@@ -32,6 +32,9 @@ jobs:
 
       - name: Check source glyphs
         run: |
+          fontforge -lang=py -script script_helper/assemble_sources.py
+          fontforge -lang=py -script script_helper/assemble_sources.py --check
+          fontforge -lang=py -script script_helper/test_source_preservation.py
           python3 script_helper/add_braille.py --check
           fontforge -lang=py -script script_helper/add_terminal_symbols.py --check
           python3 script_helper/check_unicode_data.py
@@ -44,20 +47,21 @@ jobs:
         run: |
           for style in Regular Italic Bold Bold-Italic; do
             for suffix in .ttf -hinted.ttf .otf .woff2 -hinted.woff2; do
-              test -s "export/Monofoki-${style}${suffix}"
+              test -s "export/Monofuki-${style}${suffix}"
             done
           done
-          test -s export/LICENSE-Monofoki
+          test -s export/LICENSE-Monofuki
           test -s export/LICENSE-Iosevka
           test -s export/LICENSE-NotoSansSymbols2
           test -s export/LICENSE-KreativeSquare
+          python3 script_helper/check_font_names.py export/Monofuki-*.ttf export/Monofuki-*.otf
           fontforge -lang=py -script script_helper/check_terminal_glyphs.py \
             export/*.ttf export/*.otf
 
-      - name: Upload regular Monofoki
+      - name: Upload regular Monofuki
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Monofoki-${{ github.sha }}
+          name: Monofuki-${{ github.sha }}
           path: export/
           if-no-files-found: error
           retention-days: 30
@@ -66,36 +70,42 @@ jobs:
         run: |
           ./post_create_nerdfonts.sh
           for style in Regular Italic Bold BoldItalic; do
-            test -s "export/MonofokiNerdFont-${style}.ttf"
-            test -s "export/MonofokiNerdFont-${style}.otf"
-            woff2_compress "export/MonofokiNerdFont-${style}.otf"
-            test -s "export/MonofokiNerdFont-${style}.woff2"
+            test -s "export/MonofukiNerdFont-${style}.ttf"
+            test -s "export/MonofukiNerdFont-${style}.otf"
+            woff2_compress "export/MonofukiNerdFont-${style}.otf"
+            test -s "export/MonofukiNerdFont-${style}.woff2"
           done
           test -s export/LICENSE-nerd-font
           test -s export/license-audit-nerd-font.md
           fontforge -lang=py -script script_helper/check_terminal_glyphs.py \
-            export/MonofokiNerdFont-*.ttf export/MonofokiNerdFont-*.otf
+            export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf
 
       - name: Export site character catalogues
         run: |
           python3 script_helper/export_character_catalog.py \
-            --regular export/Monofoki-Regular.otf \
-            --nerd export/MonofokiNerdFont-Regular.otf \
+            --regular export/Monofuki-Regular.otf \
+            --nerd export/MonofukiNerdFont-Regular.otf \
             --glyphnames .font-build/nerd-font-patcher/glyphnames.json \
             --output export/character-catalog.json
 
-      - name: Upload Monofoki Nerd Font
+      - name: Upload Monofuki Nerd Font
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: MonofokiNerdFont-${{ github.sha }}
+          name: MonofukiNerdFont-${{ github.sha }}
           path: |
-            export/MonofokiNerdFont-*
+            export/MonofukiNerdFont-*
             export/LICENSE-*
             export/NOTICES-symbols.md
             export/symbol-additions.json
             export/build-dependencies.json
             export/character-catalog.json
             export/license-audit-nerd-font.md
+            export/THIRD-PARTY-NOTICES.txt
+            export/component-notices/
+            export/component-provenance.json
+            export/source-provenance.json
+            export/source-overlays.json
+            export/nerd-policy.json
           if-no-files-found: error
           retention-days: 30
 
@@ -112,19 +122,19 @@ jobs:
       - name: Download regular fonts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: Monofoki-${{ github.sha }}
+          name: Monofuki-${{ github.sha }}
           path: ${{ runner.temp }}/fonts/regular
       - name: Download Nerd Font and catalogues
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: MonofokiNerdFont-${{ github.sha }}
+          name: MonofukiNerdFont-${{ github.sha }}
           path: ${{ runner.temp }}/fonts/nerd
       - name: Render native CoreText fallback snapshots
         run: |
           swift script_helper/render_coretext_previews.swift \
             "$RUNNER_TEMP/fonts/nerd/character-catalog.json" \
-            "$RUNNER_TEMP/fonts/regular/Monofoki-Regular.otf" \
-            "$RUNNER_TEMP/fonts/nerd/MonofokiNerdFont-Regular.otf" \
+            "$RUNNER_TEMP/fonts/regular/Monofuki-Regular.otf" \
+            "$RUNNER_TEMP/fonts/nerd/MonofukiNerdFont-Regular.otf" \
             "$RUNNER_TEMP/coretext"
       - name: Upload native fallback previews
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -148,13 +158,13 @@ jobs:
       - name: Download this run's regular fonts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: Monofoki-${{ github.sha }}
+          name: Monofuki-${{ github.sha }}
           path: ${{ runner.temp }}/fonts/regular
 
       - name: Download this run's Nerd Font variants
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: MonofokiNerdFont-${{ github.sha }}
+          name: MonofukiNerdFont-${{ github.sha }}
           path: ${{ runner.temp }}/fonts/nerd
 
       - name: Download native macOS fallback previews
@@ -179,27 +189,24 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y ffmpeg ttyd fontconfig
           mkdir -p "$RUNNER_TEMP/vhs"
-          curl --fail --location --show-error \
-            https://github.com/charmbracelet/vhs/releases/download/v0.12.1/vhs_0.12.1_Linux_x86_64.tar.gz \
-            -o "$RUNNER_TEMP/vhs.tar.gz"
-          echo "eb33787a5b1cebf91fe0b18bd231e2d71d36c1ff4babd99ddac1a6ab411efd10  $RUNNER_TEMP/vhs.tar.gz" | sha256sum --check
-          tar -xzf "$RUNNER_TEMP/vhs.tar.gz" --strip-components=1 -C "$RUNNER_TEMP/vhs"
+          vhs_archive=$(python3 script_helper/fetch_build_dependencies.py vhs-linux-x86_64)
+          tar -xzf "$vhs_archive" --strip-components=1 -C "$RUNNER_TEMP/vhs"
           echo "$RUNNER_TEMP/vhs" >> "$GITHUB_PATH"
           mkdir -p "$HOME/.local/share/fonts"
           cp "$RUNNER_TEMP/fonts/nerd/"*.otf "$HOME/.local/share/fonts/"
           fc-cache -f
-          fc-match 'Monofoki Nerd Font' | grep -q MonofokiNerdFont
+          fc-match 'Monofuki Nerd Font' | grep -q MonofukiNerdFont
 
       - name: Record the font specimen
         run: |
           vhs website/demo.tape
-          test -s _site/media/monofoki.mp4
+          test -s _site/media/monofuki.mp4
           # VHS Screenshot waits for a changed frame, which can capture the next
           # command after a static scene. Use the final, held artwork frame.
           ffmpeg -hide_banner -loglevel error -sseof -0.2 \
-            -i _site/media/monofoki.mp4 -frames:v 1 _site/media/demo-poster.png
+            -i _site/media/monofuki.mp4 -frames:v 1 _site/media/demo-poster.png
           test -s _site/media/demo-poster.png
-          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 _site/media/monofoki.mp4
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 _site/media/monofuki.mp4
 
       - name: Upload the generated Pages bundle
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

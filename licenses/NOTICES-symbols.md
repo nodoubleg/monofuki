@@ -1,8 +1,8 @@
 # Additional terminal symbol outlines
 
-Monofoki incorporates only the Unicode glyphs listed in
+Monofuki incorporates only the Unicode glyphs listed in
 `script_helper/symbol_additions.json`, with identical upright symbol outlines in
-all four styles. Existing Monofoki outlines remain unchanged outside Braille.
+all four styles. Inherited Monofoki source records remain unchanged; export cleanup and the explicit Nerd patching policy are separate steps.
 The font inputs, URLs and SHA-256 digests are pinned in
 `script_helper/build_dependencies.json`. Donor binaries are downloaded build
 inputs; they are not checked into this repository.
@@ -20,8 +20,8 @@ inputs; they are not checked into this repository.
   U+1FBCD BLACK SMALL UP-POINTING CHEVRON, and U+1FBFA ALARM BELL SYMBOL.
   Kreative Square copyright (c) Kreative Software 2017-2026 under the Open Font License. See `LICENSE-KreativeSquare`.
 
-All three donors permit merging and redistribution under SIL OFL 1.1.
-Their font names are not used as Monofoki's font name. Glyph provenance records
+The original donor families carry SIL OFL 1.1 notices. Iosevka Nerd Font also incorporates Nerd Fonts components; their notices and terms are bundled separately in THIRD-PARTY-NOTICES.txt.
+Their font names are not used as Monofuki's font name. Glyph provenance records
 the original code point and geometric transformation for every addition.
 Semigraphics fit the complete terminal cell; other symbols keep their aspect
 ratio and fit within side bearings. No unrelated private-use icon substitutes

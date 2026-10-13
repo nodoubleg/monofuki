@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="Monofoki: a personal Mononoki fork for code and modern terminals, with Nerd Font icons, Braille patterns, and four real styles.">
-  <title>monofoki — a terminal font rabbit hole</title>
-  <script>try{const t=localStorage.getItem('monofoki-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="preload" href="fonts/Monofoki-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="description" content="Monofuki: a personal Mononoki fork for code and modern terminals, with Nerd Font icons, Braille patterns, and four real styles.">
+  <title>monofuki — a terminal font rabbit hole</title>
+  <script>try{const t=localStorage.getItem('monofuki-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preload" href="fonts/Monofuki-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
   <script src="specimen.js" defer></script>
 </head>
@@ -15,8 +15,8 @@
   <a class="skip" href="#specimen">Skip to the specimen</a>
   <div class="page">
     <header class="topbar">
-      <a class="wordmark" href="#" aria-label="Monofoki home">m<span>/</span></a>
-      <nav aria-label="Project"><a href="symbols.html">Symbols</a><a href="https://github.com/nodoubleg/monofoki">GitHub</a><a href="#download">Download</a></nav>
+      <a class="wordmark" href="#" aria-label="Monofuki home">m<span>/</span></a>
+      <nav aria-label="Project"><a href="symbols.html">Symbols</a><a href="https://github.com/nodoubleg/monofuki">GitHub</a><a href="#download">Download</a></nav>
       <div class="theme-switch" role="group" aria-label="Color mode">
         <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
         <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
@@ -25,13 +25,13 @@
 
     <main>
       <section class="hero" aria-labelledby="title">
-        <p class="eyebrow">A personal fork. A very particular font.</p>
-        <h1 id="title">mono<span>foki</span><span class="cursor" aria-hidden="true">_</span></h1>
+        <p class="eyebrow">Greg’s personal font fork.</p>
+        <h1 id="title">mono<span>fuki</span><span class="cursor" aria-hidden="true">_</span></h1>
         <div class="hero-bottom">
-          <p>For the terminal you spend<br>way too much time in.</p>
-          <p class="hero-detail">Mononoki’s character, Monofoki’s details, and more symbols for the terminal.</p>
+          <p>For the terminal I spend<br>way too much time in.</p>
+          <p class="hero-detail">A fork of Monofoki, changed for my own terminal annoyances.</p>
         </div>
-        <a class="download-link" href="https://github.com/nodoubleg/monofoki/releases/latest">Get the fonts</a>
+        <a class="download-link" href="#download">Get the fonts</a>
       </section>
 
       <section class="split origin" aria-labelledby="rabbit-hole">
@@ -41,7 +41,7 @@
 <span class="violet">use warnings</span>;
 
 <span class="violet">my</span> <span class="mint">%terminal</span> = (
-    font =&gt; <span class="pink">'Monofoki Nerd Font'</span>,
+    font =&gt; <span class="pink">'Monofuki Nerd Font'</span>,
     size =&gt; <span class="violet">14</span>,
 );
 
@@ -51,18 +51,18 @@
         </div>
         <div class="story">
           <p class="section-number">01 / THE RABBIT HOLE</p>
-          <h2 id="rabbit-hole">The font I kept<br>coming back to.</h2>
-          <p>I went way down the rabbit hole on fonts for my terminal. Monofoki was the Mononoki variant that fit my preferences best: the shapes, the spacing, the little details you notice after staring at code all day.</p>
-          <p>This is a fork of <a href="https://github.com/datMaffin/monofoki">datMaffin/monofoki</a>, which builds on <a href="https://github.com/madmalik/mononoki">Matthias Tellen’s Mononoki</a>.</p>
+          <h2 id="rabbit-hole">Monofoki, with my<br>own changes.</h2>
+          <p>Monofuki is an unapologetic fork of Monofoki that I’ve fucked with for my own selfish purposes. It fixes the missing characters and terminal annoyances that bother me. If it works for you too, great. How you pronounce it is your business, not mine.</p>
+          <p>Upstream credit: <a href="https://github.com/datMaffin/monofoki">Marvin Dostal’s Monofoki</a>, based on <a href="https://github.com/madmalik/mononoki">Matthias Tellen’s Mononoki</a>. I mainly use Terminal.app and iTerm2 on macOS. Your setup and taste may differ.</p>
         </div>
       </section>
 
       <section id="specimen" class="specimen" aria-labelledby="characters-heading">
-        <div class="section-heading"><div><p class="section-number">02 / STRONG OPINIONS, SMALL CHARACTERS</p><h2 id="characters-heading">You know the ones.</h2></div><span class="paragraph-mark" aria-hidden="true">¶</span></div>
+        <div class="section-heading"><div><p class="section-number">02 / LETTERS</p><h2 id="characters-heading">The letterforms.</h2></div><span class="paragraph-mark" aria-hidden="true">¶</span></div>
         <div class="character-grid">
           <div><span class="glyphs">agil</span><span class="glyph-caption">The everyday shapes</span></div>
           <div><span class="glyphs">1lI|!</span><span class="glyph-caption">A little distinction</span></div>
-          <div><span class="glyphs">0Oo</span><span class="glyph-caption">Zero room for confusion</span></div>
+          <div><span class="glyphs">0Oo</span><span class="glyph-caption">Zeros and letters</span></div>
         </div>
         <div class="type-controls">
           <label>Style <select id="style"><option value="regular">Regular</option><option value="italic">Italic</option><option value="bold">Bold</option><option value="bold-italic">Bold italic</option></select></label>
@@ -72,20 +72,20 @@
         <label class="edit-label" for="type-sample">Try your own text</label>
         <textarea id="type-sample" spellcheck="false" rows="3">@@CHARACTER_SAMPLE@@
 The quick brown fox jumps over the lazy dog.</textarea>
-        <div class="sample-baseline"><span>Four actual styles. No synthetic bold or italic.</span><span>Monofoki · WOFF2</span></div>
+        <div class="sample-baseline"><span>Four actual styles. No synthetic bold or italic.</span><span>Monofuki · WOFF2</span></div>
       </section>
 
       <section class="split graphics" aria-labelledby="graphics-heading">
         <div class="story">
           <p class="section-number">03 / BEYOND ASCII</p>
           <h2 id="graphics-heading">The rest of<br>the terminal.</h2>
-          <p>Nerd Font icons bring file types, folders and prompt symbols to the terminal. Monofoki Nerd Font pairs them with the letters and terminal graphics used in apps like <a href="https://github.com/openai/codex">Codex</a>, <a href="https://github.com/can1357/oh-my-pi">oh-my-pi (omp)</a>, and <a href="https://github.com/charmbracelet/crush">Crush</a>.</p>
-          <p>Both font variants include 415 added Unicode symbols and all 256 Braille patterns. Choose Monofoki Nerd Font for the Nerd Fonts 3.5.1 icons too. Your operating system can supply emoji and other characters through font fallback.</p>
-          <p><a href="symbols.html">Leave no [?] behind: see the 415 additions and how font fallback works.</a></p>
-          <p>High-density screens are everyday tools now. The point is still the same: clean shapes at the size you actually use, consistent spacing, and no strange gaps in the middle of your terminal.</p>
+          <p>Nerd Font icons bring file types, folders and prompt symbols to the terminal. Monofuki Nerd Font pairs them with the letters and terminal graphics used in apps like <a href="https://github.com/openai/codex">Codex</a>, <a href="https://github.com/can1357/oh-my-pi">oh-my-pi (omp)</a>, and <a href="https://github.com/charmbracelet/crush">Crush</a>.</p>
+          <p>Both font variants include 415 added Unicode symbols and all 256 Braille patterns. Choose Monofuki Nerd Font for the Nerd Fonts 3.5.1 icons too. Your operating system can supply emoji and other characters through font fallback.</p>
+          <p><a href="symbols.html">See the 415 additions and how font fallback works.</a></p>
+          <p>I wanted fewer missing symbols and gaps in the artwork I actually see. These samples show the cases I’ve worked on; they aren’t a promise of universal coverage.</p>
         </div>
         <div class="terminal-panel" aria-label="Terminal glyph specimen">
-          <div class="terminal-bar"><span>~/monofoki</span><span class="mint">main</span></div>
+          <div class="terminal-bar"><span>~/monofuki</span><span class="mint">main</span></div>
           <pre class="nerd"><span class="pink">&#xf07b;</span> src/    <span class="violet">&#xe0a0;</span> master    <span class="mint">&#xf120;</span> python3
 
 ┌────────────┬────────────┐
@@ -101,19 +101,19 @@ The quick brown fox jumps over the lazy dog.</textarea>
 
       <section class="recording" aria-labelledby="recording-heading">
         <div class="section-heading"><div><p class="section-number">04 / IN MOTION</p><h2 id="recording-heading">In the terminal.</h2></div><a href="https://github.com/charmbracelet/vhs">Recorded with VHS</a></div>
-        <video controls playsinline preload="metadata" poster="media/demo-poster.png" aria-label="Monofoki terminal specimen recording">
-          <source src="media/monofoki.mp4" type="video/mp4">
-          <p>Your browser cannot play this recording. <a href="media/monofoki.mp4">Download the MP4</a> or <a href="demo.txt">read the text specimen</a>.</p>
+        <video controls playsinline preload="metadata" poster="media/demo-poster.png" aria-label="Monofuki terminal specimen recording">
+          <source src="media/monofuki.mp4" type="video/mp4">
+          <p>Your browser cannot play this recording. <a href="media/monofuki.mp4">Download the MP4</a> or <a href="demo.txt">read the text specimen</a>.</p>
         </video>
-        <div class="video-caption"><span>Monofoki letters, symbols and terminal art in action.</span><a href="demo.txt">Text version</a></div>
+        <div class="video-caption"><span>Monofuki letters, symbols and terminal art in action.</span><a href="demo.txt">Text version</a></div>
       </section>
 
       <section id="download" class="download" aria-labelledby="download-heading">
-        <div><p class="section-number">05 / DOWNLOAD</p><h2 id="download-heading">Get Monofoki.</h2></div>
+        <div><p class="section-number">05 / DOWNLOAD</p><h2 id="download-heading">Get Monofuki.</h2></div>
         <div class="download-options">
-          <a href="https://github.com/nodoubleg/monofoki/releases/latest"><strong>Monofoki Nerd Font</strong><span>For terminals with icon-heavy prompts and apps.</span><span class="format">TTF · OTF · WOFF2</span></a>
-          <a href="https://github.com/nodoubleg/monofoki/releases/latest"><strong>Monofoki</strong><span>The original shapes, with the extra terminal glyphs.</span><span class="format">TTF · hinted TTF · OTF · WOFF2</span></a>
-          <p class="install-note">Install one format per family and style, then select it in your terminal. All four styles are included. Free to use under the SIL Open Font License.</p>
+          <a href="downloads/MonofukiNerdFont.zip"><strong>Monofuki Nerd Font</strong><span>For terminals with icon-heavy prompts and apps.</span><span class="format">TTF · OTF · WOFF2</span></a>
+          <a href="downloads/Monofuki.zip"><strong>Monofuki</strong><span>The original shapes, with the extra terminal glyphs.</span><span class="format">TTF · hinted TTF · OTF · WOFF2</span></a>
+          <p class="install-note">Install one format per family and style, then select it in your terminal. All four styles are included. The base font uses the SIL Open Font License; imported components retain their own notices and terms.</p>
         </div>
       </section>
 
@@ -124,9 +124,9 @@ The quick brown fox jumps over the lazy dog.</textarea>
     </main>
 
     <footer>
-      <p><a href="https://github.com/madmalik/mononoki">Mononoki</a> by Matthias Tellen · <a href="https://github.com/datMaffin/monofoki">Monofoki</a> by datMaffin · this fork by <a href="https://github.com/nodoubleg/monofoki">nodoubleg</a>.</p>
+      <p><a href="https://github.com/madmalik/mononoki">Mononoki</a> by Matthias Tellen · <a href="https://github.com/datMaffin/monofoki">Monofoki</a> by datMaffin · this fork by <a href="https://github.com/nodoubleg/monofuki">nodoubleg</a>.</p>
       <p>Palette from <a href="https://github.com/charmbracelet/crush">Crush</a> and <a href="https://github.com/charmbracelet/x/tree/main/exp/charmtone">Charmtone</a>. Light mode adapted for this page.</p>
-      <p><a href="licenses/LICENSE-Monofoki">Font license</a> · <a href="licenses/LICENSE-nerd-font">Nerd Font licenses</a></p>
+      <p><a href="licenses/LICENSE-Monofuki">Font license</a> · <a href="licenses/THIRD-PARTY-NOTICES.txt">Component credits and licenses</a></p>
     </footer>
   </div>
 </body>

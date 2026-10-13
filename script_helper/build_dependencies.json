@@ -6,22 +6,123 @@
       "url": "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/FontPatcher.zip",
       "sha256": "42bcb32145499a35732274c7fc48deb434ad0d2e0e118f98527c1479c6fa251a",
       "filename": "FontPatcher-3.5.1.zip",
-      "archive": "zip"
+      "archive": "zip",
+      "revision": "b894ea7803af6aade63d60a4381e006098ec9c4d"
     },
     "iosevka": {
       "url": "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/b894ea7803af6aade63d60a4381e006098ec9c4d/patched-fonts/Iosevka/IosevkaNerdFont-Regular.ttf",
       "sha256": "5e3f3b0a70fcdc5f1ace66ecad69b9913dfd8822fee221dc5e552c7dbc8c17df",
-      "filename": "IosevkaNerdFont-Regular.ttf"
+      "filename": "IosevkaNerdFont-Regular.ttf",
+      "revision": "b894ea7803af6aade63d60a4381e006098ec9c4d"
     },
     "noto-symbols2": {
       "url": "https://raw.githubusercontent.com/google/fonts/7b6724ac7ececc713e9ba93af309f7520c9a80a3/ofl/notosanssymbols2/NotoSansSymbols2-Regular.ttf",
       "sha256": "7d5fb73b7ca67a6798101741f5d280a3d016a56a197afcd4199dbb57b4b82a21",
-      "filename": "NotoSansSymbols2-Regular.ttf"
+      "filename": "NotoSansSymbols2-Regular.ttf",
+      "revision": "7b6724ac7ececc713e9ba93af309f7520c9a80a3"
     },
     "kreative-square": {
       "url": "https://raw.githubusercontent.com/kreativekorp/open-relay/e4b81241e8c7269a91c0bd865cf5c9e7208fbada/KreativeSquare/KreativeSquare.ttf",
       "sha256": "7eebf2b2d739baaa68dfcaa9d482fdb89fa570bf0d553300572e90fe48ff89d6",
-      "filename": "KreativeSquare.ttf"
+      "filename": "KreativeSquare.ttf",
+      "revision": "e4b81241e8c7269a91c0bd865cf5c9e7208fbada"
+    },
+    "upstream-Regular": {
+      "url": "https://raw.githubusercontent.com/datMaffin/monofoki/dc8a1890040de522231da8aec6d4d95bc672cf1e/src/monofoki-Regular.sfd",
+      "revision": "dc8a1890040de522231da8aec6d4d95bc672cf1e",
+      "sha256": "91a36a2e136e83a34155034a35f86ef0a78dad41fe3139cfa884e6ba85b2b3ad",
+      "filename": "upstream-monofoki-Regular-dc8a1890040de522231da8aec6d4d95bc672cf1e.sfd"
+    },
+    "upstream-Italic": {
+      "url": "https://raw.githubusercontent.com/datMaffin/monofoki/dc8a1890040de522231da8aec6d4d95bc672cf1e/src/monofoki-Italic.sfd",
+      "revision": "dc8a1890040de522231da8aec6d4d95bc672cf1e",
+      "sha256": "79da88ae1c3b6f790e2f1710bc353c76d413c8f7852e9f8f7517f4cf1747c75d",
+      "filename": "upstream-monofoki-Italic-dc8a1890040de522231da8aec6d4d95bc672cf1e.sfd"
+    },
+    "upstream-Bold": {
+      "url": "https://raw.githubusercontent.com/datMaffin/monofoki/dc8a1890040de522231da8aec6d4d95bc672cf1e/src/monofoki-Bold.sfd",
+      "revision": "dc8a1890040de522231da8aec6d4d95bc672cf1e",
+      "sha256": "96389345028231b942c06e994fc2df352d1c7df9a0455188cd53f5b5ed4bd083",
+      "filename": "upstream-monofoki-Bold-dc8a1890040de522231da8aec6d4d95bc672cf1e.sfd"
+    },
+    "upstream-Bold-Italic": {
+      "url": "https://raw.githubusercontent.com/datMaffin/monofoki/dc8a1890040de522231da8aec6d4d95bc672cf1e/src/monofoki-Bold-Italic.sfd",
+      "revision": "dc8a1890040de522231da8aec6d4d95bc672cf1e",
+      "sha256": "0f2408fe931266e8d3aac4313548ee2ee54472eaff49edcbcd332b1897a23c6b",
+      "filename": "upstream-monofoki-Bold-Italic-dc8a1890040de522231da8aec6d4d95bc672cf1e.sfd"
+    },
+    "notice-font-logos": {
+      "url": "https://raw.githubusercontent.com/lukas-w/font-logos/2db3df547108b28bd4972e685e2b682092d78498/LICENSE",
+      "sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd",
+      "filename": "notice-font-logos.txt",
+      "revision": "2db3df547108b28bd4972e685e2b682092d78498",
+      "component": "Font Logos 1.4.0"
+    },
+    "notice-hack": {
+      "url": "https://raw.githubusercontent.com/source-foundry/Hack/b47d21f808fbf4784565feccde2213ef2af924b3/LICENSE.md",
+      "sha256": "1f61bb7c790c59b4b0ecdf304628b94e42ae4c8020094a8c3da73381ab212623",
+      "filename": "notice-hack.txt",
+      "revision": "b47d21f808fbf4784565feccde2213ef2af924b3",
+      "component": "Hack 3.003"
+    },
+    "notice-codicons": {
+      "url": "https://raw.githubusercontent.com/microsoft/vscode-codicons/dbb6555160650624bb1719d6264910b1cbe528f2/LICENSE",
+      "sha256": "af5e030844efddbc7ab00dcfea8b019703753d4d9f5172d727c533a492aec665",
+      "filename": "notice-codicons.txt",
+      "revision": "dbb6555160650624bb1719d6264910b1cbe528f2",
+      "component": "Codicons 0.0.45"
+    },
+    "notice-nerd-root": {
+      "url": "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/b894ea7803af6aade63d60a4381e006098ec9c4d/LICENSE",
+      "sha256": "1f6ad4edae6479aaace3112ede5279a23284ae54b2a34db66357aef5f64df160",
+      "filename": "notice-nerd-root.txt",
+      "revision": "b894ea7803af6aade63d60a4381e006098ec9c4d",
+      "component": "Nerd Fonts 3.5.1"
+    },
+    "notice-devicons": {
+      "url": "https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/LICENSE",
+      "sha256": "121194741d4a915b9f5890fdd6dd95121f9b1f816517c792358d72d7c838d664",
+      "filename": "notice-devicons.txt",
+      "revision": "54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08",
+      "component": "Devicons 2.17.0"
+    },
+    "notice-seti": {
+      "url": "https://raw.githubusercontent.com/jesseweed/seti-ui/6c358eb9ce5cc20bccd72cc4d7179fd485cd8fe7/LICENSE.md",
+      "sha256": "d4d2d888c6a0a220a7b0e2d6013cf37539b0e05ef937002b3b33bdb364575b88",
+      "filename": "notice-seti.txt",
+      "revision": "6c358eb9ce5cc20bccd72cc4d7179fd485cd8fe7",
+      "component": "Seti UI 0.8.1"
+    },
+    "notice-iec": {
+      "url": "https://raw.githubusercontent.com/jloughry/Unicode/805536fb6f93604da985d80e0c6b099f98f8b4d9/LICENSE.txt",
+      "sha256": "11aef1cdf2d58d822e6857e2574870ccc59d4900052bf5c098e319d750e7ac3d",
+      "filename": "notice-iec.txt",
+      "revision": "805536fb6f93604da985d80e0c6b099f98f8b4d9",
+      "component": "IEC Power Symbols, 2015 source snapshot"
+    },
+    "vhs-linux-x86_64": {
+      "url": "https://github.com/charmbracelet/vhs/releases/download/v0.12.1/vhs_0.12.1_Linux_x86_64.tar.gz",
+      "sha256": "eb33787a5b1cebf91fe0b18bd231e2d71d36c1ff4babd99ddac1a6ab411efd10",
+      "filename": "vhs_0.12.1_Linux_x86_64.tar.gz",
+      "version": "0.12.1"
     }
+  },
+  "schema_version": 2,
+  "upstream": {
+    "repository": "https://github.com/datMaffin/monofoki",
+    "revision": "dc8a1890040de522231da8aec6d4d95bc672cf1e"
+  },
+  "vendored_files": {
+    "LICENSE": "b01b5531a5e4ed33504558f98054196719518e55410aa5e2d9411ff5d49dfd76",
+    "licenses/LICENSE-Iosevka": "b2d7e6ef194a480335fc87b4f5ec9ad86249b02f17ee099ed14bdfc8895b9760",
+    "licenses/LICENSE-KreativeSquare": "3cfb62408756fe7e5cc38016dc2ed131d5d600a512d46e5a886fc810142d9340",
+    "licenses/LICENSE-NerdFonts": "bede0739eb2bf948765623a7a134360a6320240f4a9e29a5a68f31e191b0f8d0",
+    "licenses/LICENSE-NotoSansSymbols2": "e87c2ed7ff174c637d55fa381939ebb96f43f0415ad94605a37589228f4cbf4f",
+    "licenses/LICENSE-Unicode": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+    "script_helper/unicode/18.0.0/EastAsianWidth.txt": "a0cf29eacd00cfcaec4381c6b7c281685f18dbb4e7ff82b4076ccb342ca839aa",
+    "script_helper/unicode/18.0.0/Scripts.txt": "0071fd81b6aeae25f6e8bce8efec3066a6476a91b49bdb2f52dc76e817862a6a",
+    "script_helper/unicode/18.0.0/UnicodeData.txt": "0736451de439ae7baf1425136617da495e09ee5afbe6e394374db7009ea08950",
+    "script_helper/unicode/18.0.0/emoji-variation-sequences.txt": "ff1707564aa1f1b2fcf4ec92d609d4cb26940bc0d4dcf07f5328ad6879e84da3",
+    "script_helper/mononoki_repertoire.json": "98d73c01cdf5d5807e0e70e89ec42b440e6566500ef95b1927be53ce682adc3e"
   }
 }

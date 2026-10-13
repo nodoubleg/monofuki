@@ -6,6 +6,7 @@ import html
 import json
 import re
 import shutil
+import zipfile
 from pathlib import Path
 
 from terminal_demo import CHARACTER_SAMPLE, art_pieces
@@ -31,14 +32,14 @@ def main():
     if output == ROOT or ROOT.is_relative_to(output) or any(output.is_relative_to(path) for path in protected):
         parser.error('output must be a separate generated directory')
     output.mkdir(parents=True, exist_ok=True)
-    for directory in ('fonts', 'licenses', 'media'):
+    for directory in ('fonts', 'licenses', 'media', 'downloads'):
         (output / directory).mkdir(exist_ok=True)
     for name in ('style.css', 'specimen.js', 'symbols.js'):
         shutil.copy2(ROOT / 'website' / name, output / name)
     hashes = {}
     for family, directory, styles in (
-        ('Monofoki', args.regular, ('Regular', 'Italic', 'Bold', 'Bold-Italic')),
-        ('MonofokiNerdFont', args.nerd, ('Regular',)),
+        ('Monofuki', args.regular, ('Regular', 'Italic', 'Bold', 'Bold-Italic')),
+        ('MonofukiNerdFont', args.nerd, ('Regular',)),
     ):
         for style in styles:
             name = f'{family}-{style}.woff2'
@@ -51,9 +52,27 @@ def main():
         for name in ('LICENSE-*', '*audit*.md', 'NOTICES-*.md'):
             for license_path in directory.glob(name):
                 shutil.copy2(license_path, output / 'licenses' / license_path.name)
+    # Serve all exact component notices beside the font files.
+    for name in ('THIRD-PARTY-NOTICES.txt', 'component-provenance.json'):
+        shutil.copy2(args.nerd / name, output / 'licenses' / name)
+    shutil.copytree(args.nerd / 'component-notices', output / 'licenses/component-notices', dirs_exist_ok=True)
+    # Download bundles come from this same build, not historical Monofoki releases.
+    for family, directory in (('Monofuki', args.regular), ('MonofukiNerdFont', args.nerd)):
+        files = {p for p in directory.glob(f'{family}-*') if p.suffix in ('.otf', '.ttf', '.woff2')}
+        if len(list(directory.glob(f'{family}-*.otf'))) != 4:
+            parser.error(f'{family}: download bundle needs four OTF styles')
+        for pattern in ('LICENSE-*', 'NOTICES-*.md', '*audit*.md', '*provenance.json', '*dependencies.json', '*additions.json', '*overlays.json', '*policy.json', 'THIRD-PARTY-NOTICES.txt'):
+            files.update(directory.glob(pattern))
+        files.update(p for p in (directory / 'component-notices').rglob('*') if p.is_file())
+        for required in ('THIRD-PARTY-NOTICES.txt', 'component-provenance.json', 'source-provenance.json'):
+            if directory / required not in files:
+                parser.error(f'{family}: missing {required}')
+        with zipfile.ZipFile(output / 'downloads' / f'{family}.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
+            for path in sorted(files):
+                archive.writestr(str(path.relative_to(directory)), path.read_bytes())
     dependencies = json.loads((ROOT / 'script_helper/build_dependencies.json').read_text())
     catalog = json.loads((args.nerd / 'character-catalog.json').read_text())
-    for variant, path in (('regular', args.regular / 'Monofoki-Regular.otf'), ('nerd', args.nerd / 'MonofokiNerdFont-Regular.otf')):
+    for variant, path in (('regular', args.regular / 'Monofuki-Regular.otf'), ('nerd', args.nerd / 'MonofukiNerdFont-Regular.otf')):
         if hashlib.sha256(path.read_bytes()).hexdigest() != catalog['font_sha256'][variant]:
             parser.error(f'character catalogue does not match {variant} font input')
     (output / 'coretext').mkdir(exist_ok=True)
@@ -75,7 +94,7 @@ def main():
                     '@@BUILD_URL@@': html.escape(args.build_url, quote=True), '@@BUILD_REVISION@@': html.escape(args.revision[:7])}
     replacements.update(render_symbols(args.nerd, args.coretext))
     text_demo = '\n\n'.join(f'{title}\n\n{text}' for _, title, _, text in art_pieces())
-    (output / 'demo.txt').write_text(f'Monofoki terminal specimen\n\n{CHARACTER_SAMPLE}\n\n{text_demo}\n')
+    (output / 'demo.txt').write_text(f'Monofuki terminal specimen\n\n{CHARACTER_SAMPLE}\n\n{text_demo}\n')
     def version_asset(match):
         attribute, url = match.groups()
         if url.startswith(('https://', 'http://', '//', '#')) or url.split('#')[0].endswith('.html'):

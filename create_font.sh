@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+cd "$(dirname "$0")"
+fontforge -lang=py -script script_helper/assemble_sources.py
 mkdir -p export
 
 function generate {
@@ -30,8 +32,10 @@ for glyph in font.glyphs():
 font.appendSFNTName("English (US)", "Copyright", """Original author:
 Copyright (c) 2013-2023, Matthias Tellen matthias.tellen@googlemail.com
 
-Modifications:
+Upstream Monofoki modifications:
 Copyright (c) 2020-2025, Marvin Dostal
+
+Monofuki modifications: Greg (nodoubleg), 2026.
 
 Additional symbol outlines from Iosevka, Noto Sans Symbols 2, and Kreative Square.
 Full copyright notices and licenses are included with the fonts.
@@ -47,36 +51,41 @@ END
 
 }
 
-generate 'src/monofoki-Regular.sfd' 'export/Monofoki-Regular.ttf'
-generate 'src/monofoki-Italic.sfd' 'export/Monofoki-Italic.ttf'
-generate 'src/monofoki-Bold.sfd' 'export/Monofoki-Bold.ttf'
-generate 'src/monofoki-Bold-Italic.sfd' 'export/Monofoki-Bold-Italic.ttf'
+generate '.font-build/assembled/monofuki-Regular.sfd' 'export/Monofuki-Regular.ttf'
+generate '.font-build/assembled/monofuki-Italic.sfd' 'export/Monofuki-Italic.ttf'
+generate '.font-build/assembled/monofuki-Bold.sfd' 'export/Monofuki-Bold.ttf'
+generate '.font-build/assembled/monofuki-Bold-Italic.sfd' 'export/Monofuki-Bold-Italic.ttf'
 
 if [[ "$*" == --hint ]]
 then
-  ttfautohint export/Monofoki-Regular.ttf export/Monofoki-Regular-hinted.ttf
-  ttfautohint export/Monofoki-Italic.ttf export/Monofoki-Italic-hinted.ttf
-  ttfautohint export/Monofoki-Bold.ttf export/Monofoki-Bold-hinted.ttf
-  ttfautohint export/Monofoki-Bold-Italic.ttf export/Monofoki-Bold-Italic-hinted.ttf
+  ttfautohint export/Monofuki-Regular.ttf export/Monofuki-Regular-hinted.ttf
+  ttfautohint export/Monofuki-Italic.ttf export/Monofuki-Italic-hinted.ttf
+  ttfautohint export/Monofuki-Bold.ttf export/Monofuki-Bold-hinted.ttf
+  ttfautohint export/Monofuki-Bold-Italic.ttf export/Monofuki-Bold-Italic-hinted.ttf
 
-  woff2_compress export/Monofoki-Regular-hinted.ttf
-  woff2_compress export/Monofoki-Italic-hinted.ttf
-  woff2_compress export/Monofoki-Bold-hinted.ttf
-  woff2_compress export/Monofoki-Bold-Italic-hinted.ttf
+  woff2_compress export/Monofuki-Regular-hinted.ttf
+  woff2_compress export/Monofuki-Italic-hinted.ttf
+  woff2_compress export/Monofuki-Bold-hinted.ttf
+  woff2_compress export/Monofuki-Bold-Italic-hinted.ttf
 fi
 
-generate 'src/monofoki-Regular.sfd' 'export/Monofoki-Regular.otf'
-generate 'src/monofoki-Italic.sfd' 'export/Monofoki-Italic.otf'
-generate 'src/monofoki-Bold.sfd' 'export/Monofoki-Bold.otf'
-generate 'src/monofoki-Bold-Italic.sfd' 'export/Monofoki-Bold-Italic.otf'
+generate '.font-build/assembled/monofuki-Regular.sfd' 'export/Monofuki-Regular.otf'
+generate '.font-build/assembled/monofuki-Italic.sfd' 'export/Monofuki-Italic.otf'
+generate '.font-build/assembled/monofuki-Bold.sfd' 'export/Monofuki-Bold.otf'
+generate '.font-build/assembled/monofuki-Bold-Italic.sfd' 'export/Monofuki-Bold-Italic.otf'
 
-woff2_compress export/Monofoki-Regular.otf
-woff2_compress export/Monofoki-Italic.otf
-woff2_compress export/Monofoki-Bold.otf
-woff2_compress export/Monofoki-Bold-Italic.otf
+woff2_compress export/Monofuki-Regular.otf
+woff2_compress export/Monofuki-Italic.otf
+woff2_compress export/Monofuki-Bold.otf
+woff2_compress export/Monofuki-Bold-Italic.otf
 
-cp LICENSE export/LICENSE-Monofoki
+cp LICENSE export/LICENSE-Monofuki
+cp .font-build/assembled/source-provenance.json export/
+cp src/overlays.json export/source-overlays.json
 cp licenses/LICENSE-* export/
 cp licenses/NOTICES-symbols.md export/
 cp script_helper/symbol_additions.json export/symbol-additions.json
 cp script_helper/build_dependencies.json export/build-dependencies.json
+
+python3 script_helper/bundle_notices.py export
+python3 script_helper/check_font_names.py export/Monofuki-*.ttf export/Monofuki-*.otf

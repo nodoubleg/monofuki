@@ -143,12 +143,13 @@ def update(text, additions):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--source-dir', type=Path, default=ROOT / '.font-build/assembled')
     args = parser.parse_args()
     catalog = json.loads(CATALOG.read_text())
     additions = make_symbols(catalog)
     stale = []
     for style in ('Regular', 'Italic', 'Bold', 'Bold-Italic'):
-        path = ROOT / 'src' / f'monofoki-{style}.sfd'
+        path = args.source_dir / f'monofuki-{style}.sfd'
         original = path.read_text()
         result = update(original, additions)
         if result != original:

@@ -127,7 +127,7 @@
         preview.hidden = preview.dataset.variant !== fallbackVariant.value || !matches(preview.dataset.codepoint, preview.dataset.fallbackSearch);
         if (!preview.hidden) shown += 1;
       });
-      document.querySelector("#fallback-count").textContent = `Showing ${shown} characters absent from ${fallbackVariant.value === "regular" ? "Monofoki" : "Monofoki Nerd Font"}`;
+      document.querySelector("#fallback-count").textContent = `Showing ${shown} characters absent from ${fallbackVariant.value === "regular" ? "Monofuki" : "Monofuki Nerd Font"}`;
       document.querySelector("#fallback-empty").hidden = shown !== 0;
     }
     fallbackVariant.addEventListener("change", filterFallback);

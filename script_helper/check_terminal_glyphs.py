@@ -72,8 +72,8 @@ def check(path):
         if 'NerdFont' in str(path):
             assert 'Nerd Fonts 3.5.1' in font.version, (path, font.version, 'wrong patcher version')
             assert all('Nerd Fonts 3.5.1' in value for _, name, value in font.sfnt_names if name == 'Version'), (path, 'stale version name')
-            style = Path(path).stem.removeprefix('MonofokiNerdFont-')
-            assert font.fontname == f'MonofokiNF-{style}', (path, font.fontname, 'terminal profile name changed')
+            style = Path(path).stem.removeprefix('MonofukiNerdFont-')
+            assert font.fontname == f'MonofukiNF-{style}', (path, font.fontname, 'terminal profile name changed')
         print(f"PASS {path}: 256 Braille patterns, {len(additions)} added symbols, metrics, ASCII, boxes, blocks, arrows")
     finally:
         font.close()
@@ -81,6 +81,8 @@ def check(path):
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
-    paths = sys.argv[1:] or sorted((root / "src").glob("*.sfd"))
+    paths = sys.argv[1:] or sorted((root / ".font-build/assembled").glob("*.sfd"))
+    if not paths:
+        raise SystemExit("No assembled sources; run fontforge -lang=py -script script_helper/assemble_sources.py")
     for path in paths:
         check(path)

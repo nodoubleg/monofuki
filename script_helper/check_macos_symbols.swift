@@ -1,5 +1,5 @@
 // macOS-only fallback audit. Does not install fonts or change terminal settings.
-// swift script_helper/check_macos_symbols.swift export/MonofokiNerdFont-*.otf
+// swift script_helper/check_macos_symbols.swift export/MonofukiNerdFont-*.otf
 import Foundation
 import CoreText
 

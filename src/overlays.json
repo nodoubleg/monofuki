@@ -1,0 +1,10 @@
+{
+  "family": "Monofuki",
+  "braille": {"generator": "script_helper/add_braille.py", "range": ["2800", "28FF"]},
+  "symbols": "script_helper/symbol_additions.json",
+  "restore_from_same_weight_upright": {
+    "Italic": {"source_style": "Regular", "codepoints": ["21E8", "21E9", "21EF"]},
+    "Bold-Italic": {"source_style": "Bold", "codepoints": ["21E8", "21E9", "21EF"]}
+  },
+  "authored_overrides": []
+}

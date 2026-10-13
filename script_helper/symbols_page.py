@@ -22,7 +22,7 @@ def render_symbols(nerd_directory, coretext_directory):
     for item in catalog['baseline']:
         cp = item['codepoint']
         glyph = ('a' if item['category'].startswith('M') else '') + chr(int(cp, 16))
-        status = 'in Monofoki' if item['regular'] else 'uses another font; see the fallback examples'
+        status = 'in Monofuki' if item['regular'] else 'uses another font; see the fallback examples'
         baseline.append(f'<span class="repertoire-glyph" title="U+{cp} {html.escape(item["name"])} — {status}">{html.escape(glyph)}</span>')
     icon_groups = {}
     for item in catalog['icons']:
@@ -53,7 +53,7 @@ def render_symbols(nerd_directory, coretext_directory):
         fallback.append(f'<article class="fallback-card" data-variant="{variant}" data-codepoint="{cp}" data-fallback-search="{html.escape(record["name"].lower())} {html.escape(names.lower())}">'
                         f'<span class="native-glyph native-{variant}" role="img" aria-label="CoreText rendering of U+{cp} {html.escape(record["name"])}" '
                         f'style="background-position: -{x}px -{y}px"></span><code>U+{cp}</code>'
-                        f'<h4>{html.escape(record["name"])}</h4><small>{"Monofoki" if variant == "regular" else "Monofoki Nerd Font"} selected<br>{html.escape(result)}</small></article>')
+                        f'<h4>{html.escape(record["name"])}</h4><small>{"Monofuki" if variant == "regular" else "Monofuki Nerd Font"} selected<br>{html.escape(result)}</small></article>')
     additions = json.loads((ROOT / 'script_helper/symbol_additions.json').read_text())['additions']
     ranges = json.loads((ROOT / 'script_helper/terminal_ranges.json').read_text())
     assert len(additions) == len({item['codepoint'] for item in additions}) == 415

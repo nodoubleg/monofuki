@@ -1,0 +1,17 @@
+{
+  "nerd_fonts_version": "3.5.1",
+  "replaced_existing_codepoints": {
+    "2665": "Octicons heart",
+    "E0A0": "Powerline branch",
+    "E0A1": "Powerline line number",
+    "E0A2": "Powerline lock",
+    "E0B0": "Powerline right separator",
+    "E0B1": "Powerline right thin separator",
+    "E0B2": "Powerline left separator",
+    "E0B3": "Powerline left thin separator"
+  },
+  "regenerated_range": ["2800", "28FF"],
+  "regenerated_range_reason": "Nerd Fonts rectangle Braille generator; geometry is independently checked by check_terminal_glyphs.py",
+  "output_typographic_metrics": [910, -320, 0],
+  "outline_tolerance_font_units": 0.01
+}

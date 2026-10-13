@@ -73,8 +73,8 @@ if ($help) {
 Usage: perl script_helper/unicode_specimen.pl [options]
 
 Without options, print every code-point slot in the terminal ranges audited
-for Monofoki. Each cell is labeled, for example: 025AA! [▪].
-Select Monofoki in your terminal first; this script does not change fonts.
+for Monofuki. Each cell is labeled, for example: 025AA! [▪].
+Select Monofuki in your terminal first; this script does not change fonts.
 
   --page                 Pause after each screenshot-sized page; Enter / q
   --section shapes       Print one named block (repeatable); --list lists names
@@ -102,8 +102,8 @@ The font coverage marker checks the base character, not the emoji fallback.
 
 Examples:
   perl script_helper/unicode_specimen.pl --section shapes --page
-  perl script_helper/unicode_specimen.pl --font export/MonofokiNerdFont-Regular.otf --missing-only --page
-  perl script_helper/unicode_specimen.pl --font export/MonofokiNerdFont-Regular.otf --encoded --page
+  perl script_helper/unicode_specimen.pl --font export/MonofukiNerdFont-Regular.otf --missing-only --page
+  perl script_helper/unicode_specimen.pl --font export/MonofukiNerdFont-Regular.otf --encoded --page
 HELP
     exit;
 }
@@ -256,7 +256,7 @@ die "No characters match the selection\n" unless @pages;
 die "--start-page exceeds " . scalar(@pages) . " pages\n" if $start_page > @pages;
 for my $i ($start_page - 1 .. $#pages) {
     print "\e[2J\e[H" if $page;
-    print "Monofoki Unicode specimen | $pages[$i][0] | page " . ($i + 1) . '/' . scalar(@pages) . "\n";
+    print "Monofuki Unicode specimen | $pages[$i][0] | page " . ($i + 1) . '/' . scalar(@pages) . "\n";
     print 'Font: ' . ($font ? basename($font) : 'terminal font; no file coverage check') . " | style: $style\n";
     print "Unicode $unicode_version | $presentation presentation | + mapped, ! absent, ? unchecked, . unassigned, - control\n\n";
     print join("\n", @{$pages[$i][1]}), "\n";

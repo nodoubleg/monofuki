@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep existing terminal-profile PostScript names without changing font outlines."""
+"""Set Monofuki Nerd Font PostScript names without changing font outlines."""
 import sys
 import json
 import tempfile
@@ -21,10 +21,10 @@ def charstrings(font):
 
 
 def preserve(path):
-    style = path.stem.removeprefix('MonofokiNerdFont-')
+    style = path.stem.removeprefix('MonofukiNerdFont-')
     if style not in ('Regular', 'Italic', 'Bold', 'BoldItalic'):
         raise ValueError(f'Unexpected Nerd Font style: {path}')
-    postscript = f'MonofokiNF-{style}'
+    postscript = f'MonofukiNF-{style}'
     expected_version = json.loads((Path(__file__).parent / 'build_dependencies.json').read_text())['nerd_fonts_version']
     with TTFont(path, lazy=True, recalcBBoxes=False, recalcTimestamp=False) as font:
         versions = [record.toUnicode() for record in font['name'].names

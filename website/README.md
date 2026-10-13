@@ -1,4 +1,4 @@
-# Monofoki specimen site
+# Monofuki specimen site
 
 This adapts the paired specimens and explanations of the [original Mononoki site](https://madmalik.github.io/mononoki/) for this fork. The default dark palette comes from Crush's [Charmtone theme](https://github.com/charmbracelet/crush/blob/main/internal/ui/styles/themes.go); the light palette uses darker versions of the same accent hues for legibility.
 
@@ -14,7 +14,7 @@ python3 script_helper/build_site.py \
   --nerd /path/to/nerd-artifact \
   --coretext /path/to/coretext-artifact \
   --revision COMMIT_SHA \
-  --build-url https://github.com/nodoubleg/monofoki/actions/runs/RUN_ID
+  --build-url https://github.com/nodoubleg/monofuki/actions/runs/RUN_ID
 python3 -m http.server --directory _site 8000
 ```
 
@@ -24,13 +24,13 @@ The site and terminal demo get all three art pieces from `art_pieces()` in `scri
 python3 script_helper/terminal_demo.py --art
 ```
 
-For the recording, install [VHS](https://github.com/charmbracelet/vhs), `ttyd`, and `ffmpeg`, install the built Monofoki Nerd Font OTFs, and run this from the repository root after staging the site:
+For the recording, install [VHS](https://github.com/charmbracelet/vhs), `ttyd`, and `ffmpeg`, install the built Monofuki Nerd Font OTFs, and run this from the repository root after staging the site:
 
 ```sh
 vhs website/demo.tape
 ```
 
-The tape produces `_site/media/monofoki.mp4`. CI extracts a PNG poster from its final held artwork frame with FFmpeg. It uses deterministic specimen scenes rather than live app sessions. The video has playback controls, a poster, and a text alternative; it does not autoplay. The Nerd Fonts and Unicode versions, font-build revision and per-file SHA-256 values are recorded in `_site/build.json`.
+The tape produces `_site/media/monofuki.mp4`. CI extracts a PNG poster from its final held artwork frame with FFmpeg. It uses deterministic specimen scenes rather than live app sessions. The video has playback controls, a poster, and a text alternative; it does not autoplay. The Nerd Fonts and Unicode versions, font-build revision and per-file SHA-256 values are recorded in `_site/build.json`.
 
 The Symbols page follows the original Mononoki character showcase, Nerd Font
 icons, the fork's 415 additions, and characters supplied by native macOS font
@@ -55,8 +55,8 @@ using `script_helper/export_character_catalog.py`, then run:
 ```sh
 swift script_helper/render_coretext_previews.swift \
   /path/to/character-catalog.json \
-  /path/to/Monofoki-Regular.otf \
-  /path/to/MonofokiNerdFont-Regular.otf \
+  /path/to/Monofuki-Regular.otf \
+  /path/to/MonofukiNerdFont-Regular.otf \
   /path/to/generated-coretext
 ```
 
@@ -67,3 +67,5 @@ All three searches match partial names and code points as the visitor types.
 added symbols to the supplementary-plane entries. Icon names accept the `nf-`
 prefix, and spaces, hyphens and underscores are interchangeable. Each search
 filters only its own catalogue.
+
+The download ZIPs are built from the same font artifacts as the site and contain all four styles plus exact component notices and provenance. Historical Monofoki releases are preserved separately.

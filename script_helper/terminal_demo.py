@@ -42,14 +42,14 @@ def print_scene(scene, styled=False):
         return f'\033[38;2;{rgb}m{text}\033[0m' if styled else text
 
     if scene == "characters":
-        print(color("Monofoki character specimen", "255;132;255") + '\n')
+        print(color("Monofuki character specimen", "255;132;255") + '\n')
         print(color(CHARACTER_SAMPLE, "161;138;255"))
         print("\n0Oo  1lI|!  B8  rn m  (){}[]<>")
         styles = '\033[1mBold\033[0m   \033[3mItalic\033[0m   \033[1;3mBold italic\033[0m' if styled else 'Bold   Italic   Bold italic'
         print('\n' + styles)
     elif scene == "icons":
         print(color("Nerd Font icons + terminal graphics", "255;132;255") + '\n')
-        print(color("\uf07b  monofoki   \ue0a0 master   \uf120 python3", "104;255;214"))
+        print(color("\uf07b  monofuki   \ue0a0 master   \uf120 python3", "104;255;214"))
         print(color("\n┌──────────────────────────────┐\n│  ⇨ ⇩ ⇯   ░▒▓█   ⠁⠂⠄⠈⠐⠠⡀⢀  │\n└──────────────────────────────┘", "161;138;255"))
     else:
         colors = {'globe': '255;132;255', 'orbit': '104;255;214', 'city': '161;138;255'}
@@ -94,7 +94,7 @@ def main():
     if not 16 <= args.width <= 100:
         parser.error("--width must be between 16 and 100")
     width = min(args.width, max(16, shutil.get_terminal_size((80, 24)).columns - 2))
-    print("Monofoki terminal graphics")
+    print("Monofuki terminal graphics")
     print("Select the rebuilt font in your terminal, then rerun.")
     print("Dots should stay evenly spaced across text rows.\n")
     print("\n".join(artwork(width, max(8, round(width / 2.14)))))

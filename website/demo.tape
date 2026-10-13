@@ -1,8 +1,8 @@
 # Generate with VHS 0.12.1 from the repository root after build_site.py.
 # The CI recording job installs this run's patched fonts before rendering.
-Output "_site/media/monofoki.mp4"
+Output "_site/media/monofuki.mp4"
 Set Shell "bash"
-Set FontFamily "Monofoki Nerd Font"
+Set FontFamily "Monofuki Nerd Font"
 Set FontSize 23
 Set Width 1200
 Set Height 750

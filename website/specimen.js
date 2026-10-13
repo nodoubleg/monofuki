@@ -18,7 +18,7 @@ buttons.forEach((button) =>
   button.addEventListener("click", () => {
     root.dataset.theme = button.dataset.themeChoice;
     try {
-      localStorage.setItem("monofoki-theme", root.dataset.theme);
+      localStorage.setItem("monofuki-theme", root.dataset.theme);
     } catch (_) {
       /* Private browsing can disable storage. */
     }

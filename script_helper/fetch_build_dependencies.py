@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = json.loads((ROOT / 'script_helper/build_dependencies.json').read_text())
 
 
-def fetch(name):
+def fetch(name, extract=True):
     spec = MANIFEST['assets'][name]
     cache = ROOT / '.font-build'
     cache.mkdir(exist_ok=True)
@@ -26,7 +26,7 @@ def fetch(name):
             if hashlib.sha256(download.read_bytes()).hexdigest() != spec['sha256']:
                 raise ValueError(f'Checksum mismatch for {name}')
             download.replace(destination)
-    if spec.get('archive') == 'zip':
+    if spec.get('archive') == 'zip' and extract:
         # Extract the verified archive afresh: edits to a cached patcher must not
         # silently change a later build. Reject archive paths outside the cache.
         target = cache / name
@@ -34,6 +34,8 @@ def fetch(name):
             staging = Path(directory)
             with zipfile.ZipFile(destination) as archive:
                 for entry in archive.infolist():
+                    if ((entry.external_attr >> 16) & 0o170000) == 0o120000:
+                        raise ValueError('Symlink in build archive')
                     if not (staging / entry.filename).resolve().is_relative_to(staging.resolve()):
                         raise ValueError('Unsafe archive path')
                 archive.extractall(staging)

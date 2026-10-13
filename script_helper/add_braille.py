@@ -88,10 +88,11 @@ def update(text):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--source-dir", type=Path, default=ROOT / ".font-build/assembled")
     args = parser.parse_args()
     stale = []
     for variant in VARIANTS:
-        path = ROOT / "src" / f"monofoki-{variant}.sfd"
+        path = args.source_dir / f"monofuki-{variant}.sfd"
         original = path.read_text()
         result = update(original)
         if result != original:
