@@ -1,4 +1,4 @@
-# Monofuki
+# ![Monofuki](website/assets/monofuki-wordart.svg)
 
 Monofuki is an unapologetic fork of Monofoki that I’ve fucked with for my own selfish purposes. It fixes the missing characters and terminal annoyances that bother me. If it works for you too, great. How you pronounce it is your business, not mine.
 
@@ -32,8 +32,12 @@ Braille, the 415 pinned donor symbols, and three same-weight upstream arrows
 in each italic style. Bold and Bold Italic use their own upstream sources.
 
 The assembler checks inherited glyph records byte for byte, references, and
-source metadata and line metrics, allowing only the family rename and glyph
-count updates. It refuses new upstream/overlay collisions. Export cleanup
+source metadata and line metrics, allowing the family rename, glyph count
+updates, and explicitly fingerprinted authored overrides. There are no authored
+replacements yet. [Glyph ownership and overrides](docs/glyph-overrides.md)
+describes how to change encoded glyphs or unencoded components. A generated
+`glyph-provenance.json` inventories every final source glyph, its character
+mapping, dependencies, and provider. It refuses unreviewed upstream/overlay collisions. [The update tools](docs/glyph-overrides.md#upstream-updates) compare old upstream, candidate upstream, and current custom glyphs, with visual specimens and fingerprint-bound ownership decisions. Export cleanup
 still rounds and unlinks outlines; source preservation does not imply binary
 identity. Nerd patching intentionally substitutes the heart and seven
 Powerline glyphs, regenerates Braille, and normalizes OS/2 typographic metrics.
@@ -123,8 +127,8 @@ Source assembly and validation:
 ```sh
 fontforge -lang=py -script script_helper/assemble_sources.py
 fontforge -lang=py -script script_helper/assemble_sources.py --check
-python3 script_helper/add_braille.py --check  # verify assembled Braille geometry
-fontforge -lang=py -script script_helper/add_terminal_symbols.py --check
+fontforge -lang=py -script script_helper/test_source_preservation.py
+fontforge -lang=py -script script_helper/test_upstream_conflicts.py
 python3 script_helper/check_unicode_data.py
 fontforge -lang=py -script script_helper/check_terminal_glyphs.py
 fontforge -lang=py -script script_helper/check_terminal_glyphs.py export/Monofuki-Regular.ttf
@@ -207,6 +211,32 @@ requests FE0E; `--presentation native` leaves the characters untouched. Actual
 application output chooses its own selectors, so the font cannot force every
 emoji-capable character into the same presentation. `!` checks the font file's
 base-character map; a character marked absent can still render via fallback.
+
+### Emoji presentation checks
+
+None of the 415 donor additions is Emoji=Yes in the pinned Unicode 18 data.
+The current regular font contains two inherited default-emoji squares
+(`U+25FD`, `U+25FE`); Nerd patching also supplies `U+26A1` lightning. Plain text
+can use their monochrome glyphs. VS16 requests emoji; VS15 requests text where
+Unicode defines that variation. Unsupported selector combinations are only
+diagnostic probes, not promises of text or emoji support.
+
+```sh
+python3 script_helper/audit_emoji.py export/Monofuki-*.otf export/MonofukiNerdFont-*.otf
+swift script_helper/check_macos_emoji.swift .font-build/emoji-cases.json \
+  export/Monofuki-*.otf export/MonofukiNerdFont-*.otf \
+  --preview-dir .font-build/emoji-previews > .font-build/emoji-coretext.json
+python3 script_helper/check_emoji_results.py .font-build/emoji-coretext.json
+```
+
+The macOS check shapes whole strings, records each resolved font and UTF-16
+range, and compares supported emoji clusters with a same-host Menlo baseline.
+It includes plain/VS15/VS16 symbols, keycaps, a skin-tone modifier, a flag, and
+ZWJ sequences. Local macOS 27.0.1 tests covered all eight styles: supported
+emoji probes used Apple Color Emoji, without missing glyphs or split clusters.
+This is CoreText evidence, not a Terminal.app/iTerm2 rendering guarantee. No
+font is installed and no global Apple font or terminal setting is changed.
+CI retains its native JSON and PNG evidence with the CoreText artifact.
 
 ## Upstream design history
 

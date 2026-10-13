@@ -69,3 +69,10 @@ prefix, and spaces, hyphens and underscores are interchangeable. Each search
 filters only its own catalogue.
 
 The download ZIPs are built from the same font artifacts as the site and contain all four styles plus exact component notices and provenance. Historical Monofoki releases are preserved separately.
+
+The WordArt header is a path-only SVG generated from the built Monofuki Bold
+font with `script_helper/generate_wordart.py`. It uses the site's palette and
+ships at `website/assets/monofuki-wordart.svg` for the site and README. The
+matching fingerprint and provenance JSON files identify the actual font used.
+Regenerate it after relevant letterform changes; it does not rely on an installed
+font or browser font fallback.

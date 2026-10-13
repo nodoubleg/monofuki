@@ -123,6 +123,9 @@
     "script_helper/unicode/18.0.0/Scripts.txt": "0071fd81b6aeae25f6e8bce8efec3066a6476a91b49bdb2f52dc76e817862a6a",
     "script_helper/unicode/18.0.0/UnicodeData.txt": "0736451de439ae7baf1425136617da495e09ee5afbe6e394374db7009ea08950",
     "script_helper/unicode/18.0.0/emoji-variation-sequences.txt": "ff1707564aa1f1b2fcf4ec92d609d4cb26940bc0d4dcf07f5328ad6879e84da3",
-    "script_helper/mononoki_repertoire.json": "98d73c01cdf5d5807e0e70e89ec42b440e6566500ef95b1927be53ce682adc3e"
+    "script_helper/mononoki_repertoire.json": "98d73c01cdf5d5807e0e70e89ec42b440e6566500ef95b1927be53ce682adc3e",
+    "script_helper/unicode/18.0.0/emoji-data.txt": "80d00f8e616a0ef27fd6b8de3b758c06383b5d917e2977709578e68baf733bf1",
+    "script_helper/unicode/18.0.0/emoji-zwj-sequences.txt": "f61b5213bdf85a57741a9f903cb38d0f39a3d13be6ff4aca3b39857e859a9191",
+    "script_helper/unicode/18.0.0/emoji-sequences.txt": "1823dce71f3dd9cb0ad1976797baee4ffbdc1909756f43af8ce4c57f732843a4"
   }
 }

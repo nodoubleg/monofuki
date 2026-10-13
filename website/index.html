@@ -26,7 +26,7 @@
     <main>
       <section class="hero" aria-labelledby="title">
         <p class="eyebrow">Greg’s personal font fork.</p>
-        <h1 id="title">mono<span>fuki</span><span class="cursor" aria-hidden="true">_</span></h1>
+        <h1 id="title"><img class="wordart" src="assets/monofuki-wordart.svg" alt="Monofuki" width="1280" height="330"></h1>
         <div class="hero-bottom">
           <p>For the terminal I spend<br>way too much time in.</p>
           <p class="hero-detail">A fork of Monofoki, changed for my own terminal annoyances.</p>
@@ -36,17 +36,20 @@
 
       <section class="split origin" aria-labelledby="rabbit-hole">
         <div class="code-sample" aria-label="Perl code specimen">
-          <span class="comment"># terminal font settings</span>
+          <span class="comment"># a few terminal glyphs I was missing</span>
           <pre><code><span class="violet">use strict</span>;
 <span class="violet">use warnings</span>;
+<span class="violet">use utf8</span>;
+<span class="violet">binmode</span> STDOUT, <span class="pink">':encoding(UTF-8)'</span>;
 
-<span class="violet">my</span> <span class="mint">%terminal</span> = (
-    font =&gt; <span class="pink">'Monofuki Nerd Font'</span>,
-    size =&gt; <span class="violet">14</span>,
+<span class="violet">my</span> <span class="mint">%sample</span> = (
+    arrows  =&gt; <span class="pink">'⭦ ⭧'</span>,
+    blocks  =&gt; <span class="pink">'🬀 🬁 🬂 🬃 🬄'</span>,
+    braille =&gt; <span class="pink">'⠁ ⠃ ⠇ ⡇ ⣿'</span>,
 );
-
-<span class="violet">printf</span> <span class="pink">"%s / %d pt\n"</span>,
-    <span class="mint">@terminal</span>{qw(font size)};</code></pre>
+<span class="violet">for my</span> <span class="mint">$kind</span> (<span class="violet">sort keys</span> <span class="mint">%sample</span>) {
+    <span class="violet">printf</span> <span class="pink">"%-7s %s\n"</span>, <span class="mint">$kind, $sample{$kind}</span>;
+}</code></pre>
           <div class="code-bottom"><span>regular · italic · bold · bold italic</span><span aria-hidden="true">¶</span></div>
         </div>
         <div class="story">
@@ -82,6 +85,8 @@ The quick brown fox jumps over the lazy dog.</textarea>
           <p>Nerd Font icons bring file types, folders and prompt symbols to the terminal. Monofuki Nerd Font pairs them with the letters and terminal graphics used in apps like <a href="https://github.com/openai/codex">Codex</a>, <a href="https://github.com/can1357/oh-my-pi">oh-my-pi (omp)</a>, and <a href="https://github.com/charmbracelet/crush">Crush</a>.</p>
           <p>Both font variants include 415 added Unicode symbols and all 256 Braille patterns. Choose Monofuki Nerd Font for the Nerd Fonts 3.5.1 icons too. Your operating system can supply emoji and other characters through font fallback.</p>
           <p><a href="symbols.html">See the 415 additions and how font fallback works.</a></p>
+          <p class="presentation-sample">Text presentation: <span>☺︎ ♥︎ ☀︎ ↗︎</span><br>Emoji presentation: <span>☺️ ♥️ ☀️ ↗️</span></p>
+          <p>The first line uses VS15; the second uses VS16. On macOS, CoreText selects Apple Color Emoji for the second line. Browser and terminal rendering still depends on the application.</p>
           <p>I wanted fewer missing symbols and gaps in the artwork I actually see. These samples show the cases I’ve worked on; they aren’t a promise of universal coverage.</p>
         </div>
         <div class="terminal-panel" aria-label="Terminal glyph specimen">

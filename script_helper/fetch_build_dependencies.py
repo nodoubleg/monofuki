@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = json.loads((ROOT / 'script_helper/build_dependencies.json').read_text())
 
 
-def fetch(name, extract=True):
-    spec = MANIFEST['assets'][name]
+def fetch(name, extract=True, manifest=None):
+    spec = (manifest or MANIFEST)['assets'][name]
     cache = ROOT / '.font-build'
     cache.mkdir(exist_ok=True)
     destination = cache / spec['filename']

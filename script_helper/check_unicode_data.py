@@ -30,3 +30,10 @@ assert '1FBFA? [\U0001fbfa]' in output
 assert '02BB7? [\u2bb7]' in output
 assert '00023? [#]' in output
 print('PASS Unicode 18.0.0: 2113 assigned symbols, 159 emoji sequences; Perl uses bundled data')
+
+# Current donor additions are text symbols, not default-emoji substitutions.
+from audit_emoji import properties
+props = properties()
+added = {int(item['codepoint'], 16) for item in json.loads((HELPERS / 'symbol_additions.json').read_text())['additions']}
+assert not added & props['Emoji_Presentation'], 'Default-emoji donor addition needs explicit presentation review'
+print(f"Emoji audit: {len(added & props['Emoji'])} emoji-capable donor additions; no default-emoji additions")

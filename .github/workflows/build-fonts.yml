@@ -35,8 +35,7 @@ jobs:
           fontforge -lang=py -script script_helper/assemble_sources.py
           fontforge -lang=py -script script_helper/assemble_sources.py --check
           fontforge -lang=py -script script_helper/test_source_preservation.py
-          python3 script_helper/add_braille.py --check
-          fontforge -lang=py -script script_helper/add_terminal_symbols.py --check
+          fontforge -lang=py -script script_helper/test_upstream_conflicts.py
           python3 script_helper/check_unicode_data.py
           fontforge -lang=py -script script_helper/check_terminal_glyphs.py
 
@@ -57,6 +56,9 @@ jobs:
           python3 script_helper/check_font_names.py export/Monofuki-*.ttf export/Monofuki-*.otf
           fontforge -lang=py -script script_helper/check_terminal_glyphs.py \
             export/*.ttf export/*.otf
+
+      - name: Audit regular emoji mappings
+        run: python3 script_helper/audit_emoji.py export/Monofuki-*.otf --output export/emoji-audit.json --cases export/emoji-cases.json
 
       - name: Upload regular Monofuki
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -79,6 +81,9 @@ jobs:
           test -s export/license-audit-nerd-font.md
           fontforge -lang=py -script script_helper/check_terminal_glyphs.py \
             export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf
+
+      - name: Audit all emoji mappings
+        run: python3 script_helper/audit_emoji.py export/Monofuki-*.otf export/MonofukiNerdFont-*.otf --output export/emoji-audit.json --cases export/emoji-cases.json
 
       - name: Export site character catalogues
         run: |
@@ -104,8 +109,12 @@ jobs:
             export/component-notices/
             export/component-provenance.json
             export/source-provenance.json
+            export/glyph-provenance.json
+            export/upstream-decisions.json
             export/source-overlays.json
             export/nerd-policy.json
+            export/emoji-audit.json
+            export/emoji-cases.json
           if-no-files-found: error
           retention-days: 30
 
@@ -136,6 +145,13 @@ jobs:
             "$RUNNER_TEMP/fonts/regular/Monofuki-Regular.otf" \
             "$RUNNER_TEMP/fonts/nerd/MonofukiNerdFont-Regular.otf" \
             "$RUNNER_TEMP/coretext"
+      - name: Check native emoji presentation and clusters
+        run: |
+          swift script_helper/check_macos_emoji.swift \
+            "$RUNNER_TEMP/fonts/nerd/emoji-cases.json" \
+            "$RUNNER_TEMP/fonts/regular/"*.otf "$RUNNER_TEMP/fonts/nerd/"*.otf \
+            --preview-dir "$RUNNER_TEMP/coretext/emoji-previews" > "$RUNNER_TEMP/coretext/emoji-coretext.json"
+          python3 script_helper/check_emoji_results.py "$RUNNER_TEMP/coretext/emoji-coretext.json"
       - name: Upload native fallback previews
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:

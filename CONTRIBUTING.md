@@ -28,12 +28,17 @@ Branch individual upstream fixes from the clean branch, for example
 `git switch -c upstream/fix-description upstream-tracking`. Send those topics
 to datMaffin/monofoki. Do not use `master` as the base for an upstream PR.
 Updating this tracking branch never updates Monofuki’s build inputs: changing
-`script_helper/build_dependencies.json` is a separate reviewed step.
+`script_helper/build_dependencies.json` is a separate reviewed step. See
+[reviewing a locked upstream update](docs/glyph-overrides.md#upstream-updates).
+Monofoki is the single base. Mononoki improvements normally arrive through
+Monofoki; a direct backport needs an explicit source, provenance, and review,
+not a second equally ranked base.
 
 ## Source changes
 
 Edit the recipe in `src/overlays.json`, the Braille generator, or the explicit
-symbol manifest. Imported font outlines belong in the verified input cache,
+symbol manifest. For individual replacement glyphs and unencoded components,
+follow [the authored override contract](docs/glyph-overrides.md). Imported font outlines belong in the verified input cache,
 not in authored source. Rebuild the disposable assembly and run preservation
 checks. `src/nerd-policy.json` documents permitted Nerd patcher substitutions;
 expand it only after examining the actual glyph and metric changes.

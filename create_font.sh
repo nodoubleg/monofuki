@@ -80,8 +80,9 @@ woff2_compress export/Monofuki-Bold.otf
 woff2_compress export/Monofuki-Bold-Italic.otf
 
 cp LICENSE export/LICENSE-Monofuki
-cp .font-build/assembled/source-provenance.json export/
+cp .font-build/assembled/*-provenance.json export/
 cp src/overlays.json export/source-overlays.json
+cp src/upstream-decisions.json export/upstream-decisions.json
 cp licenses/LICENSE-* export/
 cp licenses/NOTICES-symbols.md export/
 cp script_helper/symbol_additions.json export/symbol-additions.json

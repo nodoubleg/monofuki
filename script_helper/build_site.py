@@ -36,6 +36,7 @@ def main():
         (output / directory).mkdir(exist_ok=True)
     for name in ('style.css', 'specimen.js', 'symbols.js'):
         shutil.copy2(ROOT / 'website' / name, output / name)
+    shutil.copytree(ROOT / 'website/assets', output / 'assets', dirs_exist_ok=True)
     hashes = {}
     for family, directory, styles in (
         ('Monofuki', args.regular, ('Regular', 'Italic', 'Bold', 'Bold-Italic')),
@@ -61,7 +62,7 @@ def main():
         files = {p for p in directory.glob(f'{family}-*') if p.suffix in ('.otf', '.ttf', '.woff2')}
         if len(list(directory.glob(f'{family}-*.otf'))) != 4:
             parser.error(f'{family}: download bundle needs four OTF styles')
-        for pattern in ('LICENSE-*', 'NOTICES-*.md', '*audit*.md', '*provenance.json', '*dependencies.json', '*additions.json', '*overlays.json', '*policy.json', 'THIRD-PARTY-NOTICES.txt'):
+        for pattern in ('LICENSE-*', 'NOTICES-*.md', '*audit*.md', '*provenance.json', '*dependencies.json', '*additions.json', '*overlays.json', '*policy.json', '*decisions.json', 'emoji-*.json', 'THIRD-PARTY-NOTICES.txt'):
             files.update(directory.glob(pattern))
         files.update(p for p in (directory / 'component-notices').rglob('*') if p.is_file())
         for required in ('THIRD-PARTY-NOTICES.txt', 'component-provenance.json', 'source-provenance.json'):
