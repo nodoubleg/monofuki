@@ -126,7 +126,8 @@ def make_report(before_path, candidate_path, assembled, output):
     catalog = json.loads((ROOT / recipe['symbols']).read_text())
     symbols = make_symbols(catalog)
     donor_sources = {item['codepoint']: item for item in catalog['additions']}
-    snapshot_paths = [before_path, candidate_path, recipe_path, decisions_path, ROOT / recipe['symbols'],
+    snapshot_paths = [ROOT / 'script_helper/build_dependencies.json', before_path, candidate_path,
+                      recipe_path, decisions_path, ROOT / recipe['symbols'],
                       *(ROOT / e['source'] for e in recipe['authored_overrides'])]
     report = {'schema_version': 1, 'before_lock': before, 'candidate_lock': candidate,
               'recipe': recipe, 'accepted': accepted, 'styles': {}, 'items': []}
@@ -150,7 +151,7 @@ def make_report(before_path, candidate_path, assembled, output):
         old, new, current = old_path.read_text(), new_path.read_text(), current_path.read_text()
         snapshot_paths.append(current_path)
         report['styles'][style] = compare(old, new)
-        items = ownership_items(style, old, new, current, recipe, symbols, candidate['upstream']['revision'], accepted, effective=effective[style])
+        items = ownership_items(style, old, new, current, recipe, symbols, candidate['upstream']['revision'], accepted, root=ROOT, effective=effective[style])
         for item in items:
             cp = item['binding']['codepoint']
             if item['kind'] == 'donor':
@@ -227,13 +228,15 @@ def resolve(report, choices, root=ROOT):
             raise ValueError('Revising a donor requires an explicit authored override entry')
         if entry['style'] != b['style'] or entry['codepoint'] != b['codepoint']:
             raise ValueError('Revised override changes style or character identity')
-        entry['expected_upstream_revision'] = report['candidate_lock']['upstream']['revision']
-        entry['expected_base_sha256'] = b['candidate_sha256']
         candidate_base = item.get('candidate_base', item['candidate'])
-        entry['operation'] = 'replace' if candidate_base else 'add'
         if candidate_base and entry['glyph_name'] != candidate_base['glyph_name']:
             raise ValueError('Candidate glyph name differs; revise the authored identity explicitly')
         if action == 'keep-overlay':
+            # Only an explicit keep (or an unchanged reviewed binding) rebases
+            # existing ownership. A revision supplies its own exact guards.
+            entry['expected_upstream_revision'] = report['candidate_lock']['upstream']['revision']
+            entry['expected_base_sha256'] = b['candidate_sha256']
+            entry['operation'] = 'replace' if candidate_base else 'add'
             changes = {d['glyph_name']: d['candidate_sha256'] for d in item['dependency_changes']}
             for dep in entry['dependencies']:
                 if dep['glyph_name'] in changes:
@@ -251,23 +254,19 @@ def resolve(report, choices, root=ROOT):
 
 def checked_apply(report_path, choices_path, write=False):
     report, choices = (json.loads(p.read_text()) for p in (report_path, choices_path))
+    target_paths = {ROOT / 'src/overlays.json', ROOT / 'src/upstream-decisions.json',
+                    ROOT / 'script_helper/build_dependencies.json'}
+    snapshotted = {Path(s['path']).resolve() for s in report['snapshots']}
+    if not {p.resolve() for p in target_paths}.issubset(snapshotted):
+        raise ValueError('Review must snapshot every live apply target; generate a fresh report')
     recipe, decisions = resolve(report, choices)
     with tempfile.TemporaryDirectory() as directory:
-        pre_recipe=copy.deepcopy(recipe);pre_recipe['authored_overrides']=[]
-        assemble(Path(directory)/'base',recipe=pre_recipe,decisions=decisions,manifest=report['candidate_lock'],require_coverage=False)
-        for style in STYLES:
-            pre=records((Path(directory)/'base'/f'monofuki-{style}.sfd').read_text())
-            owned={e['glyph_name']:e for e in recipe['authored_overrides'] if e['style']==style}
-            for name,entry in owned.items():
-                entry['operation']='replace' if name in pre else 'add'
-                entry['expected_base_sha256']=digest(pre[name]) if name in pre else None
-                for dep in entry['dependencies']:
-                    dep_name=dep['glyph_name']
-                    source=(ROOT/owned[dep_name]['source']).read_text() if dep_name in owned else pre.get(dep_name)
-                    if source is None: raise ValueError('Referenced component removed; revise its ownership explicitly')
-                    dep['expected_source_sha256']=digest(source)
+        # The assembler must validate the reviewed/supplied fingerprints as-is.
+        # Refreshing them here would turn drift into silently accepted ownership.
         assemble(Path(directory)/'final', recipe=recipe, decisions=decisions, manifest=report['candidate_lock'])
     if write:
+        # Also catch inputs edited while candidate assembly was running.
+        resolve(report, choices)
         targets = {ROOT / 'src/overlays.json': recipe,
                    ROOT / 'src/upstream-decisions.json': {'schema_version': 1, 'decisions': decisions, 'last_review_fingerprint': report['id']},
                    ROOT / 'script_helper/build_dependencies.json': report['candidate_lock']}

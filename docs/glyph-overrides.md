@@ -141,6 +141,10 @@ The maintainer chooses `adopt-upstream`, `keep-overlay`, or `revise-overlay`:
   upstream uses a different name. Existing source changes that preceded a report
   are captured by that report; changing a snapshotted source afterward requires
   a fresh report. A revision may use a new file without modifying those snapshots.
+  Its upstream revision, operation, base hash and dependency hashes are validated
+  exactly as supplied; `check` and `apply` never refresh those guards. If another
+  ownership choice changes its effective base or component, explicitly revise the
+  entry against that chosen source and review the new fingerprint.
 
 The choice file binds to the report fingerprint and each conflict ID. These
 include exact candidate and overlay hashes, style, identity, revision, and
@@ -164,6 +168,8 @@ fontforge -lang=py -script script_helper/upstream_conflicts.py apply \
 
 `apply` runs the same validation before updating the lock, overlay recipe and
 `src/upstream-decisions.json`. It never commits, pushes, installs, or publishes.
+All three live destinations are snapshotted even when the old and candidate locks
+are separate temporary files. Any later edit rejects the report before writing.
 Review the diff. Accepted identical collisions do not require another choice in
 a newly generated report; changed candidate/overlay fingerprints or dependencies
 trigger review again. Unchanged overrides retain ownership and can bind to a new
