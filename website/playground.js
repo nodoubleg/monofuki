@@ -7,7 +7,8 @@ spacing:'minimum Toffee vivid AVATAR\nVVA VYA WYA · illi WWW 111\n\na ... b   a
 };
 const FONT_LEADING=1150/1024;
 let currentSample='code',family='Monofuki';
-const styles={Regular:{weight:'400',style:'normal',suffix:'Regular'},Bold:{weight:'700',style:'normal',suffix:'Bold'},Italic:{weight:'400',style:'italic',suffix:'Italic'},BoldItalic:{weight:'700',style:'italic',suffix:'Bold-Italic'}};
+const styles=MonofukiFonts.styles;
+let fontSerial=0;
 byId('sample').value=samples.code;
 function render(){
  const chosen=styles[byId('font-style').value],size=byId('font-size').value,leading=byId('leading').value,kern=byId('font-kern').checked;
@@ -25,35 +26,59 @@ async function loadCustom(){
  const db=await new Promise((resolve,reject)=>{const request=indexedDB.open('monofuki-playground',1);request.onupgradeneeded=()=>request.result.createObjectStore('fonts');request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});
  const values=await Promise.all([...Object.keys(styles),'profile'].map(key=>new Promise((resolve,reject)=>{const q=db.transaction('fonts').objectStore('fonts').get(key);q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);})));db.close();
  const fonts=values.slice(0,4);if(fonts.some(f=>!f))throw Error('Build a font in the customizer first.');
- const loaded=await Promise.all(Object.entries(styles).map(async([style,descriptor],i)=>{const font=new FontFace('MonofukiCustom',fonts[i],descriptor);await font.load();return font;}));
- return {fonts:loaded,profile:values[4]||''};
+ const alias='MonofukiCustom'+(++fontSerial);
+ const loaded=await Promise.all(Object.entries(styles).map(async([style,descriptor],i)=>{const bytes=fonts[i],buffer=ArrayBuffer.isView(bytes)?bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength):bytes.slice(0);const font=new FontFace(alias,buffer,{weight:descriptor.weight,style:descriptor.style});await font.load();return font;}));
+ return {fonts:loaded,profile:values[4]||'',family:alias};
 }
-let selectionRequest=0;
+let selectionRequest=0,activeCustomFonts=[];
+function showLoadedFont(nextFamily){
+ family=nextFamily;document.body.classList.remove('font-awaiting');
+ byId('sample').readOnly=false;byId('sample').setAttribute('aria-busy','false');render();
+}
 async function selectBuild(){
  const generation=++selectionRequest,choice=byId('font-build').value;
+ byId('retry-font').hidden=true;byId('sample').setAttribute('aria-busy','true');
+ byId('font-status').textContent=choice==='custom'?'Loading your generated build…':'Loading Monofuki default…';
  try{
   if(choice==='custom'){
-   byId('font-status').textContent='Loading your generated build…';
    const custom=await loadCustom();
    if(generation!==selectionRequest||byId('font-build').value!==choice)return;
-   for(const font of document.fonts)if(font.family==='MonofukiCustom')document.fonts.delete(font);
    for(const font of custom.fonts)document.fonts.add(font);
+   const previous=activeCustomFonts;activeCustomFonts=custom.fonts;
    byId('font-build').querySelector('[value=custom]').textContent='Your build '+custom.profile;
-   family='MonofukiCustom';
-  }else family='Monofuki';
-  render();byId('font-status').textContent=choice==='custom'?'Your generated build · four real styles · 575-unit advances':'Greg’s current defaults · four real styles · 575-unit advances';
- }catch(e){
+   showLoadedFont(custom.family);
+   for(const font of previous)document.fonts.delete(font);
+  }else{
+   await MonofukiFonts.loadDefault();
+   if(generation!==selectionRequest||byId('font-build').value!==choice)return;
+   showLoadedFont('Monofuki');
+  }
+  byId('font-status').textContent=choice==='custom'?'Your generated build · four real styles · 575-unit advances':'Monofuki default · four real styles · 575-unit advances';
+ }catch(error){
   if(generation!==selectionRequest||byId('font-build').value!==choice)return;
-  family='Monofuki';byId('font-build').value='default';render();
-  byId('font-status').textContent='Showing Greg’s defaults. '+e.message;
+  if(choice==='custom'){
+   byId('font-build').value='default';
+   try{
+    await MonofukiFonts.loadDefault();
+    if(generation!==selectionRequest)return;
+    showLoadedFont('Monofuki');byId('font-status').textContent='Monofuki default · '+error.message;return;
+   }catch{}
+  }
+  if(generation!==selectionRequest)return;
+  document.body.classList.add('font-awaiting');byId('sample').readOnly=true;
+  byId('sample').setAttribute('aria-busy','false');byId('retry-font').hidden=false;
+  byId('font-status').textContent='Font not loaded. Check your connection, then retry.';
  }
 }
 byId('font-build').onchange=selectBuild;
-
+byId('retry-font').onclick=selectBuild;
 async function start(){
- try{for(const s of Object.values(styles))await document.fonts.load(`${s.style} ${s.weight} 28px Monofuki`);if(!selectionRequest)byId('font-status').textContent='Greg’s current defaults · four real styles · 575-unit advances';}
- catch{if(!selectionRequest)byId('font-status').textContent='Font loading failed. Please reload.';}
- try{const custom=await loadCustom(),option=byId('font-build').querySelector('[value=custom]');option.disabled=false;option.textContent='Your build '+custom.profile;if(location.hash==='#custom'&&!selectionRequest){byId('font-build').value='custom';await selectBuild();}}catch{}
- render();
+ const initial=selectBuild(),generation=selectionRequest;
+ try{
+  const custom=await loadCustom(),option=byId('font-build').querySelector('[value=custom]');
+  option.disabled=false;option.textContent='Your build '+custom.profile;
+  if(location.hash==='#custom'&&generation===selectionRequest){byId('font-build').value='custom';await selectBuild();}
+ }catch{}
+ await initial;
 }
 render();start();

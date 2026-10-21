@@ -5,7 +5,7 @@
   "outlines": "Monofuki-derived outlines; no Iosevka g/q/zero/brace outlines imported",
   "source_files": {
     "alternatives.json": "0bc2639916007b974c82086664d84c1c75a522a324e060517e4ea7800714fdb8",
-    "defaults.json": "86a63a268be82ae378aa4c8f987babfe481ced99a74df3e21280427df31b2d89",
+    "defaults.json": "d413f8b1cec18a350eafe806ad58bcb5efca22c97e2b216a59abc2e4c88d5a45",
     "g-alternatives.json": "fc5ee9da87ddf545d3a7df7a428496b1a09d17b39b8d5bcae85b3ca4c27f7d52",
     "glyphs.json": "16869d963a30a3f07033e9daee6a6d4e315256306d0fca25a3bf7320e8755b35",
     "alternative-metadata.json": "5345cde31e4621b02171921907bb15ba0db220ff123124f76331df9db7943cf6",
@@ -1313,5 +1313,11 @@
       "Rcommaaccent": "134c8d961f02444612be356cc0339e2d550a42a486f11dbe96f3ac5411536555",
       "rcommaaccent": "029c1d66159624e40586bfc48d38dcb107c82af146130548b80bc9a5177d6f38"
     }
-  }
+  },
+  "default_updates": [
+    {
+      "date": "2026-10-21",
+      "change": "User requested tailed q as the Monofuki default; all other tuning values retained."
+    }
+  ]
 }

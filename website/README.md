@@ -131,3 +131,13 @@ base fonts through the normal scripts first. The source contract and spacing
 scope are documented in `docs/glyph-overrides.md`. Browser and operating-system
 rendering must be checked before publication; static tests alone do not prove
 interactive layout or terminal support.
+
+The customizer shares the site’s Monofuki webfonts, navigation and palette. Its
+shape preview draws the current tuned outlines immediately and stays above the
+text-entry control on narrow screens. Text entry uses the loaded Monofuki font
+in the selected style; it edits sample text, while the SVG above shows shape
+changes. The playground tests the actual compiled default or saved custom font.
+Both pages verify matching loaded FontFace objects instead of treating an empty
+FontFaceSet.load result as success. Saved builds receive fresh CSS family aliases
+so editable controls cannot retain a previous build’s face in WebKit. Native
+WebKit viewport tests are browser-engine evidence, not an actual iOS-device test.

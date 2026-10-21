@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def stage(output, regular, nerd, revision):
     dest = output/'tuning'
     dest.mkdir(exist_ok=True)
+    shutil.copy2(ROOT/'website/font-loading.js', output/'font-loading.js')
     for name in ('worker.js','download.js','theme.js'):
         shutil.copy2(ROOT/'website/tuning'/name, dest/name)
         if name == 'download.js':
@@ -57,14 +58,14 @@ def stage(output, regular, nerd, revision):
     if '{{' in template:
         raise ValueError('Unresolved customizer template')
     shutil.copy2(ROOT/'website/tuning.css',output/'tuning.css')
-    for name in ('tuning/theme.js','tuning/download.js','tuning.css'):
+    for name in ('tuning/theme.js','tuning/download.js','tuning.css','style.css','font-loading.js'):
         digest = hashlib.sha256((output/name).read_bytes()).hexdigest() if (output/name).exists() else revision
         template = template.replace('src="'+name+'"','src="'+name+'?v='+digest+'"').replace('href="'+name+'"','href="'+name+'?v='+digest+'"')
     (output/'customize.html').write_text(template)
     for name in ('tuning.css','playground.html','playground.js','playground.css'):
         shutil.copy2(ROOT/'website'/name, output/name)
     document = (output/'playground.html').read_text()
-    for name in ('tuning/theme.js','style.css','playground.js','playground.css'):
+    for name in ('tuning/theme.js','style.css','playground.js','playground.css','font-loading.js'):
         digest = hashlib.sha256((output/name).read_bytes()).hexdigest()
         document = document.replace('src="'+name+'"','src="'+name+'?v='+digest+'"').replace('href="'+name+'"','href="'+name+'?v='+digest+'"')
     (output/'playground.html').write_text(document)

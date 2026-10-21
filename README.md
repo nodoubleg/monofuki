@@ -2,7 +2,7 @@
 
 Monofuki is an unapologetic fork of Monofoki that I’ve fucked with for my own selfish purposes. It fixes the missing characters and terminal annoyances that bother me. If it works for you too, great. How you pronounce it is your business, not mine.
 
-Upstream: [Monofoki by Marvin Dostal (datMaffin)](https://github.com/datMaffin/monofoki), based on [Mononoki by Matthias Tellen](https://github.com/madmalik/mononoki). This fork is by [Greg (nodoubleg)](https://github.com/nodoubleg).
+Upstream: [Monofoki by Marvin Dostal (datMaffin)](https://github.com/datMaffin/monofoki), based on [Mononoki by Matthias Tellen](https://github.com/madmalik/mononoki). This fork is by [Greg Mason (nodoubleg)](https://github.com/nodoubleg).
 
 I mainly use Terminal.app and iTerm2 on macOS. My priorities are missing
 symbols, Braille artwork, and repeatable regular and Nerd Font builds. I make

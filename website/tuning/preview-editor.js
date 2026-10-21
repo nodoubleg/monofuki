@@ -35,6 +35,10 @@ function setPreviewEditorText(text, selection = previewEditorSelection()) {
 function syncPreviewEditor(forceExternal = false) {
   if (!previewEditorState) return;
   const state = previewEditorState, field = $('reading-editor'), source = $('sample').value;
+  field.readOnly = !previewFontsReady;
+  if(previewFontsReady)MonofukiFonts.apply(field,'Monofuki',MonofukiFonts.styles[$('style').value]);
+  $('preview-font-status').hidden = !state.editing || previewFontsReady;
+  $('retry-preview-font').hidden = !state.editing || !previewFontError;
   $('reading-editor-region').hidden = !state.editing;
   $('finish-preview-edit').hidden = !state.editing;
   $('edit-preview').hidden = state.editing;
@@ -140,3 +144,26 @@ $('reading').addEventListener('keydown', event => {
 $('edit-preview').addEventListener('click', beginPreviewEditing);
 $('finish-preview-edit').addEventListener('click', finishPreviewEditing);
 syncPreviewEditor();
+
+var previewFontsReady = false;
+var previewFontError = false;
+async function loadPreviewFonts(){
+  previewFontError=false;
+  $('preview-font-status').textContent='Loading Monofuki…';
+  syncPreviewEditor();
+  try{await MonofukiFonts.loadDefault();previewFontsReady=true;}
+  catch(error){previewFontError=true;$('preview-font-status').textContent=error.message;}
+  syncPreviewEditor();
+}
+$('retry-preview-font').onclick=loadPreviewFonts;
+function syncVisualViewport(){
+  const view=window.visualViewport,height=view?.height||innerHeight;
+  const offset=Math.max(0,innerHeight-height-(view?.offsetTop||0));
+  document.documentElement.style.setProperty('--visual-height',height+'px');
+  document.documentElement.style.setProperty('--keyboard-offset',offset+'px');
+  $('reading-shell').classList.toggle('compact-viewport',height<360);
+}
+window.visualViewport?.addEventListener('resize',syncVisualViewport);
+window.visualViewport?.addEventListener('scroll',syncVisualViewport);
+window.addEventListener('resize',syncVisualViewport);
+syncVisualViewport();loadPreviewFonts();
