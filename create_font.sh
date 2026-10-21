@@ -56,6 +56,17 @@ generate '.font-build/assembled/monofuki-Italic.sfd' 'export/Monofuki-Italic.ttf
 generate '.font-build/assembled/monofuki-Bold.sfd' 'export/Monofuki-Bold.ttf'
 generate '.font-build/assembled/monofuki-Bold-Italic.sfd' 'export/Monofuki-Bold-Italic.ttf'
 
+generate '.font-build/assembled/monofuki-Regular.sfd' 'export/Monofuki-Regular.otf'
+generate '.font-build/assembled/monofuki-Italic.sfd' 'export/Monofuki-Italic.otf'
+generate '.font-build/assembled/monofuki-Bold.sfd' 'export/Monofuki-Bold.otf'
+generate '.font-build/assembled/monofuki-Bold-Italic.sfd' 'export/Monofuki-Bold-Italic.otf'
+
+# FontForge 2023 can erase Bold superscript/subscript n during quadratic overlap cleanup.
+# Reuse its correct OTF outline before hinting or Nerd patching.
+python3 script_helper/repair_bold_small_n.py \
+  export/Monofuki-Bold.otf export/Monofuki-Bold.ttf \
+  --provenance export/export-repair-provenance.json
+
 if [[ "$*" == --hint ]]
 then
   ttfautohint export/Monofuki-Regular.ttf export/Monofuki-Regular-hinted.ttf
@@ -68,11 +79,6 @@ then
   woff2_compress export/Monofuki-Bold-hinted.ttf
   woff2_compress export/Monofuki-Bold-Italic-hinted.ttf
 fi
-
-generate '.font-build/assembled/monofuki-Regular.sfd' 'export/Monofuki-Regular.otf'
-generate '.font-build/assembled/monofuki-Italic.sfd' 'export/Monofuki-Italic.otf'
-generate '.font-build/assembled/monofuki-Bold.sfd' 'export/Monofuki-Bold.otf'
-generate '.font-build/assembled/monofuki-Bold-Italic.sfd' 'export/Monofuki-Bold-Italic.otf'
 
 woff2_compress export/Monofuki-Regular.otf
 woff2_compress export/Monofuki-Italic.otf
@@ -90,3 +96,5 @@ cp script_helper/build_dependencies.json export/build-dependencies.json
 
 python3 script_helper/bundle_notices.py export
 python3 script_helper/check_font_names.py export/Monofuki-*.ttf export/Monofuki-*.otf
+
+python3 script_helper/check_visible_glyphs.py export/Monofuki-*.ttf export/Monofuki-*.otf

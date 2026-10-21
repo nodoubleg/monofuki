@@ -28,3 +28,5 @@ cp licenses/license-audit-nerd-font.md export/license-audit-nerd-font.md
 python3 script_helper/bundle_notices.py export
 cp src/nerd-policy.json export/nerd-policy.json
 python3 script_helper/check_font_names.py export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf
+
+python3 script_helper/check_visible_glyphs.py export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf

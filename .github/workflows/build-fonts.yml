@@ -84,6 +84,8 @@ jobs:
           .font-build/tuning-python/bin/python script_helper/test_spacing_safety.py
           .font-build/tuning-python/bin/python script_helper/test_woff2_compression.py
           .font-build/tuning-python/bin/python script_helper/test_spacing_masks.py
+          .font-build/tuning-python/bin/python script_helper/test_bold_small_n.py
+          .font-build/tuning-python/bin/python script_helper/check_visible_glyphs.py export/Monofuki-*.ttf export/Monofuki-*.otf export/Monofuki-*.woff2 export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf export/MonofukiNerdFont-*.woff2
           node script_helper/test_site_ui.cjs
           python3 script_helper/check_font_names.py export/Monofuki-*.ttf export/Monofuki-*.otf export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf
           fontforge -lang=py -script script_helper/check_terminal_glyphs.py --tuned export/Monofuki-*.ttf export/Monofuki-*.otf export/MonofukiNerdFont-*.ttf export/MonofukiNerdFont-*.otf
@@ -121,6 +123,7 @@ jobs:
             export/emoji-cases.json
             export/tuning-settings.json
             export/tuning-provenance.json
+            export/export-repair-provenance.json
           if-no-files-found: error
           retention-days: 30
 
@@ -133,6 +136,7 @@ jobs:
             export/tuning-base/MonofukiNerdFont-*
             export/tuning-settings.json
             export/tuning-provenance.json
+            export/export-repair-provenance.json
             export/LICENSE-*
             export/NOTICES-symbols.md
             export/symbol-additions.json
@@ -185,6 +189,17 @@ jobs:
           swift script_helper/check_tuned_coretext.swift \
             "$RUNNER_TEMP/fonts/regular/"*.otf > "$RUNNER_TEMP/coretext/tuned-coretext-proof.json"
           cp .font-build/tuned-coretext-proof.png "$RUNNER_TEMP/coretext/"
+      - name: Check visible superscript and subscript n in CoreText
+        run: |
+          swift script_helper/check_small_n_coretext.swift \
+            "$RUNNER_TEMP/fonts/regular/"*.otf "$RUNNER_TEMP/fonts/regular/"*.ttf \
+            "$RUNNER_TEMP/fonts/nerd/"*.otf "$RUNNER_TEMP/fonts/nerd/"*.ttf \
+            > "$RUNNER_TEMP/coretext/small-n-coretext.json"
+      - name: Reject lost visible glyphs in TrueType exports
+        run: |
+          swift script_helper/check_export_visibility.swift \
+            "$RUNNER_TEMP/fonts/regular/"*.ttf "$RUNNER_TEMP/fonts/nerd/"*.ttf \
+            > "$RUNNER_TEMP/coretext/export-visibility.json"
       - name: Check native emoji presentation and clusters
         run: |
           swift script_helper/check_macos_emoji.swift \

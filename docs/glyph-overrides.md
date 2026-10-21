@@ -234,3 +234,12 @@ so extra movement cannot add overlap. Existing italic overlaps at the approved 9
 Other Unicode characters and unsupported clusters retain their base behavior.
 Applications can disable this feature; the font cannot force a terminal to use
 it. CoreText and HarfBuzz evidence is not terminal-app evidence.
+
+The base exporter repairs two pre-existing FontForge quadratic-cleanup failures
+in upright Bold: U+207F (superscript n) and U+2099 (subscript n). It converts only
+those two correct same-style OTF outlines to quadratic curves, at a 0.5-unit
+conversion tolerance, before hinting and Nerd patching. Source records, character
+maps, advances, other glyphs and layout tables remain unchanged. The generated
+`export-repair-provenance.json` records input/output hashes and travels with both
+download families. Explicit ink checks reject empty outlines for these expected
+visible characters; a valid mapping or successful rasterizer call is insufficient.
