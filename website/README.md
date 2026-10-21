@@ -2,7 +2,7 @@
 
 The site uses Monofuki’s Monofoki-derived outlines. The dark palette comes from Crush’s [Charmtone theme](https://github.com/charmbracelet/crush/blob/main/internal/ui/styles/themes.go); light mode darkens the same accents for legibility.
 
-The `site` job in `.github/workflows/build-fonts.yml` downloads the regular and Nerd Font artifacts from its own workflow run. `script_helper/build_site.py` stages five WOFF2 files, licenses, HTML, and the demo under ignored `_site/`. Generated font and video files are never committed. Only the separate `deploy` job can publish to GitHub Pages, and it runs on `master` outside pull requests.
+The `site` job in `.github/workflows/publish-verified-site.yml` downloads the exact regular and Nerd Font artifacts identified by a successful Linux build and the owner-submitted native verification proof. `script_helper/build_site.py` stages five WOFF2 files, licenses, HTML, and the demo under ignored `_site/`. Generated font and video files are never committed. Only the separate `deploy` job can publish to GitHub Pages, and it runs on `master` outside pull requests.
 
 Asset URLs use content hashes, or the recording’s source revision, to refresh cached assets after a build.
 
@@ -12,7 +12,9 @@ To preview locally, download the two artifacts from a successful font-build run,
 python3 script_helper/build_site.py \
   --regular /path/to/regular-artifact \
   --nerd /path/to/nerd-artifact \
-  --coretext /path/to/coretext-artifact \
+  --coretext /path/to/validated/evidence \
+  --native-receipt /path/to/validated/receipt.json \
+  --native-bundle /path/to/validated/native-evidence.zip \
   --revision COMMIT_SHA \
   --build-url https://github.com/nodoubleg/monofuki/actions/runs/RUN_ID
 python3 -m http.server --directory _site 8000
@@ -39,13 +41,17 @@ outlines. Unicode 18 script properties filter other writing-system alphabets,
 keeping Latin, common punctuation, symbols and private-use icons. Character
 maps and Nerd Font names come from the built fonts.
 
-The `coretext` job uses a macOS 26 runner and the same run’s OTFs. It registers
-fonts only in its process and renders bare Unicode scalars into transparent
+The supervised [native verification command](../docs/native-verification.md) runs
+on the connected Mac using the exact Linux build artifacts. It records the actual
+host macOS version and registers fonts only in its process, rendering bare Unicode
+scalars into transparent
 light/dark PNG atlases. Records include requested and fallback fonts, missing
 glyphs, host details, rendering settings and input hashes. Apple font files
 and outlines are not distributed. The page labels these as macOS examples;
 visitors’ results may differ. Generated catalogues, images and records stay
-in ignored staging directories and Actions/Pages artifacts.
+in ignored staging directories, a data-only `native-verification` branch, and
+Actions/Pages artifacts. `build.json` links the public native proof bundle and
+records its immutable evidence commit, build run/attempt, host, and hashes.
 
 To generate a local native snapshot, first export `character-catalog.json`
 using `script_helper/export_character_catalog.py`, then run:

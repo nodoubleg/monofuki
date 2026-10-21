@@ -11,6 +11,7 @@ from pathlib import Path
 
 from terminal_demo import CHARACTER_SAMPLE, art_pieces
 from symbols_page import render_symbols
+from native_evidence import file_hash, inventory, read_json, require
 from build_tuning_site import stage as stage_tuning
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,13 +21,26 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--regular', type=Path, required=True, help='downloaded regular font artifact directory')
     parser.add_argument('--nerd', type=Path, required=True, help='downloaded Nerd Font artifact directory')
-    parser.add_argument('--coretext', type=Path, required=True, help='same-run macOS CoreText preview artifact')
+    parser.add_argument('--coretext', type=Path, required=True, help='validated exact-build native evidence directory')
+    parser.add_argument('--native-receipt', type=Path, required=True)
+    parser.add_argument('--native-bundle', type=Path, required=True)
     parser.add_argument('--output', type=Path, default=ROOT / '_site')
     parser.add_argument('--revision', required=True, help='source commit SHA of the font build')
     parser.add_argument('--build-url', required=True, help='GitHub Actions run producing these fonts')
     args = parser.parse_args()
     if not re.fullmatch(r'[0-9a-fA-F]{40}', args.revision):
         parser.error('revision must be a full Git commit SHA')
+    receipt = read_json(args.native_receipt)
+    proof = read_json(args.coretext / 'manifest.json')
+    require(receipt.get('status') == 'passed' and receipt.get('source_commit') == args.revision,
+            'Native receipt does not match this source commit')
+    require(receipt['manifest_sha256'] == file_hash(args.coretext / 'manifest.json')
+            and receipt['evidence_sha256'] == file_hash(args.native_bundle), 'Native evidence changed after validation')
+    require(proof['contract']['run']['head_sha'] == args.revision
+            and proof['contract']['run']['id'] == receipt['build_run_id']
+            and proof['contract']['run']['run_attempt'] == receipt['build_attempt']
+            and proof['contract']['input_files'] == {'regular': inventory(args.regular), 'nerd': inventory(args.nerd)},
+            'Native proof does not cover these exact font inputs')
     output = args.output.resolve()
     # Do not permit an output path that could overwrite project source.
     protected = (ROOT / name for name in ('website', 'src', 'script_helper', '.git', '.agents', '.codex'))
@@ -72,6 +86,8 @@ def main():
         with zipfile.ZipFile(output / 'downloads' / f'{family}.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
             for path in sorted(files):
                 archive.writestr(str(path.relative_to(directory)), path.read_bytes())
+    shutil.copy2(args.native_bundle, output / 'downloads/Monofuki-native-verification.zip')
+    shutil.copy2(args.native_receipt, output / 'native-verification.json')
     dependencies = json.loads((ROOT / 'script_helper/build_dependencies.json').read_text())
     catalog = json.loads((args.nerd / 'character-catalog.json').read_text())
     for variant, path in (('regular', args.regular / 'Monofuki-Regular.otf'), ('nerd', args.nerd / 'MonofukiNerdFont-Regular.otf')):
@@ -116,6 +132,7 @@ def main():
         (output / name).write_text(document)
     tuning_hash = stage_tuning(output, args.regular, args.nerd, args.revision)
     (output / 'build.json').write_text(json.dumps({'revision': args.revision, 'build_url': args.build_url, 'tuning_configuration_sha256': tuning_hash,
+                                                'native_verification': dict(receipt, download='downloads/Monofuki-native-verification.zip'),
                                                 'font_sha256': hashes, 'vhs_version': '0.12.1',
                                                 'nerd_fonts_version': dependencies['nerd_fonts_version'],
                                                 'unicode_version': dependencies['unicode_version']}, indent=2) + '\n')

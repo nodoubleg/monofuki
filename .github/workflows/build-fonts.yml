@@ -30,6 +30,9 @@ jobs:
           sudo apt-get install --no-install-recommends -y \
             fontforge python3-fontforge python3-fonttools ttfautohint woff2 curl unzip
 
+      - name: Test supervised native handoff gates
+        run: python3 -m unittest discover -s script_helper -p test_native_handoff.py -v
+
       - name: Check source glyphs
         run: |
           fontforge -lang=py -script script_helper/assemble_sources.py
@@ -105,7 +108,7 @@ jobs:
       - name: Upload regular Monofuki
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Monofuki-${{ github.sha }}
+          name: Monofuki-${{ github.sha }}-attempt-${{ github.run_attempt }}
           path: |
             export/Monofuki-*
             export/tuning-base/Monofuki-*
@@ -131,7 +134,7 @@ jobs:
       - name: Upload Monofuki Nerd Font
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: MonofukiNerdFont-${{ github.sha }}
+          name: MonofukiNerdFont-${{ github.sha }}-attempt-${{ github.run_attempt }}
           path: |
             export/MonofukiNerdFont-*
             export/tuning-base/MonofukiNerdFont-*
@@ -157,148 +160,17 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-  coretext:
-    name: Render macOS fallback glyphs
-    needs: build
-    runs-on: macos-26
-    timeout-minutes: 10
-    steps:
-      - name: Check out the native renderer
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-      - name: Download regular fonts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: Monofuki-${{ github.sha }}
-          path: ${{ runner.temp }}/fonts/regular
-      - name: Download Nerd Font and catalogues
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: MonofukiNerdFont-${{ github.sha }}
-          path: ${{ runner.temp }}/fonts/nerd
-      - name: Render native CoreText fallback snapshots
-        run: |
-          swift script_helper/render_coretext_previews.swift \
-            "$RUNNER_TEMP/fonts/nerd/character-catalog.json" \
-            "$RUNNER_TEMP/fonts/regular/Monofuki-Regular.otf" \
-            "$RUNNER_TEMP/fonts/nerd/MonofukiNerdFont-Regular.otf" \
-            "$RUNNER_TEMP/coretext"
-      - name: Check native tuned spacing and metrics
-        run: |
-          mkdir -p .font-build
-          swift script_helper/check_tuned_coretext.swift \
-            "$RUNNER_TEMP/fonts/regular/"*.otf > "$RUNNER_TEMP/coretext/tuned-coretext-proof.json"
-          cp .font-build/tuned-coretext-proof.png "$RUNNER_TEMP/coretext/"
-      - name: Check visible superscript and subscript n in CoreText
-        run: |
-          swift script_helper/check_small_n_coretext.swift \
-            "$RUNNER_TEMP/fonts/regular/"*.otf "$RUNNER_TEMP/fonts/regular/"*.ttf \
-            "$RUNNER_TEMP/fonts/nerd/"*.otf "$RUNNER_TEMP/fonts/nerd/"*.ttf \
-            > "$RUNNER_TEMP/coretext/small-n-coretext.json"
-      - name: Reject lost visible glyphs in TrueType exports
-        run: |
-          swift script_helper/check_export_visibility.swift \
-            "$RUNNER_TEMP/fonts/regular/"*.ttf "$RUNNER_TEMP/fonts/nerd/"*.ttf \
-            > "$RUNNER_TEMP/coretext/export-visibility.json"
-      - name: Check native emoji presentation and clusters
-        run: |
-          swift script_helper/check_macos_emoji.swift \
-            "$RUNNER_TEMP/fonts/nerd/emoji-cases.json" \
-            "$RUNNER_TEMP/fonts/regular/"*.otf "$RUNNER_TEMP/fonts/nerd/"*.otf \
-            --preview-dir "$RUNNER_TEMP/coretext/emoji-previews" > "$RUNNER_TEMP/coretext/emoji-coretext.json"
-          python3 script_helper/check_emoji_results.py "$RUNNER_TEMP/coretext/emoji-coretext.json"
-      - name: Upload native fallback previews
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: CoreText-${{ github.sha }}
-          path: ${{ runner.temp }}/coretext
-          if-no-files-found: error
-          retention-days: 30
-
-  site:
-    name: Build specimen site and recording
-    needs: [build, coretext]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    steps:
-      - name: Check out site and demo sources
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-
-      - name: Download this run's regular fonts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: Monofuki-${{ github.sha }}
-          path: ${{ runner.temp }}/fonts/regular
-
-      - name: Download this run's Nerd Font variants
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: MonofukiNerdFont-${{ github.sha }}
-          path: ${{ runner.temp }}/fonts/nerd
-
-      - name: Download native macOS fallback previews
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: CoreText-${{ github.sha }}
-          path: ${{ runner.temp }}/coretext
-
-      - name: Stage the site with CI webfonts
+      - name: Report supervised native verification command
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         env:
-          FONT_REVISION: ${{ github.sha }}
-          FONT_BUILD_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BUILD_RUN_ID: ${{ github.run_id }}
+          BUILD_ATTEMPT: ${{ github.run_attempt }}
         run: |
-          python3 script_helper/build_site.py \
-            --regular "$RUNNER_TEMP/fonts/regular" \
-            --nerd "$RUNNER_TEMP/fonts/nerd" \
-            --coretext "$RUNNER_TEMP/coretext" \
-            --revision "$FONT_REVISION" --build-url "$FONT_BUILD_URL"
-
-      - name: Install VHS and recording dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends -y ffmpeg ttyd fontconfig
-          mkdir -p "$RUNNER_TEMP/vhs"
-          vhs_archive=$(python3 script_helper/fetch_build_dependencies.py vhs-linux-x86_64)
-          tar -xzf "$vhs_archive" --strip-components=1 -C "$RUNNER_TEMP/vhs"
-          echo "$RUNNER_TEMP/vhs" >> "$GITHUB_PATH"
-          mkdir -p "$HOME/.local/share/fonts"
-          cp "$RUNNER_TEMP/fonts/nerd/"*.otf "$HOME/.local/share/fonts/"
-          fc-cache -f
-          fc-match 'Monofuki Nerd Font' | grep -q MonofukiNerdFont
-
-      - name: Record the font specimen
-        run: |
-          vhs website/demo.tape
-          test -s _site/media/monofuki.mp4
-          # VHS Screenshot waits for a changed frame, which can capture the next
-          # command after a static scene. Use the final, held artwork frame.
-          ffmpeg -hide_banner -loglevel error -sseof -0.2 \
-            -i _site/media/monofuki.mp4 -frames:v 1 _site/media/demo-poster.png
-          test -s _site/media/demo-poster.png
-          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 _site/media/monofuki.mp4
-
-      - name: Upload the generated Pages bundle
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: _site
-
-  deploy:
-    name: Publish GitHub Pages
-    needs: site
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-    runs-on: ubuntu-24.04
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-      - name: Deploy the specimen
-        id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+          {
+            echo '## Linux build complete; native verification pending'
+            echo 'Pages stays unchanged until the repository owner verifies these exact artifacts on the connected Mac and submits the proof.'
+            echo '```sh'
+            echo "python3 script_helper/verify_on_mac.py check $BUILD_RUN_ID --output /path/to/new/native-$BUILD_RUN_ID-$BUILD_ATTEMPT"
+            echo "python3 script_helper/verify_on_mac.py submit /path/to/new/native-$BUILD_RUN_ID-$BUILD_ATTEMPT"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

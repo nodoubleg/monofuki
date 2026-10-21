@@ -1,0 +1,136 @@
+name: Publish verified site
+run-name: Publish verified build ${{ inputs.build_run_id }} / ${{ inputs.evidence_commit }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_run_id:
+        description: Successful current-master Linux build run ID
+        required: true
+        type: string
+      evidence_commit:
+        description: Immutable data-only commit on native-verification
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: monofuki-pages
+  cancel-in-progress: false
+
+jobs:
+  site:
+    name: Validate native evidence and build site
+    if: github.ref == 'refs/heads/master' && github.actor == github.repository_owner && github.triggering_actor == github.repository_owner
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      source_sha: ${{ steps.native.outputs.source_sha }}
+      build_attempt: ${{ steps.native.outputs.build_attempt }}
+      pages_artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Check out the trusted publication source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Install font metadata reader
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y python3-fonttools
+      - name: Validate exact Linux artifacts and supervised Mac evidence
+        id: native
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RUN_ID: ${{ inputs.build_run_id }}
+          EVIDENCE_COMMIT: ${{ inputs.evidence_commit }}
+        run: |
+          python3 script_helper/native_handoff.py prepare-site \
+            --run-id "$BUILD_RUN_ID" --evidence-commit "$EVIDENCE_COMMIT" \
+            --source-sha "$GITHUB_SHA" --workspace "$RUNNER_TEMP/verified"
+      - name: Stage the site with verified fonts and native results
+        env:
+          FONT_BUILD_URL: ${{ steps.native.outputs.build_url }}
+        run: |
+          python3 script_helper/build_site.py \
+            --regular "$RUNNER_TEMP/verified/fonts/regular" \
+            --nerd "$RUNNER_TEMP/verified/fonts/nerd" \
+            --coretext "$RUNNER_TEMP/verified/evidence" \
+            --native-receipt "$RUNNER_TEMP/verified/receipt.json" \
+            --native-bundle "$RUNNER_TEMP/verified/native-evidence.zip" \
+            --revision "$GITHUB_SHA" --build-url "$FONT_BUILD_URL"
+      - name: Retain validated native verification evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Native-verification-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/verified/native-evidence.zip
+            ${{ runner.temp }}/verified/receipt.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Install VHS and recording dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg ttyd fontconfig
+          mkdir -p "$RUNNER_TEMP/vhs"
+          vhs_archive=$(python3 script_helper/fetch_build_dependencies.py vhs-linux-x86_64)
+          tar -xzf "$vhs_archive" --strip-components=1 -C "$RUNNER_TEMP/vhs"
+          echo "$RUNNER_TEMP/vhs" >> "$GITHUB_PATH"
+          mkdir -p "$HOME/.local/share/fonts"
+          cp "$RUNNER_TEMP/verified/fonts/nerd/"*.otf "$HOME/.local/share/fonts/"
+          fc-cache -f
+          fc-match 'Monofuki Nerd Font' | grep -q MonofukiNerdFont
+
+      - name: Record the font specimen
+        run: |
+          vhs website/demo.tape
+          test -s _site/media/monofuki.mp4
+          # VHS Screenshot waits for a changed frame, which can capture the next
+          # command after a static scene. Use the final, held artwork frame.
+          ffmpeg -hide_banner -loglevel error -sseof -0.2 \
+            -i _site/media/monofuki.mp4 -frames:v 1 _site/media/demo-poster.png
+          test -s _site/media/demo-poster.png
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 _site/media/monofuki.mp4
+
+      - name: Upload the generated Pages bundle
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          path: _site
+
+  deploy:
+    name: Publish GitHub Pages
+    needs: site
+    if: github.ref == 'refs/heads/master' && github.actor == github.repository_owner && github.triggering_actor == github.repository_owner
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the trusted publication source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Reject superseded source or build attempt before deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RUN_ID: ${{ inputs.build_run_id }}
+          SOURCE_SHA: ${{ needs.site.outputs.source_sha }}
+          BUILD_ATTEMPT: ${{ needs.site.outputs.build_attempt }}
+        run: |
+          python3 script_helper/native_handoff.py check-current \
+            --run-id "$BUILD_RUN_ID" --source-sha "$SOURCE_SHA" --attempt "$BUILD_ATTEMPT"
+      - name: Configure Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Deploy the specimen
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: ${{ needs.site.outputs.pages_artifact_name }}

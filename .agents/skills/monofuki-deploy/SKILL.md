@@ -9,9 +9,12 @@ Read [website/README.md](../../../website/README.md),
 build, push, Pages deployment, release creation, or font installation; one does
 not imply the others. Preserve existing releases and assets unless asked otherwise.
 
-The workflow builds all four regular/Nerd styles, renders native macOS fallback
-previews, stages the site from those exact artifacts, records a fresh VHS video,
-and publishes Pages from `master`. Never reuse an old-name recording or unrelated
+The Linux build workflow produces all four regular/Nerd styles. Follow
+[the supervised native handoff](../../../docs/native-verification.md): verify
+that exact successful build on the connected Mac, then submit its data-only
+evidence. The separate publication workflow validates the proof, stages the
+site from those exact artifacts, records a fresh VHS video, and publishes Pages
+from `master`. Do not replace a native gate with a success claim or stale proof. Never reuse an old-name recording or unrelated
 font build. Both download ZIPs need all four styles, licenses, component notices,
 source/glyph provenance, and locked input metadata. Build scripts and CI contain
 the current commands and expected file list.

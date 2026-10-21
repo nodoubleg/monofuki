@@ -64,7 +64,8 @@ alternative profiles, spacing regressions and exported-font checks run before
 upload. See the [customizer build notes](website/README.md#customizer-and-playground)
 to reproduce the tuned downloads locally.
 
-Download `Monofuki-<commit>` or `MonofukiNerdFont-<commit>` from the run's
+Download `Monofuki-<commit>-attempt-<n>` or
+`MonofukiNerdFont-<commit>-attempt-<n>` from the run's
 Artifacts section. The regular bundle contains TTF, hinted TTF, OTF, WOFF2
 from OTF, hinted WOFF2 from TTF, and the font license. The Nerd Font bundle
 contains patched TTF, OTF, WOFF2 from OTF, and licenses. Changed outlines in
@@ -73,9 +74,13 @@ separate autohinted files.
 Artifacts are retained for 30 days. Generated fonts are uploaded as artifacts
 and are not committed to the repository.
 
-The same run builds the [GitHub Pages specimen](https://nodoubleg.github.io/monofuki/)
-using its WOFF2 artifacts and records a terminal demo with VHS. Only `master`
-publishes the site. Print all of the site's artwork with
+After the Linux build succeeds, I verify its exact artifacts on my connected Mac.
+The owner-submitted native evidence then unlocks a separate Ubuntu workflow that
+builds the [GitHub Pages specimen](https://nodoubleg.github.io/monofuki/), records
+the terminal demo, and publishes from `master`. The Mac is not a self-hosted runner.
+Until that supervised step passes, the existing site stays live and unchanged.
+See [the native verification handoff](docs/native-verification.md) for commands,
+provenance, and retry behavior. Print all of the site's artwork with
 `python3 script_helper/terminal_demo.py --art`.
 
 ## Terminal graphics
