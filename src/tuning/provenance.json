@@ -1,11 +1,11 @@
 {
   "source": "User Monofuki playground, Library version 7; settings version 9",
   "bundle_sha256": "24a5cfc3eaca8d45d6c7851f7de0bc1562946830a8ed346f94c8f51d25ac808a",
-  "settings_input_sha256": "eb51f66ff1c0b4bac150bf3526430831047bf7de41585d1d0d206324c85eeef0",
+  "settings_input_sha256": "cf364759b07cbca16ff01d9cc936bb887f8127f501f5471e27aa6b26d2478ba8",
   "outlines": "Monofuki-derived outlines; no Iosevka g/q/zero/brace outlines imported",
   "source_files": {
     "alternatives.json": "0bc2639916007b974c82086664d84c1c75a522a324e060517e4ea7800714fdb8",
-    "defaults.json": "d413f8b1cec18a350eafe806ad58bcb5efca22c97e2b216a59abc2e4c88d5a45",
+    "defaults.json": "e5bd04ad8fd4a751d96fbf395761308e8345a6756e058287275d5f3605ab62bc",
     "g-alternatives.json": "fc5ee9da87ddf545d3a7df7a428496b1a09d17b39b8d5bcae85b3ca4c27f7d52",
     "glyphs.json": "16869d963a30a3f07033e9daee6a6d4e315256306d0fca25a3bf7320e8755b35",
     "alternative-metadata.json": "5345cde31e4621b02171921907bb15ba0db220ff123124f76331df9db7943cf6",
@@ -1318,6 +1318,14 @@
     {
       "date": "2026-10-21",
       "change": "User requested tailed q as the Monofuki default; all other tuning values retained."
+    },
+    {
+      "date": "2026-10-21",
+      "input_library_id": "libfile_6e646362503c8191ad981cbc757665c1",
+      "input_sha256": "cf364759b07cbca16ff01d9cc936bb887f8127f501f5471e27aa6b26d2478ba8",
+      "normalized_sha256": "e5bd04ad8fd4a751d96fbf395761308e8345a6756e058287275d5f3605ab62bc",
+      "change": "Latest user defaults; all values retained except private sample text replaced with the standard public sample."
     }
-  ]
+  ],
+  "initial_settings_input_sha256": "eb51f66ff1c0b4bac150bf3526430831047bf7de41585d1d0d206324c85eeef0"
 }

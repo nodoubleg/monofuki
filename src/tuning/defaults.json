@@ -7,12 +7,12 @@
     "braces": "curved"
   },
   "pickerSections": {
-    "space": true,
+    "space": false,
     "capitals": false,
     "lowercase": false,
-    "digits": false,
-    "punctuation": true,
-    "accents": true
+    "digits": true,
+    "punctuation": false,
+    "accents": false
   },
   "accentAdjustments": {
     "À": {
@@ -48,7 +48,7 @@
     "Å": {
       "top": 47,
       "bottom": 0,
-      "gap": -29,
+      "gap": -20,
       "followBase": false
     },
     "Ç": {
@@ -592,9 +592,9 @@
     "accentLowering": 0,
     "gAlternative": "open-double-storey",
     "smartEnabled": true,
-    "smartStrength": 94,
-    "symbolEnabled": false,
-    "symbolStrength": 70,
+    "smartStrength": 112,
+    "symbolEnabled": true,
+    "symbolStrength": 400,
     "strictReading": false,
     "floatPreview": true
   },
@@ -618,8 +618,8 @@
     "angle": -2,
     "length": 278,
     "thickness": 80,
-    "x": 341,
-    "y": 318
+    "x": 315,
+    "y": 235
   },
   "startingSevenCrossbar": {
     "enabled": true,
@@ -4482,7 +4482,7 @@
     }
   },
   "horizontalScale": 1,
-  "selectedCharacter": "}",
+  "selectedCharacter": "7",
   "accentCoverage": [
     "À",
     "Á",
@@ -4553,7 +4553,7 @@
     "Ż",
     "Ž"
   ],
-  "spacingImplementation": "SVG fixed-advance ink-shift simulation; not OpenType GSUB or GPOS shaping",
+  "spacingImplementation": "GPOS kern xPlacement in downloads; SVG editor uses the same fixed-advance formula, rounded to the nearest font unit by the compiler",
   "morph": "Vertical top/tail-height remapping plus y junction raise (0..150, original-coordinate plateau -20..110; tapered to zero at -120/400). Separate segment-masked horizontal controls: Q/y/j terminal translation and connector truncation in font units; g descender compression in percent. Bodies and advances are not horizontally scaled. Approximate Bezier control-point morph, not optical redraw. Mapped accented-capital bodies can be shortened independently or follow their plain base; accents translate rigidly with their base edge and top gap. Optional above-accent capitals also receive rigid whole-composite lowering. Open double-storey g is a custom Monofuki-derived alternate. Contextual spacing shifts ink only and is not font shaping. The 7 crossbar is a separate rounded shape in final font coordinates; positive angle rises to the right, length is end-to-end, thickness is perpendicular, and x/y locate its center independently of digit shortening.",
   "sample": "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789 !? [] {} () <> /\\ | _-+=\nconst glyphs = [\"Ag0MW\", \"mwgy\", \"Il1|0O\"];\nÁÉÅÜ éñç gypqj 0123456789"
 }

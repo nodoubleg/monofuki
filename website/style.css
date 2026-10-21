@@ -447,9 +447,13 @@ textarea {
   padding-bottom: 14px;
   margin-bottom: 20px;
 }
+.terminal-panel pre, .dot-field {
+  font-kerning: none;
+  font-feature-settings: "kern" 0, "liga" 0, "calt" 0;
+}
 .terminal-panel pre {
   font-size: clamp(12px, 1.25vw, 15px);
-  line-height: 1.201171875;
+  line-height: 1.123046875;
   overflow-x: auto;
 }
 .nerd {
@@ -457,7 +461,7 @@ textarea {
 }
 .dot-field {
   font-size: clamp(10px, 1.2vw, 14px);
-  line-height: 1.201171875;
+  line-height: 1.123046875;
   color: var(--violet);
   margin-top: 24px;
   letter-spacing: 0;
@@ -536,8 +540,13 @@ textarea {
   align-items: center;
 }
 .art-grid pre {
+  font-family: Monofuki, ui-monospace, monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-kerning: none;
+  font-feature-settings: "kern" 0, "liga" 0, "calt" 0;
   font-size: clamp(11px, 1.2vw, 14px);
-  line-height: 1.201171875;
+  line-height: 1.123046875;
   letter-spacing: 0;
   overflow-x: auto;
   width: fit-content;

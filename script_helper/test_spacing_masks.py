@@ -13,7 +13,7 @@ def shape(data,text,direction,features):
 settings=json.loads((ROOT/'src/tuning/defaults.json').read_text())
 settings['experiments'].update(smartStrength=400,symbolEnabled=True,symbolStrength=400)
 geometry=oracle(settings)
-texts=['A\u200cVVA V\u200ciA VVA\u200c','minimum Toffee MWiMWiMWi', 'a ... b === c +-*/ d ..... e ======== f','A\u0301 V\u0308A ÁÉÅÜ ď7ŁŁ ď7TŁ','VVA\u200dVYA\u200bWYA\u2060A','a::b a!=b x->y']
+texts=['A\u200cVVA V\u200ciA VVA\u200c','minimum Toffee MWiMWiMWi', 'a ... b === c +-*/ d ..... e ======== f','A\u0301 V\u0308A ÁÉÅÜ ď7ŁŁ ď7TŁ','VVA\u200dVYA\u200bWYA\u2060A','a::b a!=b x->y','(( )) [[ ]] {{ }} ([]) []{} ((((( )))))']
 count=0
 for style in STYLES:
  suffix=style.replace('BoldItalic','Bold-Italic')

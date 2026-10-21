@@ -1,27 +1,25 @@
 # ![Monofuki](website/assets/monofuki-wordart.svg)
 
-Monofuki is an unapologetic fork of Monofoki that I’ve fucked with for my own selfish purposes. It fixes the missing characters and terminal annoyances that bother me. If it works for you too, great. How you pronounce it is your business, not mine.
+Monofuki is my fork of Monofoki. I’ve fucked with it to fix the missing characters and terminal annoyances that bother me. If it works for you too, great.
 
 Upstream: [Monofoki by Marvin Dostal (datMaffin)](https://github.com/datMaffin/monofoki), based on [Mononoki by Matthias Tellen](https://github.com/madmalik/mononoki). This fork is by [Greg Mason (nodoubleg)](https://github.com/nodoubleg).
 
-I mainly use Terminal.app and iTerm2 on macOS. My priorities are missing
-symbols, Braille artwork, and repeatable regular and Nerd Font builds. I make
-no promise that this will suit your terminal, platform, or taste.
+I mainly use iTerm2 on macOS. My priorities are symbols, Braille artwork,
+and repeatable regular and Nerd Font builds. Your setup and taste may differ.
 
-Try the [customizer](https://nodoubleg.github.io/monofuki/customize.html),
-[playground](https://nodoubleg.github.io/monofuki/playground.html), and [live specimen](https://nodoubleg.github.io/monofuki/), or get the
-[Monofuki](https://nodoubleg.github.io/monofuki/downloads/Monofuki.zip) and
-[Monofuki Nerd Font](https://nodoubleg.github.io/monofuki/downloads/MonofukiNerdFont.zip)
-downloads.
+Try the [specimen](https://nodoubleg.github.io/monofuki/),
+[playground](https://nodoubleg.github.io/monofuki/playground.html), or
+[customizer](https://nodoubleg.github.io/monofuki/customize.html). Download
+[Monofuki](https://nodoubleg.github.io/monofuki/downloads/Monofuki.zip) or
+[Monofuki Nerd Font](https://nodoubleg.github.io/monofuki/downloads/MonofukiNerdFont.zip).
 The [PDF specimen](script_helper/specimen.pdf) is an inherited Monofoki specimen;
 `script_helper/specimen.tex` now targets Monofuki for future regeneration.
 
-The [original copyright notices and SIL Open Font License](LICENSE), including
-the upstream Reserved Font Names, are retained. Monofuki is the new family name.
-See [symbol provenance](licenses/NOTICES-symbols.md) and the
-[component licensing notes](licenses/license-audit-nerd-font.md) for imported
-outlines and Nerd Font icons. Component rights and attribution are retained;
-this is not a claim that every imported icon is exclusively OFL-licensed.
+The [upstream copyright notices, Reserved Font Names and SIL Open Font License](LICENSE)
+remain intact. This fork’s family name is Monofuki. Imported symbols and icons
+keep their own terms and attribution; not every icon is OFL-licensed. See
+[symbol provenance](licenses/NOTICES-symbols.md) and
+[component licensing notes](licenses/license-audit-nerd-font.md).
 
 ## Source and build layout
 
@@ -32,18 +30,19 @@ writes disposable merged sources to `.font-build/assembled/`, adding generated
 Braille, the 415 pinned donor symbols, and three same-weight upstream arrows
 in each italic style. Bold and Bold Italic use their own upstream sources.
 
-The assembler checks inherited glyph records byte for byte, references, and
-source metadata and line metrics, allowing the family rename, glyph count
-updates, and explicitly fingerprinted authored overrides. There are no authored
-replacements yet. [Glyph ownership and overrides](docs/glyph-overrides.md)
-describes how to change encoded glyphs or unencoded components. A generated
-`glyph-provenance.json` inventories every final source glyph, its character
-mapping, dependencies, and provider. It refuses unreviewed upstream/overlay collisions. [The update tools](docs/glyph-overrides.md#upstream-updates) compare old upstream, candidate upstream, and current custom glyphs, with visual specimens and fingerprint-bound ownership decisions. Export cleanup
-still rounds and unlinks outlines; source preservation does not imply binary
-identity. Nerd patching intentionally substitutes the heart and seven
-Powerline glyphs, regenerates Braille, and normalizes OS/2 typographic metrics.
-Those allowances are explicit in `src/nerd-policy.json`; other outlines and
-advances are checked against the exact regular font passed to the patcher.
+The assembler checks inherited glyph records byte for byte, along with references,
+metadata and line metrics. It allows the family rename, glyph count updates and
+fingerprinted authored overrides; there are no authored replacements yet.
+`glyph-provenance.json` records every source glyph’s mapping, dependencies and
+provider. Unreviewed upstream/overlay collisions stop the build. See
+[glyph ownership and overrides](docs/glyph-overrides.md) for edits and
+[upstream review](docs/glyph-overrides.md#upstream-updates) for updates.
+
+Export cleanup rounds and unlinks outlines, so source preservation does not imply
+binary identity. Nerd patching substitutes the heart and seven Powerline glyphs,
+regenerates Braille and normalizes OS/2 typographic metrics. These allowances are
+in `src/nerd-policy.json`; other outlines and advances are checked against the
+regular font passed to the patcher.
 
 Install FontForge, Python 3 with fontTools, `woff2_compress`, and curl.
 `--hint` additionally needs `ttfautohint`. `nix-shell` supplies these tools;
@@ -51,9 +50,7 @@ CI installs them on Ubuntu. Input bytes are pinned, but toolchains and host
 rendering are not claimed to be bit-for-bit reproducible. Exports include the
 input lock, source and symbol provenance, and component notices.
 
-The update workflow for the clean upstream branch is in
-[CONTRIBUTING.md](CONTRIBUTING.md). The design history at the end of this README
-is Marvin’s, including its first-person goals and historical TODOs.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the clean upstream branch workflow.
 
 ## Automated builds
 
@@ -153,7 +150,7 @@ present in the final font but absent in the first.
 
 The four assembled sources have identical encoded character coverage. Three arrows
 (`⇨` U+21E8, `⇩` U+21E9, `⇯` U+21EF) were restored in Italic and Bold-Italic
-using Monofuki's own glyphs/references at the corresponding weight.
+from the pinned Monofoki upright sources at the corresponding weight.
 
 The comparison below records the earlier Monofoki audit, before the 415 donor symbols
 were added. It is retained as history, not the current coverage table. The
@@ -247,10 +244,8 @@ CI retains its native JSON and PNG evidence with the CoreText artifact.
 
 ## Upstream design history
 
-The following goals, experiments, and TODOs came from datMaffin/monofoki’s
-README. First-person statements in this section refer to Marvin, and the
-checkboxes describe his work and notes. They are preserved for context, not
-as my current roadmap or a promise to fix every known issue.
+These goals, experiments and TODOs are from datMaffin/monofoki’s README.
+“I” refers to Marvin. They describe his work, not my current roadmap.
 
 ### Marvin’s original goals
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="Monofuki: a personal Mononoki fork for code and modern terminals, with Nerd Font icons, Braille patterns, and four real styles.">
+  <meta name="description" content="Monofuki: Greg Mason’s fork of Monofoki, with added terminal symbols, Braille patterns and optional Nerd Font icons.">
   <title>monofuki — a terminal font rabbit hole</title>
   <script>try{const t=localStorage.getItem('monofuki-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="preload" href="fonts/Monofuki-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,11 +25,11 @@
 
     <main>
       <section class="hero" aria-labelledby="title">
-        <p class="eyebrow">Greg’s personal font fork.</p>
+        <p class="eyebrow">Greg Mason’s font fork.</p>
         <h1 id="title"><img class="wordart" src="assets/monofuki-wordart.svg" alt="Monofuki" width="1280" height="330"></h1>
         <div class="hero-bottom">
           <p>For the terminal I spend<br>way too much time in.</p>
-          <p class="hero-detail">A fork of Monofoki, changed for my own terminal annoyances.</p>
+          <p class="hero-detail">My Monofoki fork for iTerm2 on macOS.</p>
         </div>
         <a class="download-link" href="#download">Get the fonts</a>
       </section>
@@ -55,8 +55,8 @@
         <div class="story">
           <p class="section-number">01 / THE RABBIT HOLE</p>
           <h2 id="rabbit-hole">Monofoki, with my<br>own changes.</h2>
-          <p>Monofuki is an unapologetic fork of Monofoki that I’ve fucked with for my own selfish purposes. It fixes the missing characters and terminal annoyances that bother me. If it works for you too, great. How you pronounce it is your business, not mine.</p>
-          <p>Upstream credit: <a href="https://github.com/datMaffin/monofoki">Marvin Dostal’s Monofoki</a>, based on <a href="https://github.com/madmalik/mononoki">Matthias Tellen’s Mononoki</a>. I mainly use Terminal.app and iTerm2 on macOS. Your setup and taste may differ.</p>
+          <p>Monofuki is my fork of Monofoki. I’ve fucked with it to fix the missing characters and terminal annoyances that bother me. If it works for you too, great.</p>
+          <p>Based on <a href="https://github.com/datMaffin/monofoki">Marvin Dostal’s Monofoki</a>, which comes from <a href="https://github.com/madmalik/mononoki">Matthias Tellen’s Mononoki</a>.</p>
         </div>
       </section>
 
@@ -75,19 +75,18 @@
         <label class="edit-label" for="type-sample">Try your own text</label>
         <textarea id="type-sample" spellcheck="false" rows="3">@@CHARACTER_SAMPLE@@
 The quick brown fox jumps over the lazy dog.</textarea>
-        <div class="sample-baseline"><span>Four actual styles. No synthetic bold or italic.</span><span>Monofuki · WOFF2</span></div>
+        <div class="sample-baseline"><span>Regular · italic · bold · bold italic</span><span>Monofuki · WOFF2</span></div>
       </section>
 
       <section class="split graphics" aria-labelledby="graphics-heading">
         <div class="story">
           <p class="section-number">03 / BEYOND ASCII</p>
           <h2 id="graphics-heading">The rest of<br>the terminal.</h2>
-          <p>Nerd Font icons bring file types, folders and prompt symbols to the terminal. Monofuki Nerd Font pairs them with the letters and terminal graphics used in apps like <a href="https://github.com/openai/codex">Codex</a>, <a href="https://github.com/can1357/oh-my-pi">oh-my-pi (omp)</a>, and <a href="https://github.com/charmbracelet/crush">Crush</a>.</p>
-          <p>Both font variants include 415 added Unicode symbols and all 256 Braille patterns. Choose Monofuki Nerd Font for the Nerd Fonts 3.5.1 icons too. Your operating system can supply emoji and other characters through font fallback.</p>
-          <p><a href="symbols.html">See the 415 additions and how font fallback works.</a></p>
+          <p>Letters, icons and graphics for apps like <a href="https://github.com/openai/codex">Codex</a>, <a href="https://github.com/can1357/oh-my-pi">oh-my-pi (omp)</a> and <a href="https://github.com/charmbracelet/crush">Crush</a>.</p>
+          <p>Both variants include 415 added symbols and all 256 Braille patterns. Monofuki Nerd Font adds Nerd Fonts 3.5.1 icons. Emoji and other missing characters rely on system fallback.</p>
+          <p><a href="symbols.html">Browse symbols and fallback examples →</a></p>
           <p class="presentation-sample">Text presentation: <span>☺︎ ♥︎ ☀︎ ↗︎</span><br>Emoji presentation: <span>☺️ ♥️ ☀️ ↗️</span></p>
-          <p>The first line uses VS15; the second uses VS16. On macOS, CoreText selects Apple Color Emoji for the second line. Browser and terminal rendering still depends on the application.</p>
-          <p>I wanted fewer missing symbols and gaps in the artwork I actually see. These samples show the cases I’ve worked on; they aren’t a promise of universal coverage.</p>
+          <p>The first line requests text; the second requests emoji. Rendering depends on your app and fonts.</p>
         </div>
         <div class="terminal-panel" aria-label="Terminal glyph specimen">
           <div class="terminal-bar"><span>~/monofuki</span><span class="mint">main</span></div>
@@ -110,14 +109,14 @@ The quick brown fox jumps over the lazy dog.</textarea>
           <source src="media/monofuki.mp4" type="video/mp4">
           <p>Your browser cannot play this recording. <a href="media/monofuki.mp4">Download the MP4</a> or <a href="demo.txt">read the text specimen</a>.</p>
         </video>
-        <div class="video-caption"><span>Monofuki letters, symbols and terminal art in action.</span><a href="demo.txt">Text version</a></div>
+        <div class="video-caption"><span>Monofuki Nerd Font · recorded terminal specimen</span><a href="demo.txt">Text version</a></div>
       </section>
 
       <section id="download" class="download" aria-labelledby="download-heading">
         <div><p class="section-number">05 / DOWNLOAD</p><h2 id="download-heading">Get Monofuki.</h2></div>
         <div class="download-options">
-          <a href="downloads/MonofukiNerdFont.zip"><strong>Monofuki Nerd Font</strong><span>For terminals with icon-heavy prompts and apps.</span><span class="format">TTF · OTF · WOFF2</span></a>
-          <a href="downloads/Monofuki.zip"><strong>Monofuki</strong><span>The original shapes, with the extra terminal glyphs.</span><span class="format">TTF · hinted TTF · OTF · WOFF2</span></a>
+          <a href="downloads/MonofukiNerdFont.zip"><strong>Monofuki Nerd Font</strong><span>With Nerd Font icons.</span><span class="format">TTF · OTF · WOFF2</span></a>
+          <a href="downloads/Monofuki.zip"><strong>Monofuki</strong><span>Letters and terminal symbols.</span><span class="format">TTF · hinted TTF · OTF · WOFF2</span></a>
           <p class="install-note">Install one format per family and style, then select it in your terminal. All four styles are included. The base font uses the SIL Open Font License; imported components retain their own notices and terms.</p>
         </div>
       </section>
@@ -129,7 +128,7 @@ The quick brown fox jumps over the lazy dog.</textarea>
     </main>
 
     <footer>
-      <p><a href="https://github.com/madmalik/mononoki">Mononoki</a> by Matthias Tellen · <a href="https://github.com/datMaffin/monofoki">Monofoki</a> by datMaffin · this fork by <a href="https://github.com/nodoubleg/monofuki">Greg Mason (nodoubleg)</a>.</p>
+      <p><a href="https://github.com/madmalik/mononoki">Mononoki</a> by Matthias Tellen · <a href="https://github.com/datMaffin/monofoki">Monofoki</a> by Marvin Dostal (datMaffin) · this fork by <a href="https://github.com/nodoubleg/monofuki">Greg Mason</a>.</p>
       <p>Palette from <a href="https://github.com/charmbracelet/crush">Crush</a> and <a href="https://github.com/charmbracelet/x/tree/main/exp/charmtone">Charmtone</a>. Light mode adapted for this page.</p>
       <p><a href="licenses/LICENSE-Monofuki">Font license</a> · <a href="licenses/THIRD-PARTY-NOTICES.txt">Component credits and licenses</a></p>
     </footer>

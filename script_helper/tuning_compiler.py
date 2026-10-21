@@ -27,9 +27,9 @@ from fontTools.pens.recordingPen import RecordingPen
 from fontTools.pens.reverseContourPen import ReverseContourPen
 from fontTools.svgLib.path import parse_path
 
-COMPILER_VERSION = 1
+COMPILER_VERSION = 2
 STYLES = ('Regular', 'Bold', 'Italic', 'BoldItalic')
-SYMBOLS = '=+*/%<>!&|^~?:.-'
+SYMBOLS = '=+*/%<>!&|^~?:.-()[]{}'
 
 
 def config_identity(settings):

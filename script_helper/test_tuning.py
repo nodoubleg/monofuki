@@ -99,7 +99,7 @@ def main():
             data,_=compile_font((ROOT/'export/tuning-base'/f'Monofuki-{suffix}.otf').read_bytes(),geom[style],current,style)
             env=safety_envelope(geom[style]);random.seed(17)
             letters=[c for c in geom[style] if c.isalnum() and geom[style][c]['sourceBounds']]
-            cases=['minimum Toffee VVA VYA WYA','... :: -> === ==== ===== ====== += !=','AÁA ÉÉÉ']
+            cases=['minimum Toffee VVA VYA WYA','... :: -> === ==== ===== ====== += !=','AÁA ÉÉÉ','(( )) [[ ]] {{ }} ([]) []{} ((((( )))))']
             cases += [''.join(random.choices(letters,k=3))for _ in range(250)]
             code="const {createEngine}=require('./script_helper/tuning_reference.cjs'),v=JSON.parse(require('fs').readFileSync(0,'utf8')),e=createEngine(v.settings);process.stdout.write(JSON.stringify(v.cases.map(t=>e.spacing(t,v.style))));"
             expected=json.loads(subprocess.check_output(['node','-e',code],input=json.dumps({'settings':current,'style':style,'cases':cases}).encode(),cwd=ROOT))

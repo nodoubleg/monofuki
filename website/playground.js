@@ -3,7 +3,7 @@ const byId=id=>document.getElementById(id),samples={
 code:'#!/usr/bin/env python3\nfrom pathlib import Path\n\ndef choose_font(profile):\n    glyphs = ["Ag0MW", "mwgy", "Il1|0O"]\n    return {"family": "Monofuki", "profile": profile}\n\nif __name__ == "__main__":\n    print(choose_font("curved braces"))',
 prose:'The quick brown fox jumps over the lazy dog.\n\nA font is a small thing you spend a lot of time looking at. Try a paragraph, a tricky word, or a line you know by heart.\n\nÁÉÅÜ Ñ Ö Ì Ç Ľ · áéåü ñöìç · 0123456789\nBright vixens jump; dozy fowl quack.',
 symbols:'┌─────────────────────┐\n│ Monofuki / symbols  │\n└─────────────────────┘\n⠁ ⠃ ⠇ ⡇ ⣿  █ ▄ ▀ ▌ ▐\n← → ↑ ↓ ⇨ ⇩ ↔  ∑ ∞ ≠ ≤ ≥\n0 O 1 l I |   g q y j   { } 7\n\nSystem emoji: 😀 👩‍💻 🏳️‍🌈 ❤️ ⚡',
-spacing:'minimum Toffee vivid AVATAR\nVVA VYA WYA · illi WWW 111\n\na ... b   a :: b   x -> y\na === b   x += 1   a != b\n\n+------------+------------+\n| fixed      | advances   |\n+------------+------------+'
+spacing:'minimum Toffee vivid AVATAR\nVVA VYA WYA · illi WWW 111\n\na ... b   a :: b   x -> y\na === b   x += 1   a != b\n(( )) [[ ]] {{ }}\n\n+------------+------------+\n| fixed      | advances   |\n+------------+------------+'
 };
 const FONT_LEADING=1150/1024;
 let currentSample='code',family='Monofuki';

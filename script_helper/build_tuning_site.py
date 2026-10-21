@@ -1,6 +1,7 @@
 """Stage the customizer, shared compiler and complete same-run base fonts."""
 import hashlib
 import json
+import re
 import shutil
 from pathlib import Path
 from fetch_tuning_runtime import fetch
@@ -55,7 +56,7 @@ def stage(output, regular, nerd, revision):
     for key,name in {'GLYPHS':'glyphs.json','ACCENT_COMPONENTS':'accent-components.json','ALTERNATIVES':'g-alternatives.json','EXTRA_ALTERNATIVES':'alternatives.json'}.items():
         template=template.replace('{{'+key+'}}',(ROOT/'src/tuning'/name).read_text())
     template=template.replace('{{APP}}',(ROOT/'website/tuning/app.js').read_text()+'\n'+(ROOT/'website/tuning/preview-editor.js').read_text())
-    if '{{' in template:
+    if re.search(r'\{\{[A-Z_]+\}\}', template):
         raise ValueError('Unresolved customizer template')
     shutil.copy2(ROOT/'website/tuning.css',output/'tuning.css')
     for name in ('tuning/theme.js','tuning/download.js','tuning.css','style.css','font-loading.js'):

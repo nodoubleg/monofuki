@@ -1,6 +1,6 @@
 # Working on Monofuki
 
-`master` is Greg’s custom Monofuki branch. The `upstream` remote points to
+`master` holds Greg Mason’s Monofuki changes. The `upstream` remote points to
 `https://github.com/datMaffin/monofoki.git`; `origin` points to
 `https://github.com/nodoubleg/monofuki.git`.
 
@@ -25,14 +25,13 @@ git -C ../monofuki-upstream push origin upstream-tracking
 
 If the fast-forward fails, inspect the divergence; do not reset or force-push.
 Branch individual upstream fixes from the clean branch, for example
-`git switch -c upstream/fix-description upstream-tracking`. Send those topics
-to datMaffin/monofoki. Do not use `master` as the base for an upstream PR.
+`git switch -c upstream/fix-description upstream-tracking`. Upstream PRs target
+datMaffin/monofoki; do not base them on `master`.
 Updating this tracking branch never updates Monofuki’s build inputs: changing
 `script_helper/build_dependencies.json` is a separate reviewed step. See
 [reviewing a locked upstream update](docs/glyph-overrides.md#upstream-updates).
-Monofoki is the single base. Mononoki improvements normally arrive through
-Monofoki; a direct backport needs an explicit source, provenance, and review,
-not a second equally ranked base.
+Monofoki is the base. Mononoki improvements normally arrive through Monofoki;
+a direct backport needs an explicit source, provenance and review.
 
 ## Source changes
 
@@ -45,9 +44,8 @@ expand it only after examining the actual glyph and metric changes.
 
 ## Historical Mononoki contribution guide
 
-The following is Matthias Tellen’s original guide, retained for attribution
-and design context. Its first-person offers and UFO workflow are his, not a
-promise or the build workflow of this fork.
+This is Matthias Tellen’s original guide. Its offers and UFO workflow are his;
+Monofuki uses the source workflow above.
 
 <details>
 <summary>Original guide</summary>

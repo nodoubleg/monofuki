@@ -1,10 +1,10 @@
 # Monofuki specimen site
 
-This adapts the paired specimens and explanations of the [original Mononoki site](https://madmalik.github.io/mononoki/) for this fork. The default dark palette comes from Crush's [Charmtone theme](https://github.com/charmbracelet/crush/blob/main/internal/ui/styles/themes.go); the light palette uses darker versions of the same accent hues for legibility.
+The site uses Monofuki’s Monofoki-derived outlines. The dark palette comes from Crush’s [Charmtone theme](https://github.com/charmbracelet/crush/blob/main/internal/ui/styles/themes.go); light mode darkens the same accents for legibility.
 
 The `site` job in `.github/workflows/build-fonts.yml` downloads the regular and Nerd Font artifacts from its own workflow run. `script_helper/build_site.py` stages five WOFF2 files, licenses, HTML, and the demo under ignored `_site/`. Generated font and video files are never committed. Only the separate `deploy` job can publish to GitHub Pages, and it runs on `master` outside pull requests.
 
-Asset URLs include content hashes (or the recording's source revision) so a browser cannot keep an older font, video, or poster after a new site build.
+Asset URLs use content hashes, or the recording’s source revision, to refresh cached assets after a build.
 
 To preview locally, download the two artifacts from a successful font-build run, then run:
 
@@ -30,24 +30,22 @@ For the recording, install [VHS](https://github.com/charmbracelet/vhs), `ttyd`, 
 vhs website/demo.tape
 ```
 
-The tape produces `_site/media/monofuki.mp4`. CI extracts a PNG poster from its final held artwork frame with FFmpeg. It uses deterministic specimen scenes rather than live app sessions. The video has playback controls, a poster, and a text alternative; it does not autoplay. The Nerd Fonts and Unicode versions, font-build revision and per-file SHA-256 values are recorded in `_site/build.json`.
+The tape records specimen scenes to `_site/media/monofuki.mp4`. CI extracts a PNG poster from the final artwork frame with FFmpeg. The video has controls and a text alternative; it does not autoplay. `_site/build.json` records Nerd Fonts and Unicode versions, the font-build revision and per-file SHA-256 hashes.
 
-The Symbols page follows the original Mononoki character showcase, Nerd Font
-icons, the fork's 415 additions, and characters supplied by native macOS font
-fallback. The original list is pinned in `mononoki_repertoire.json`; Unicode
-18 script properties omit other writing-system alphabets while keeping Latin,
-common punctuation, symbols and private-use icons. Character maps and Nerd
-Font names come from the actual build, not hand-maintained icon ranges.
+The Symbols page shows Monofuki’s letters and symbols, Nerd Font icons, the
+415 additions and macOS fallback examples. The old Mononoki specimen supplied
+the character list pinned in `mononoki_repertoire.json`, not the displayed
+outlines. Unicode 18 script properties filter other writing-system alphabets,
+keeping Latin, common punctuation, symbols and private-use icons. Character
+maps and Nerd Font names come from the built fonts.
 
-The `coretext` job uses a macOS 26 runner and the same run's OTF files. It
-registers those fonts only in its process and renders bare Unicode scalars
-into transparent light/dark PNG atlases. The generated records include the
-requested font, actual fallback font names, missing-glyph status, host version,
-architecture, rendering settings and input font hashes. No Apple font files
-or outlines are distributed. The page presents these as macOS fallback examples
-and explains that results depend on the visitor's fonts and applications.
-Host details and validation history stay out of the visitor-facing copy. Generated catalogues, images and
-records remain in ignored staging directories and Actions/Pages artifacts.
+The `coretext` job uses a macOS 26 runner and the same run’s OTFs. It registers
+fonts only in its process and renders bare Unicode scalars into transparent
+light/dark PNG atlases. Records include requested and fallback fonts, missing
+glyphs, host details, rendering settings and input hashes. Apple font files
+and outlines are not distributed. The page labels these as macOS examples;
+visitors’ results may differ. Generated catalogues, images and records stay
+in ignored staging directories and Actions/Pages artifacts.
 
 To generate a local native snapshot, first export `character-catalog.json`
 using `script_helper/export_character_catalog.py`, then run:
@@ -91,11 +89,10 @@ A worker downloads the same-run complete regular/Nerd base fonts and a pinned,
 self-hosted Pyodide runtime on demand. It verifies base and notice file hashes,
 then runs the shared fontTools compiler locally. Each ZIP contains four styles in
 OTF, TTF and WOFF2, exact component notices, the selected settings and provenance.
-There is no service endpoint, account, upload or paid infrastructure. The first
-build loads roughly 14 MB of compiler assets plus full base fonts; compilation
-can take a minute or longer on slower or busy machines. Progress identifies
-each style and format, and Cancel stops the worker. Default prebuilt ZIPs remain
-available without the compiler. WOFF2 uses lossless Brotli quality 9: decoded
+Compilation runs in the browser without uploading settings. The first build
+loads roughly 14 MB of compiler assets plus base fonts and can take a minute
+or longer. Progress shows each style and format; Cancel stops the worker.
+Monofuki default ZIPs are available without running the compiler. WOFF2 uses lossless Brotli quality 9: decoded
 font tables match maximum compression, with a modest size increase and much
 shorter encoding time.
 Custom family names include a configuration hash so distinct choices can coexist.
@@ -118,6 +115,7 @@ profiles before staging the site. Native checks include:
 .font-build/tuning-python/bin/python script_helper/build_tuned_fonts.py
 .font-build/tuning-python/bin/python script_helper/test_tuning.py --all-profiles
 .font-build/tuning-python/bin/python script_helper/test_spacing_safety.py
+.font-build/tuning-python/bin/python script_helper/test_symbol_runs.py
 .font-build/tuning-python/bin/python script_helper/test_spacing_masks.py
 .font-build/tuning-python/bin/python script_helper/test_woff2_compression.py
 node script_helper/test_site_ui.cjs

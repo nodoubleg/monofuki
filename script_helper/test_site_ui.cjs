@@ -64,6 +64,18 @@ async function customFaceAliases(){
  assert.notEqual(a.family,b.family);assert.equal(a.fonts.length,4);assert.equal(b.fonts.length,4);assert.equal(close,2);
  console.log('PASS saved builds use fresh four-style aliases and owned ArrayBuffers');
 }
+function resetUsesCurrentDefaults(){
+ const app=read('website/tuning/app.js'),nodes={};
+ for(const [id,file]of Object.entries({'glyph-data':'glyphs.json','accent-components':'accent-components.json','g-alternatives':'g-alternatives.json','glyph-alternatives':'alternatives.json'}))nodes[id]={textContent:read('src/tuning/'+file)};
+ const ctx=vm.createContext({document:{getElementById:id=>nodes[id]||(nodes[id]={})},render(){}});
+ vm.runInContext(app.slice(0,app.indexOf('function syncCrossbarControls()')),ctx);
+ const line=app.split('\n').find(line=>line.startsWith("$('defaults').onclick="));vm.runInContext(line,ctx);
+ vm.runInContext("experiments.smartStrength=0;experiments.symbolStrength=0;experiments.symbolEnabled=false;sevenCrossbar.x=0;sevenCrossbar.y=0;accentAdjustments['Å'].gap=0;glyphAlternatives.q='original';$('defaults').onclick();",ctx);
+ const actual=JSON.parse(vm.runInContext('JSON.stringify({experiments,sevenCrossbar,accentAdjustments,glyphAlternatives,state})',ctx)),expected=JSON.parse(read('src/tuning/defaults.json'));
+ for(const key of ['experiments','sevenCrossbar','accentAdjustments','glyphAlternatives'])assert.deepEqual(actual[key],expected[key],key+' reset');
+ assert.deepEqual(actual.state,expected.adjustments);
+ console.log('PASS preset reset uses current authoritative tuning values');
+}
 function defaultContract(){
  const defaults=JSON.parse(read('src/tuning/defaults.json'));
  const match=read('website/tuning/app.js').match(/^const APPROVED_DEFAULTS=(.*);$/m);
@@ -75,4 +87,4 @@ function defaultContract(){
  assert.doesNotMatch(read('website/playground.js'),/Greg[’']s/);
  console.log('PASS Monofuki default settings, q selection, shared font loading and labels');
 }
-(async()=>{defaultContract();await fontLoading();await failedCssFaceRetry();await customFaceAliases();await selectionRace();await compilerRetry();await workerStartup();})().catch(e=>{console.error(e);process.exitCode=1;});
+(async()=>{defaultContract();resetUsesCurrentDefaults();await fontLoading();await failedCssFaceRetry();await customFaceAliases();await selectionRace();await compilerRetry();await workerStartup();})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -225,12 +225,15 @@ of the two neighbor edges share exact values. Both neighbors stay context, so
 partial feature masks and adjacent centers keep the original matching behavior.
 Only the root lookup belongs to `kern`; existing mark features remain intact.
 It covers the 254 letters/numbers present in the reference data; symbol-run
-spacing covers the documented operator set and runs of two through four. The
-source formula is rounded to the nearest font unit (at most 0.5 units). The old
+spacing covers `=+*/%<>!&|^~?:.-()[]{}` and maximal contiguous runs of two
+through four. Single symbols and runs of five or more stay unchanged. Compiler
+version 2 adds parentheses, brackets and braces to this set; the same eligibility
+and limits apply in the SVG preview. The
+source formula is rounded to the nearest font unit (at most 0.5 units). The existing operator set’s
 0–100 strength range is unchanged. Above 100, a conservative envelope reserves
 room for the worst supported neighbor at the old range. Bounds enclose the
 selected transformed control points, including a moved or rotated 7 crossbar,
-so extra movement cannot add overlap. Existing italic overlaps at the approved 94 setting are retained.
+so extra movement cannot add overlap. Existing italic overlaps in the legacy 94-strength baseline are retained.
 Other Unicode characters and unsupported clusters retain their base behavior.
 Applications can disable this feature; the font cannot force a terminal to use
 it. CoreText and HarfBuzz evidence is not terminal-app evidence.

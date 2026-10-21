@@ -82,6 +82,7 @@ jobs:
           .font-build/tuning-python/bin/python script_helper/build_tuned_fonts.py
           .font-build/tuning-python/bin/python script_helper/test_tuning.py --all-profiles
           .font-build/tuning-python/bin/python script_helper/test_spacing_safety.py
+          .font-build/tuning-python/bin/python script_helper/test_symbol_runs.py
           .font-build/tuning-python/bin/python script_helper/test_woff2_compression.py
           .font-build/tuning-python/bin/python script_helper/test_spacing_masks.py
           .font-build/tuning-python/bin/python script_helper/test_bold_small_n.py
