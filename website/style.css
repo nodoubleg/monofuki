@@ -617,6 +617,15 @@ footer .build-note {
   nav {
     gap: 16px;
   }
+  .page .topbar nav {
+    flex: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+  .page .topbar .theme-switch {
+    flex-shrink: 0;
+  }
   nav a,
   .theme-switch button {
     font-size: 12px;
@@ -630,7 +639,7 @@ footer .build-note {
   .hero-bottom,
   .split,
   .download {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .hero-bottom {
     gap: 20px;
