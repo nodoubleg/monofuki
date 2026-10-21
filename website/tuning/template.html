@@ -1,0 +1,194 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Monofuki · customizer</title><style>
+:root{color-scheme:light dark;--bg:#f5f4ef;--panel:#fffefa;--ink:#252c2d;--muted:#5e6868;--line:#d6dcd8;--accent:#176b61;--ghost:#ad5c3c;--modified:#e7eee8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}main{max-width:1400px;margin:auto;padding:28px}h1{font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.7px;margin:8px 0 12px}h2{font-size:18px;margin:0 0 10px}p{margin:8px 0 16px}.eyebrow{font-size:12px;letter-spacing:1.8px;color:var(--accent);font-weight:650}.muted,small{color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:22px;margin-top:24px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}.stack{display:grid;gap:18px;align-content:start}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.space{justify-content:space-between}button,select,textarea,input{font:inherit;color:inherit}button,select{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:8px 12px}button{cursor:pointer}button:hover{border-color:var(--accent)}button.primary,button[aria-pressed=true]{background:var(--accent);color:white;border-color:var(--accent)}input[type=range]{width:100%;accent-color:var(--accent);margin:8px 0 0}input[type=checkbox]{accent-color:var(--accent)}.slider{margin-top:18px}.slider label{display:flex;justify-content:space-between;gap:8px}.value{font-variant-numeric:tabular-nums;font-size:13px}.sub{font-size:12px;color:var(--muted)}textarea{display:block;width:100%;padding:12px;resize:vertical;min-height:100px;background:var(--bg);border:1px solid var(--line);border-radius:8px;margin-top:8px}label.control{display:flex;align-items:center;gap:8px}.preview{min-height:50px;margin-top:12px;overflow:hidden}svg{display:block;max-width:100%}.legend{font-size:13px;color:var(--muted)}.warning{color:var(--ghost);font-size:13px;margin-top:10px}summary{cursor:pointer;color:var(--accent);font-weight:600}.status{font-size:13px;color:var(--accent);min-height:20px}#settings{font:12px/1.5 ui-monospace,monospace;min-height:180px}.small{font-size:13px}footer{margin:22px 0;color:var(--muted);font-size:12px}.glyph-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(38px,1fr));gap:5px}.glyph-button{min-height:44px;padding:3px;font:20px ui-monospace,monospace;position:relative}.glyph-button.changed{background:var(--modified)}.glyph-button[aria-pressed=true]{background:var(--accent);color:white;border:2px solid var(--ink)}.glyph-button.changed[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--panel)}.glyph-button:focus-visible{outline:3px solid var(--ghost)}.group-label{font-size:12px;color:var(--muted);margin:16px 0 7px}#selected-note{margin:6px 0}.overrides{font:12px/1.7 ui-monospace,monospace;white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto;border-top:1px solid var(--line);padding-top:10px}@media(max-width:800px){main{padding:18px}.layout{grid-template-columns:1fr}.panel{padding:16px}h1{font-size:26px}.glyph-grid{grid-template-columns:repeat(auto-fit,minmax(40px,1fr))}}@media(max-width:400px){main{padding:12px}.row{gap:8px}}@media(prefers-color-scheme:dark){:root{--bg:#171e1e;--panel:#202929;--ink:#e1e9e4;--muted:#a7b6b0;--line:#40514b;--accent:#78cdb5;--ghost:#e8a789;--modified:#30413c}button.primary,button[aria-pressed=true],.glyph-button[aria-pressed=true]{color:#102a24}}
+
+.glyph-button svg{margin:auto;width:25px;height:50px}.glyph-button{padding:0;min-height:52px}.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}.compare>div{min-width:0}.alternative{display:inline-flex;align-items:center;gap:10px;text-align:left}.alternative .preview{width:70px;margin:0}.alternative svg{max-height:85px}.experiment-controls{margin:16px 0}.experiment-controls .control{margin:10px 0}.reading-shell{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:10px 14px;margin-top:14px}.reading-shell.floating{position:fixed;bottom:12px;left:16px;right:16px;max-height:34vh;z-index:20;box-shadow:0 5px 32px #0003;margin:0}.reading-shell.floating #reading{max-height:calc(34vh - 72px);overflow:auto;margin-top:4px}.preview-floating body{padding-bottom:calc(var(--dock-height,240px) + 30px)}.reading-shell #reading{overflow:auto}.reading-shell .row{gap:8px}.preview-title{font-size:13px;font-weight:650}.reading-shell button{font-size:13px;padding:5px 10px}.reading-shell .small{font-size:11px}#ascii-art{overflow:auto}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--ghost);outline-offset:2px}@media(max-width:650px){.compare{grid-template-columns:1fr}.reading-shell.floating{left:6px;right:6px;bottom:6px;padding:8px}.reading-shell.floating #reading{max-height:calc(34vh - 86px)}}
+.alternative[aria-pressed=true] small{color:inherit;opacity:.85}.reading-shell.floating{display:flex;flex-direction:column;overflow:hidden}.reading-shell.floating>.row{flex:0 0 auto}.reading-shell.floating #reading{min-height:0;flex:1 1 auto}
+/* Text entry is deliberately monospace; the adjacent SVG remains Monofuki. */
+#sample,#reading-editor,#import-json{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;tab-size:4}
+#sample,#reading-editor{font-size:14px;line-height:1.5}
+.reading-editor-region[hidden],#edit-preview[hidden],#finish-preview-edit[hidden],#preview-edit-hint[hidden]{display:none!important}
+.reading-shell .preview-toolbar{align-items:flex-start}
+.preview-actions{flex:0 0 auto}
+.preview-edit-hint{margin:3px 0 0}
+.reading-workspace{min-width:0;min-height:0}
+.reading-shell #reading{cursor:text;outline-offset:-3px}
+.reading-shell #reading:focus-visible,#reading-editor:focus-visible,#sample:focus-visible{outline:3px solid var(--ghost)}
+.reading-shell.editing .reading-workspace{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1fr);gap:14px;margin-top:9px}
+.reading-editor-region{display:flex;flex-direction:column;min-width:0;min-height:0}
+#reading-editor{margin:4px 0 0;min-height:90px;height:140px;resize:vertical;flex:1 1 auto}
+#reading-editor-help{margin:5px 0 0;font-size:11px;line-height:1.35}
+.reading-shell.floating .reading-workspace{overflow:auto;flex:1 1 auto}
+.reading-shell.floating #reading{max-height:none;margin-top:3px;min-height:42px}
+.reading-shell.floating.editing{max-height:52vh;max-height:min(52dvh,calc(100dvh - 24px))}
+.reading-shell.floating.editing .reading-workspace{align-items:stretch;overflow:hidden}
+.reading-shell.floating.editing #reading{overflow:auto;min-height:42px}
+.reading-shell.floating.editing #reading-editor{resize:none;min-height:64px;height:120px}
+.reading-shell.floating.editing #reading-editor-help{flex:0 0 auto}
+@media(max-width:650px){
+  .reading-shell.editing .reading-workspace{display:flex;flex-direction:column;gap:8px}
+  .reading-shell.floating.editing{max-height:64vh;max-height:min(64dvh,calc(100dvh - 12px))}
+  .reading-shell.floating.editing .reading-workspace{overflow:auto}
+  .reading-shell.floating.editing .reading-editor-region{flex:0 0 auto}
+  .reading-shell.floating.editing #reading-editor{height:90px;max-height:20dvh;min-height:54px}
+  .reading-shell.floating.editing #reading{flex:1 0 45px;max-height:22dvh}
+  .reading-shell .preview-toolbar{gap:4px}
+  .reading-shell .preview-actions{gap:5px}
+}
+@media(max-height:440px){
+  .reading-shell.floating.editing{max-height:calc(100vh - 12px);max-height:calc(100dvh - 12px)}
+  .reading-shell.floating.editing .reading-workspace{overflow:auto}
+}
+
+[hidden]{display:none!important}
+.picker-section{border-bottom:1px solid var(--line);padding:9px 0}
+.picker-section:last-of-type{border-bottom:0}
+.picker-section .group-label{margin:0;font-size:12px;font-weight:650;color:var(--muted);padding:3px 0}
+.picker-section[open] .group-label{margin-bottom:8px}
+summary:focus-visible{outline:3px solid var(--ghost);outline-offset:3px;border-radius:3px}
+.help{margin:10px 0;font-size:12px}.help summary{font-weight:500;color:var(--muted)}.help p{margin:7px 0 0}
+.cherry-picker{border:1px solid var(--line);border-radius:10px;padding:12px;margin:14px 0;background:var(--bg)}
+.cherry-picker h3{font-size:13px;margin:0 0 9px;font-weight:650}
+.alternative-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.alternative-option{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px;min-height:90px;text-align:left}
+.alternative-option[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--panel)}
+.alternative-ink{display:block;flex:0 0 36px}.alternative-ink svg{width:36px;height:70px;margin:auto}
+.alternative-label{font-size:12px;font-weight:600;line-height:1.3}
+#seven-crossbar-control>h3{margin-bottom:0}
+@media(max-width:400px){.alternative-option{gap:5px;padding:6px}.alternative-label{font-size:11px}.alternative-ink{flex-basis:30px}}
+</style><link rel="stylesheet" href="tuning.css"><script src="tuning/theme.js"></script></head><body><main><div class="site-nav"><a class="site-brand" href="index.html">m / monofuki</a><nav aria-label="Project"><a href="playground.html">Playground</a><a href="symbols.html">Symbols</a><a href="index.html#download">Downloads</a></nav><div class="themes" role="group" aria-label="Color mode"><button data-theme-choice="light">Light</button><button data-theme-choice="dark">Dark</button></div></div><header class="customizer-heading"><h1>Fine-tune Monofuki.</h1><div class="row editor-toolbar"><label class="control">Preview <select id="style"><option>Regular</option><option>Bold</option><option>Italic</option><option value="BoldItalic">Bold Italic</option></select></label><button id="defaults" class="primary">Restore defaults</button><button id="reset">Zero adjustments</button></div></header>
+<section class="panel build-panel" aria-labelledby="build-title"><div class="row"><h2 id="build-title">Fonts</h2><label class="control">Family <select id="build-family"><option value="regular">Monofuki</option><option value="nerd">Monofuki Nerd Font</option></select></label><button id="build-fonts" class="primary">Build &amp; download</button><button id="cancel-build" hidden>Cancel build</button><a id="default-download" href="downloads/Monofuki.zip">Default ZIP</a><a id="test-build" href="playground.html#custom" hidden>Try your build in the playground →</a></div><p id="build-status" class="sub" role="status" aria-live="polite">Four styles · OTF, TTF, WOFF2 · 575 × 1150 cells</p></section><div class="layout"><aside class="stack"><section class="panel"><h2>Choose a character</h2><div id="picker"></div><details class="help"><summary>Picker key</summary><p class="sub">Tiles show your actual tuned outlines. Tint means modified from the original; a solid tile marks the selection. Space uses a placeholder. Collapse any section without changing your selection or edits.</p></details></section><section class="panel"><h2>Current changes</h2><p class="small muted" id="changed-count"></p><div id="overrides" class="overrides"></div></section></aside><div class="stack"><section class="panel"><div class="row space"><h2 id="selected-title">Character</h2><label class="control small"><input id="overlay" type="checkbox" checked> Original contour</label></div><div class="legend">Solid: adjusted outline · colored contour: original</div><div id="large" class="preview"></div><details class="help"><summary>Character details</summary><p id="selected-note" class="sub"></p><p class="sub">Shortening removes vertical font units. Horizontal tail controls are separate. These Bézier morphs change curvature and stroke thickness. Downloads contain these same edited outlines.</p></details><div id="alternative-control" class="cherry-picker" hidden><h3 id="alternative-title">Cherry-pick</h3><div id="alternative-options"></div></div><div class="slider"><label for="top"><span id="top-label">Shorten top</span><output id="top-value" class="value"></output></label><input id="top" type="range" min="0" step="1"></div><div class="slider"><label for="bottom"><span id="bottom-label">Shorten tail</span><output id="bottom-value" class="value"></output></label><input id="bottom" type="range" min="0" step="1"></div><div id="accent-shape-control" class="slider" hidden><label class="control"><input id="accent-follow" type="checkbox"><span id="accent-follow-label">Follow base shortening</span></label><details class="help"><summary>Body &amp; gap help</summary><p class="sub">Link this body to its plain capital, or move either shortening slider to edit it independently. Positive gap moves a top accent away; negative brings it closer. Marks move rigidly, never stretch.</p></details><label for="accent-gap"><span>Top accent gap</span><output id="accent-gap-value" class="value"></output></label><input id="accent-gap" type="range" min="-150" max="150" step="1"><p id="accent-gap-help" class="sub"></p></div><div id="junction-control" class="slider" hidden><label for="junction"><span>Raise y junction</span><output id="junction-value" class="value"></output></label><input id="junction" type="range" min="0" max="150" value="0" step="1"><details class="help"><summary>Junction help</summary><p class="sub">Moves the inner crotch and outer join up together. Tapers to zero near top ends and deep tail, independently of tail shortening. Default: 80.</p></details></div><div id="tail-width-control" class="slider" hidden><label for="tail-width"><span id="tail-width-label">Horizontal tail adjustment</span><output id="tail-width-value" class="value"></output></label><input id="tail-width" type="range" min="0" value="0" step="1"><details class="help"><summary>Tail help</summary><p id="tail-width-help" class="sub"></p></details></div><div id="seven-crossbar-control" class="slider" hidden><h3 class="small">Crossbar shape</h3><details class="help"><summary>Crossbar help</summary><p class="sub">Angle 0° is horizontal; positive rises right. X/Y locate its center in font units; positive Y moves up. Independent of digit shortening and shared by all four styles. Extreme positions may detach the dash. Default: −2°, 278 × 80 at (341, 318).</p></details><div class="slider"><label for="seven-angle"><span>Angle</span><output id="seven-angle-value" class="value"></output></label><input id="seven-angle" type="range" step="1"></div><div class="slider"><label for="seven-length"><span>Length</span><output id="seven-length-value" class="value"></output></label><input id="seven-length" type="range" step="1"></div><div class="slider"><label for="seven-thickness"><span>Thickness</span><output id="seven-thickness-value" class="value"></output></label><input id="seven-thickness" type="range" step="1"></div><div class="slider"><label for="seven-x"><span>Horizontal position (X)</span><output id="seven-x-value" class="value"></output></label><input id="seven-x" type="range" step="1"></div><div class="slider"><label for="seven-y"><span>Vertical position (Y)</span><output id="seven-y-value" class="value"></output></label><input id="seven-y" type="range" step="1"></div></div><div class="row" style="margin-top:18px"><button id="reset-char">Zero this character</button><button id="default-char">Restore its default</button></div></section>
+
+<section class="panel"><h2>Accents</h2><label class="control"><input id="accent-enabled" type="checkbox"> Lower capitals with above accents</label><div class="slider"><label for="accent-lowering"><span>Whole-glyph lowering</span><output id="accent-lowering-value" class="value"></output></label><input id="accent-lowering" type="range" min="0" max="150" step="1"></div><details class="help"><summary>Accent behavior</summary><p class="sub">Whole-glyph lowering moves each above-accent capital and mark together. It excludes plain capitals, lowercase, below marks and Ľ’s side caron. Body and gap edits live with each character. Canonically equivalent combining forms use the same outline; unsupported combinations show a missing-glyph cell. Tall marks can extend above the cell.</p></details><div class="compare"><div><h3 class="small">Original accented outlines</h3><div id="accent-before" class="preview"></div></div><div><h3 class="small">Your body, gap &amp; lowering</h3><div id="accent-after" class="preview"></div></div></div></section>
+<section class="panel"><h2>Spacing experiments</h2><div class="experiment-controls"><label class="control"><input id="smart-enabled" type="checkbox"> Smart optical spacing</label><label for="smart-strength">Smart strength <output id="smart-strength-value" class="value"></output></label><input id="smart-strength" type="range" min="0" max="400" step="1"><label class="control"><input id="symbol-enabled" type="checkbox"> Symbol-run spacing</label><label for="symbol-strength">Symbol strength <output id="symbol-strength-value" class="value"></output></label><input id="symbol-strength" type="range" min="0" max="400" step="1"><label class="control"><input id="strict-reading" type="checkbox" checked> Strict reading grid</label></div><details class="help"><summary>Spacing behavior</summary><p class="sub">Downloads encode these fixed-advance ink shifts in the OpenType kern feature. Apps may disable it. No cell moves or changes width; no ligatures or ellipsis substitution. Above 100%, extra movement is conservatively limited to avoid adding collisions. Existing italic overlaps in the approved baseline are retained. The comparison always shows the configured experiments. Reading uses them only with strict mode off. ASCII previews and artwork always stay strict.</p></details><p id="spacing-status" class="status"></p><div class="compare"><div><h3 class="small">Strict cells</h3><div id="spacing-before" class="preview"></div></div><div><h3 class="small">Configured experiments</h3><div id="spacing-after" class="preview"></div></div></div><button id="reset-experiments">Reset new experiments</button></section>
+<section class="panel"><div class="row space"><h2>Full ASCII preview</h2><label class="control small"><input id="grid" type="checkbox"> Cell grid</label></div><div id="ascii" class="preview"></div></section>
+<section class="panel"><div class="row space"><h2>Reading preview</h2><button id="reset-preview">Reset preview text</button><label class="control small">Size <select id="size"><option value="14">14 px</option><option value="16">16 px</option><option value="18" selected>18 px</option><option value="20">20 px</option><option value="24">24 px</option><option value="28">28 px</option></select></label></div><label for="sample" class="small muted" title="Tabs use four cells; text wraps to whole cells. Reset preview text does not change glyph settings.">Sample text</label><textarea id="sample" spellcheck="false">ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+0123456789 !? [] {} () &lt;&gt; /\ | _-+=
+const glyphs = ["Ag0MW", "mwgy", "Il1|0O"];
+ÁÉÅÜ éñç gypqj 0123456789</textarea><div id="reading-shell" class="reading-shell">
+  <div class="row space preview-toolbar">
+    <div><span class="preview-title">Live reading preview</span> <span id="reading-mode" class="small muted"></span></div>
+    <div class="row preview-actions">
+      <button id="edit-preview" type="button" aria-controls="reading-editor-region" aria-expanded="false">Edit text</button>
+      <button id="finish-preview-edit" type="button" hidden>Done</button>
+      <button id="toggle-preview" type="button">Pin into page</button>
+    </div>
+  </div>
+  <p id="preview-edit-hint" class="preview-edit-hint small muted">Click preview to edit.</p>
+  <div class="reading-workspace">
+    <div id="reading-editor-region" class="reading-editor-region" hidden>
+      <label for="reading-editor" class="small muted">Text entry · monospace</label>
+      <textarea id="reading-editor" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="soft" maxlength="20000" aria-describedby="reading-editor-help"></textarea>
+      <p id="reading-editor-help" class="small muted">Enter: new line · Escape or Ctrl/⌘ + Enter: done</p>
+    </div>
+    <div id="reading" class="preview" role="button" tabindex="0" aria-label="Edit live reading preview text" aria-controls="reading-editor-region" aria-expanded="false"></div>
+  </div>
+</div>
+
+<div id="missing" class="warning" role="status"></div><details id="reference-details"><summary>Compare with 90% proportional ink</summary><p class="small muted">Unadjusted originals at 90% in both axes, centered in the same advance. Reference only; sliders do not affect it.</p><div id="reference" class="preview"></div></details></section>
+<section class="panel"><h2>Import tuning</h2><details class="help"><summary>Import compatibility</summary><p class="sub">Accepts v2–v9 exports and validates before replacing anything. Older missing fields retain their historical zero/original behavior: q, 0 and braces use originals; a missing legacy 7 crossbar is disabled. Existing g and 7 selections use their original JSON fields, without competing aliases. v9 restores q/0 and linked-brace choices and saved section visibility; older imports keep your current section visibility. Preview text resets to the standard sample. Retired capital-position fields remain ignored.</p></details><label for="import-file" class="small">Choose a settings JSON file</label><input id="import-file" type="file" accept=".json,application/json" style="display:block;max-width:100%;margin:10px 0"><details><summary>Or paste settings JSON</summary><textarea id="import-json" aria-label="Settings JSON to import" spellcheck="false"></textarea><button id="import-paste" style="margin-top:10px">Apply pasted settings</button></details><p id="import-status" class="status" role="status" aria-live="polite"></p></section><section class="panel"><h2>Keep your choices</h2><p class="sub">Save a configuration to keep tuning later. The font download includes this configuration too.</p><div class="row"><button id="copy">Copy settings</button><button id="download">Download JSON</button><span id="status" class="status" role="status" aria-live="polite"></span></div><details id="settingsDetails"><summary>View settings</summary><textarea id="settings" readonly aria-label="Current settings JSON"></textarea></details></section>
+<section class="panel"><h2>ASCII art · always strict</h2><div id="ascii-art" class="preview"></div></section><details class="panel small"><summary>Technical notes &amp; limitations</summary><p>Capitals and tall lowercase letters shorten above y=520. Short lowercase letters and numerals shorten above their baseline (or positive ink bottom). Punctuation uses its own ink midpoint, with separate upper- and lower-edge controls. Letters with ink below the baseline also have a tail control; tiny overshoots have correspondingly small limits. Space has no outline to adjust.</p><p>Top/tail-height and junction controls move coordinates vertically. Horizontal tail controls are separate and never scale the whole glyph. These are approximate Bézier control-point morphs, not optical redraws. Curves and stroke thickness can change, especially g/y tails, round capitals, digits and punctuation. The base top/tail-height controls retain at least 75% of each band height. The y junction range is now 0–150 units. Even combined with maximum top and tail-height adjustments, its vertical mapping remains monotonic (minimum slope above 0.10); it does not reverse vertically. This does not guarantee production-quality contours.</p><p>The y-only junction control translates the whole band from y=−20 through 110 upward, covering the inner junction at 63 or 83 and outer join at −10 in all four styles. A smooth taper leaves original points at/below −120 and at/above 400 unchanged by this control. The junction control preserves top height, x coordinates and deep-tail points relative to your other settings, while changing the nearby arms and tail transition. Inner and outer junctions move together; this is still an approximate contour morph.</p><p>Q/y/j truncation moves each rounded terminal inward without scaling the terminal itself; only the connecting tail span is shortened horizontally. The bowl, arms, stem and dot are excluded. The g control compresses only its descender horizontally: the lower loop in upright styles, or the returning tail in italic styles, with a tapered connection to the unchanged body. These local Bézier morphs preserve the original 575-unit advance and 1150-unit cell; the font download applies these same transformations.</p><p>The 7 crossbar is a separate rounded shape in final font coordinates, shared by all four styles. Angle, end-to-end length, perpendicular thickness and center X/Y are independent of digit shortening. It never changes the numeral’s body or advance. Zeroing 7 removes it; restoring its default brings back your −2°, 278 × 80 dash at (341, 318). Original-contour and 90% reference views omit the dash.</p><p>For short lowercase or numeral top adjustments, x-height or digit height changes intentionally. The 81 decomposable accented capitals have exact body/mark contour maps across all four styles. Shortening affects only the matched base body. Top accents follow its shortened top rigidly, plus your signed gap setting; below marks follow its lower overshoot. Ľ’s side caron stays in place. “Follow base” links body shortening to the current ASCII base settings; otherwise each accented capital is independent. Whole-glyph lowering translates the complete result and affects only the 68 top-accent capitals. Marks are never stretched. This embedded subset includes multi-contour marks, not arbitrary stacked Unicode accents. Tall accents may extend above a cell at zero lowering. The browser draws vectors rather than terminal-hinted fonts.</p><p>The q, dotted-zero and linked-brace alternatives are Monofuki-native experimental contours. Originals remain available. The q keeps its native bowl with a small rightward descender foot. Dotted zero preserves the outer body and removes the slash before adding the dot. Selecting either brace alternative applies to both braces, without changing their individual shortening values. The picker and preview render the selected outlines in all four styles.</p></details></div></div><footer>Monofuki · UPM 1024 · 575 × 1150 · baseline +880 / −270 · four styles<br><a href="licenses/THIRD-PARTY-NOTICES.txt">Font notices</a> · <a href="tuning/runtime/LICENSE-Pyodide">Compiler notices</a> · Reference: <a href="https://typeof.net/Iosevka/" target="_blank" rel="noopener noreferrer">Iosevka glyph alternatives</a>. Downloads use the same outline edits and fixed-advance spacing shown here. App support for contextual spacing varies.</footer><details class="small"><summary>Font attribution and license</summary><pre style="white-space:pre-wrap;font:inherit">Original author:
+Copyright (c) 2013-2023, Matthias Tellen matthias.tellen@googlemail.com
+
+Upstream Monofoki modifications:
+Copyright (c) 2020-2025, Marvin Dostal
+
+Monofuki modifications: Greg (nodoubleg), 2026.
+
+Additional symbol outlines from Iosevka, Noto Sans Symbols 2, and Kreative Square.
+Full copyright notices and licenses are included with the fonts.
+
+Licensed under SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+https://scripts.sil.org/OFL
+
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+
+PREAMBLE The goals of the Open Font License (OFL) are to stimulate
+worldwide development of collaborative font projects, to support the font
+creation efforts of academic and linguistic communities, and to provide
+a free and open framework in which fonts may be shared and improved in
+partnership with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves.
+The fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works.  The fonts and derivatives,
+however, cannot be released under any other type of license.  The
+requirement for fonts to remain under this license does not apply to
+any document created using the fonts or their derivatives.
+
+
+
+DEFINITIONS
+&quot;Font Software&quot; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such.
+This may include source files, build scripts and documentation.
+
+&quot;Reserved Font Name&quot; refers to any names specified as such after the
+copyright statement(s).
+
+&quot;Original Version&quot; refers to the collection of Font Software components
+as distributed by the Copyright Holder(s).
+
+&quot;Modified Version&quot; refers to any derivative made by adding to, deleting,
+or substituting — in part or in whole —
+any of the components of the Original Version, by changing formats or
+by porting the Font Software to a new environment.
+
+&quot;Author&quot; refers to any designer, engineer, programmer, technical writer
+or other person who contributed to the Font Software.
+
+
+PERMISSION &amp; CONDITIONS
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,in
+Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the
+corresponding Copyright Holder. This restriction only applies to the
+primary font name as presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole, must
+be distributed entirely under this license, and must not be distributed
+under any other license. The requirement for fonts to remain under
+this license does not apply to any document created using the Font
+Software.
+
+
+
+TERMINATION
+This license becomes null and void if any of the above conditions are not met.
+
+
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT.  IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER
+DEALINGS IN THE FONT SOFTWARE.
+</pre></details></main><script id="accent-components" type="application/json">{{ACCENT_COMPONENTS}}</script><script id="g-alternatives" type="application/json">{{ALTERNATIVES}}</script><script id="glyph-alternatives" type="application/json">{{EXTRA_ALTERNATIVES}}</script><script id="glyph-data" type="application/json">{{GLYPHS}}</script><script>{{APP}}</script><script src="tuning/download.js"></script></body></html>

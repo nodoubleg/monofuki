@@ -1,0 +1,243 @@
+{
+  "source": "glyphs.json",
+  "source_sha256": "16869d963a30a3f07033e9daee6a6d4e315256306d0fca25a3bf7320e8755b35",
+  "reference": {
+    "q": "input/image(20261021-043626).png",
+    "braces": "input/image(20261021-044138).png"
+  },
+  "construction": "q preserves native bowl/counter and upper stem in every style. Dotted zero preserves the exact outer and every existing curved counter segment; two tangent-matched counter bridges remove the fused slash. Dot is the native period scaled 70%, centered in the counter. Compact braces have rounded hooks, a centered cusp, native 85/105 and 76/96 stroke weights, paired mirror symmetry before a shared 0.16 italic shear. All paths use original 575-unit advance.",
+  "styles": {
+    "Regular": {
+      "q_original_bounds": [
+        85,
+        -250,
+        490,
+        510
+      ],
+      "q_alternate_bounds": [
+        85,
+        -250,
+        540,
+        510
+      ],
+      "zero_original_bounds": [
+        55,
+        -10,
+        520,
+        710
+      ],
+      "zero_alternate_bounds": [
+        55,
+        -10,
+        520,
+        710
+      ],
+      "zero_dot_center": [
+        287.5,
+        350.5
+      ],
+      "zero_dot_scale": 0.7,
+      "zero_dot_bounds": [
+        235.0,
+        301.5,
+        340.0,
+        399.5
+      ],
+      "zero_bridge_count": 2,
+      "zero_outer_preserved": true,
+      "brace_left_bounds": [
+        112,
+        -178,
+        454,
+        750
+      ],
+      "brace_right_bounds": [
+        121,
+        -178,
+        463,
+        750
+      ],
+      "brace_mirror_axis": 287.5,
+      "brace_slant": 0,
+      "brace_midline": 286,
+      "brace_strokes": {
+        "vertical": 85,
+        "horizontal": 76
+      }
+    },
+    "Bold": {
+      "q_original_bounds": [
+        75,
+        -250,
+        500,
+        510
+      ],
+      "q_alternate_bounds": [
+        75,
+        -250,
+        550,
+        510
+      ],
+      "zero_original_bounds": [
+        45,
+        -10,
+        530,
+        710
+      ],
+      "zero_alternate_bounds": [
+        45,
+        -10,
+        530,
+        710
+      ],
+      "zero_dot_center": [
+        287.5,
+        350.5
+      ],
+      "zero_dot_scale": 0.7,
+      "zero_dot_bounds": [
+        228.0,
+        294.5,
+        347.0,
+        406.5
+      ],
+      "zero_bridge_count": 2,
+      "zero_outer_preserved": true,
+      "brace_left_bounds": [
+        102,
+        -188,
+        464,
+        760
+      ],
+      "brace_right_bounds": [
+        111,
+        -188,
+        473,
+        760
+      ],
+      "brace_mirror_axis": 287.5,
+      "brace_slant": 0,
+      "brace_midline": 286,
+      "brace_strokes": {
+        "vertical": 105,
+        "horizontal": 96
+      }
+    },
+    "Italic": {
+      "q_original_bounds": [
+        82,
+        -250,
+        527,
+        510
+      ],
+      "q_alternate_bounds": [
+        82,
+        -250,
+        527,
+        510
+      ],
+      "zero_original_bounds": [
+        62,
+        -10,
+        545,
+        710
+      ],
+      "zero_alternate_bounds": [
+        62,
+        -10,
+        545,
+        710
+      ],
+      "zero_dot_center": [
+        303.5,
+        350.5
+      ],
+      "zero_dot_scale": 0.7,
+      "zero_dot_bounds": [
+        245.05,
+        301.5,
+        361.95,
+        399.5
+      ],
+      "zero_bridge_count": 2,
+      "zero_outer_preserved": true,
+      "brace_left_bounds": [
+        108.4028,
+        -178,
+        525.8159,
+        750
+      ],
+      "brace_right_bounds": [
+        49.1841,
+        -178,
+        466.5972,
+        750
+      ],
+      "brace_mirror_axis": 287.5,
+      "brace_slant": 0.16,
+      "brace_midline": 286,
+      "brace_strokes": {
+        "vertical": 85,
+        "horizontal": 76
+      }
+    },
+    "BoldItalic": {
+      "q_original_bounds": [
+        72,
+        -250,
+        537,
+        510
+      ],
+      "q_alternate_bounds": [
+        72,
+        -250,
+        537,
+        510
+      ],
+      "zero_original_bounds": [
+        52,
+        -10,
+        555,
+        710
+      ],
+      "zero_alternate_bounds": [
+        52,
+        -10,
+        555,
+        710
+      ],
+      "zero_dot_center": [
+        303.5,
+        350.5
+      ],
+      "zero_dot_scale": 0.7,
+      "zero_dot_bounds": [
+        238.05,
+        294.5,
+        368.95,
+        406.5
+      ],
+      "zero_bridge_count": 2,
+      "zero_outer_preserved": true,
+      "brace_left_bounds": [
+        98.245,
+        -188,
+        535.9172,
+        760
+      ],
+      "brace_right_bounds": [
+        39.0828,
+        -188,
+        476.755,
+        760
+      ],
+      "brace_mirror_axis": 287.5,
+      "brace_slant": 0.16,
+      "brace_midline": 286,
+      "brace_strokes": {
+        "vertical": 105,
+        "horizontal": 96
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ from pathlib import Path
 
 from terminal_demo import CHARACTER_SAMPLE, art_pieces
 from symbols_page import render_symbols
+from build_tuning_site import stage as stage_tuning
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -62,7 +63,7 @@ def main():
         files = {p for p in directory.glob(f'{family}-*') if p.suffix in ('.otf', '.ttf', '.woff2')}
         if len(list(directory.glob(f'{family}-*.otf'))) != 4:
             parser.error(f'{family}: download bundle needs four OTF styles')
-        for pattern in ('LICENSE-*', 'NOTICES-*.md', '*audit*.md', '*provenance.json', '*dependencies.json', '*additions.json', '*overlays.json', '*policy.json', '*decisions.json', 'emoji-*.json', 'THIRD-PARTY-NOTICES.txt'):
+        for pattern in ('LICENSE-*', 'NOTICES-*.md', '*audit*.md', '*provenance.json', '*dependencies.json', '*additions.json', '*overlays.json', '*policy.json', '*decisions.json', 'emoji-*.json', 'tuning-settings.json', 'THIRD-PARTY-NOTICES.txt'):
             files.update(directory.glob(pattern))
         files.update(p for p in (directory / 'component-notices').rglob('*') if p.is_file())
         for required in ('THIRD-PARTY-NOTICES.txt', 'component-provenance.json', 'source-provenance.json'):
@@ -113,7 +114,8 @@ def main():
             parser.error(f'unresolved template marker in {name}')
         document = re.sub(r'\b(href|src|poster)="([^"]+)"', version_asset, document)
         (output / name).write_text(document)
-    (output / 'build.json').write_text(json.dumps({'revision': args.revision, 'build_url': args.build_url,
+    tuning_hash = stage_tuning(output, args.regular, args.nerd, args.revision)
+    (output / 'build.json').write_text(json.dumps({'revision': args.revision, 'build_url': args.build_url, 'tuning_configuration_sha256': tuning_hash,
                                                 'font_sha256': hashes, 'vhs_version': '0.12.1',
                                                 'nerd_fonts_version': dependencies['nerd_fonts_version'],
                                                 'unicode_version': dependencies['unicode_version']}, indent=2) + '\n')

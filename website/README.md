@@ -76,3 +76,58 @@ ships at `website/assets/monofuki-wordart.svg` for the site and README. The
 matching fingerprint and provenance JSON files identify the actual font used.
 Regenerate it after relevant letterform changes; it does not rely on an installed
 font or browser font fallback.
+
+## Customizer and playground
+
+`customize.html` is staged from `website/tuning/template.html`, its application
+and editor source, and the locked reference data in `src/tuning/`. It starts and
+resets to the approved configuration. The five alternative groups (g, q, zero,
+7 and linked braces) remain independently selectable, including original forms.
+Individual body/gap/tail controls and strengths 0–400 are compiled into the
+selected download. The floating editor, collapsible picker and JSON import/export
+are retained. Preview text is reset on import and is not sent to the compiler.
+
+A worker downloads the same-run complete regular/Nerd base fonts and a pinned,
+self-hosted Pyodide runtime on demand. It verifies base and notice file hashes,
+then runs the shared fontTools compiler locally. Each ZIP contains four styles in
+OTF, TTF and WOFF2, exact component notices, the selected settings and provenance.
+There is no service endpoint, account, upload or paid infrastructure. The first
+build loads roughly 14 MB of compiler assets plus full base fonts; compilation
+can take a minute or longer on slower or busy machines. Progress identifies
+each style and format, and Cancel stops the worker. Default prebuilt ZIPs remain
+available without the compiler. WOFF2 uses lossless Brotli quality 9: decoded
+font tables match maximum compression, with a modest size increase and much
+shorter encoding time.
+Custom family names include a configuration hash so distinct choices can coexist.
+Native default TTFs additionally have separately named autohinted exports; browser
+TTFs are unhinted on changed glyphs and are identified separately in the ZIP.
+
+`playground.html` uses real WOFF2 files, not SVG glyphs. It has editable code,
+prose, symbol/emoji and spacing samples; four styles; size/leading controls; a kern
+toggle; and an optional four-style comparison. A successful browser build writes
+all four webfonts and their profile ID to IndexedDB in one transaction. The playground can load that
+local build. Initial leading is exactly 1150/1024 em, retaining the 1:2 cell
+ratio; the Leading Reset button restores it after free leading adjustments.
+Samples stay in the tab. Browser storage failure does not prevent
+the font download.
+
+The CI build validates all four regular/Nerd styles and all 32 alternative
+profiles before staging the site. Native checks include:
+
+```sh
+.font-build/tuning-python/bin/python script_helper/build_tuned_fonts.py
+.font-build/tuning-python/bin/python script_helper/test_tuning.py --all-profiles
+.font-build/tuning-python/bin/python script_helper/test_spacing_safety.py
+.font-build/tuning-python/bin/python script_helper/test_spacing_masks.py
+.font-build/tuning-python/bin/python script_helper/test_woff2_compression.py
+node script_helper/test_site_ui.cjs
+fontforge -lang=py -script script_helper/check_terminal_glyphs.py --tuned export/Monofuki-*.otf
+swift script_helper/check_tuned_coretext.swift export/Monofuki-*.otf > .font-build/tuned-coretext-proof.json
+```
+
+Rebuilding from the saved same-run bases uses `build_tuned_fonts.py --from-base`.
+It rejects accidentally tuning an already tuned output. Full rebuilds recreate
+base fonts through the normal scripts first. The source contract and spacing
+scope are documented in `docs/glyph-overrides.md`. Browser and operating-system
+rendering must be checked before publication; static tests alone do not prove
+interactive layout or terminal support.

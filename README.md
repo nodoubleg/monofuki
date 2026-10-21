@@ -8,7 +8,8 @@ I mainly use Terminal.app and iTerm2 on macOS. My priorities are missing
 symbols, Braille artwork, and repeatable regular and Nerd Font builds. I make
 no promise that this will suit your terminal, platform, or taste.
 
-Try the [live specimen](https://nodoubleg.github.io/monofuki/) or get the
+Try the [customizer](https://nodoubleg.github.io/monofuki/customize.html),
+[playground](https://nodoubleg.github.io/monofuki/playground.html), and [live specimen](https://nodoubleg.github.io/monofuki/), or get the
 [Monofuki](https://nodoubleg.github.io/monofuki/downloads/Monofuki.zip) and
 [Monofuki Nerd Font](https://nodoubleg.github.io/monofuki/downloads/MonofukiNerdFont.zip)
 downloads.
@@ -60,12 +61,18 @@ The [Build fonts workflow](https://github.com/nodoubleg/monofuki/actions/workflo
 runs on pushes to `master`, `v*` tags, pull requests, and manual runs from the
 Actions tab. It uses an Ubuntu 24.04 GitHub runner to build all four styles
 with `./create_font.sh --hint`, then applies checksum-pinned Nerd Fonts 3.5.1 patching.
-Source and exported glyph checks must pass before each artifact is uploaded.
+The shared tuning compiler then applies my current settings to all four regular
+and Nerd styles, preserving the complete character sets. Source checks, all 32
+alternative profiles, spacing regressions and exported-font checks run before
+upload. See the [customizer build notes](website/README.md#customizer-and-playground)
+to reproduce the tuned downloads locally.
 
 Download `Monofuki-<commit>` or `MonofukiNerdFont-<commit>` from the run's
 Artifacts section. The regular bundle contains TTF, hinted TTF, OTF, WOFF2
 from OTF, hinted WOFF2 from TTF, and the font license. The Nerd Font bundle
-contains patched TTF (from the hinted build), OTF, WOFF2 from OTF, and licenses.
+contains patched TTF, OTF, WOFF2 from OTF, and licenses. Changed outlines in
+Nerd TTFs and browser-built TTFs are unhinted; regular native exports also provide
+separate autohinted files.
 Artifacts are retained for 30 days. Generated fonts are uploaded as artifacts
 and are not committed to the repository.
 
@@ -79,10 +86,10 @@ publishes the site. Print all of the site's artwork with
 All four styles include the 256 Unicode Braille patterns (`U+2800–U+28FF`).
 These are often used for dotted terminal artwork. The glyphs match Nerd Fonts
 3.5.1's default rectangle geometry: upright 172.5 by 184.5-unit dots on a
-two-column, four-row grid. The grid fills
-Monofuki's existing 575-unit-wide, 1230-unit-high character cell, so the dot
-spacing continues across character and line boundaries. Font metrics and
-existing glyphs are unchanged. Braille is not emboldened in the bold styles.
+two-column, four-row grid. The base grid fills a 575 × 1230-unit cell. The tuned downloads map it vertically
+to the selected 575 × 1150-unit cell, keeping dot spacing continuous across
+character and line boundaries. Braille stays upright and is not emboldened in
+the bold styles.
 
 To try the font, build with `./create_font.sh`, install the resulting fonts
 from `export/`, select Monofuki in your terminal, and run:

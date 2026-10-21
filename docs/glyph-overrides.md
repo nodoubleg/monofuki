@@ -182,3 +182,55 @@ These choices do not waive geometry/metric checks or component license review.
 Review changed notices when donors, the patcher, or component versions change.
 Report which checks actually ran. The clean tracking branch stays separate from
 custom `master`; no upstream post or PR is implied.
+
+## Parameterized tuning exports
+
+The customizer is an additional **export** layer declared by
+`src/overlays.json:tuned_export`. The four assembled SFD sources and normal
+fingerprinted `.glyph` override mechanism remain the base contract above.
+Build complete regular and Nerd base exports first. `build_tuned_fonts.py`
+then retains those exact inputs under `export/tuning-base/` and applies the
+approved tuning to their exported outlines. It does not save a merged font back
+into `src/` or replace upstream SFD records.
+
+`src/tuning/defaults.json` holds the approved configuration. The original
+playground's bounded glyph data, component maps and Monofuki-derived alternatives
+are retained under `src/tuning/`. Their hashes and the expected source-record
+hashes for every referenced glyph are in `src/tuning/provenance.json`. Source drift
+fails the native build: command-index masks must be reviewed against new input
+geometry before their guards are updated. Bold and Bold Italic always use their
+own full base fonts and their own outline data.
+
+`website/tuning/app.js` owns the outline transformations and input validation.
+`script_helper/tuning_reference.cjs` executes those same functions without a DOM
+for native builds and numerical tests. The browser sends the same full-precision
+pen operations to `script_helper/tuning_compiler.py`; both paths use fontTools
+4.56.0 and its Python table serializer. No generated font is an authored input.
+The default browser and native OTFs are compared from identical base bytes.
+
+The export layer replaces the 323 preview-covered characters without removing
+any other character, glyph, or existing mark feature. It changes line metrics to
+880/-270, preserves every horizontal advance, and vertically remaps box/block
+and Braille graphics from the old 1230-unit cell to the new 1150-unit cell. The
+Win clipping metrics enclose the complete font, including untouched tall glyphs.
+`tuning-provenance.json` identifies exact base/output hashes, source geometry,
+settings, compiler and transform. It accompanies both font families and custom
+browser downloads. Source preservation and these export changes are separate
+claims and are checked separately.
+
+Contextual optical spacing uses a GPOS `kern` feature with **xPlacement only**.
+Shallow chained-context dispatch trees select preceding and following edge
+classes, then indexed SinglePos tables position the current glyph. Equal sums
+of the two neighbor edges share exact values. Both neighbors stay context, so
+partial feature masks and adjacent centers keep the original matching behavior.
+Only the root lookup belongs to `kern`; existing mark features remain intact.
+It covers the 254 letters/numbers present in the reference data; symbol-run
+spacing covers the documented operator set and runs of two through four. The
+source formula is rounded to the nearest font unit (at most 0.5 units). The old
+0–100 strength range is unchanged. Above 100, a conservative envelope reserves
+room for the worst supported neighbor at the old range. Bounds enclose the
+selected transformed control points, including a moved or rotated 7 crossbar,
+so extra movement cannot add overlap. Existing italic overlaps at the approved 94 setting are retained.
+Other Unicode characters and unsupported clusters retain their base behavior.
+Applications can disable this feature; the font cannot force a terminal to use
+it. CoreText and HarfBuzz evidence is not terminal-app evidence.

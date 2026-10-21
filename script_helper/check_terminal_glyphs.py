@@ -14,12 +14,14 @@ from pathlib import Path
 import fontforge
 
 
-def check(path):
+def check(path, tuned=False):
     font = fontforge.open(str(path))
     try:
         assert font.em == 1024, (path, "em changed")
-        assert (font.hhea_ascent, font.hhea_descent, font.hhea_linegap) == (910, -320, 0)
-        assert font.os2_typoascent - font.os2_typodescent + font.os2_typolinegap == 1230
+        ascent, descent = (880, -270) if tuned else (910, -320)
+        cell_height = ascent - descent
+        assert (font.hhea_ascent, font.hhea_descent, font.hhea_linegap) == (ascent, descent, 0)
+        assert font.os2_typoascent - font.os2_typodescent + font.os2_typolinegap == cell_height
         width = font[0x20].width
         assert width == 575
         # Independent expectation from Unicode character names, not the generator.
@@ -33,7 +35,7 @@ def check(path):
             name = unicodedata.name(chr(cp))
             dots = [] if cp == 0x2800 else [int(n) for n in name.split("-")[1]]
             expected = sorted(((columns[n] + 0.5) * width / 2,
-                               910 - (rows[n] + 0.5) * 1230 / 4) for n in dots)
+                               ascent - (rows[n] + 0.5) * cell_height / 4) for n in dots)
             actual = []
             for contour in glyph.foreground:
                 assert contour.closed and contour.isClockwise(), (path, hex(cp), "contour")
@@ -46,7 +48,7 @@ def check(path):
                 assert all(a.x == b.x or a.y == b.y for a, b in zip(points, points[1:] + points[:1]))
                 assert all(p.x in (min(xs), max(xs)) or p.y in (min(ys), max(ys)) for p in points)
                 assert abs(max(xs) - min(xs) - 172.5) <= 1
-                assert abs(max(ys) - min(ys) - 184.5) <= 1
+                assert abs(max(ys) - min(ys) - 184.5 * cell_height / 1230) <= 1
                 actual.append(((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2))
             assert len(actual) == len(expected), (path, hex(cp), "dot count")
             for observed, wanted in zip(sorted(actual), expected):
@@ -81,8 +83,9 @@ def check(path):
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
-    paths = sys.argv[1:] or sorted((root / ".font-build/assembled").glob("*.sfd"))
+    tuned = '--tuned' in sys.argv
+    paths = [arg for arg in sys.argv[1:] if arg != '--tuned'] or sorted((root / ".font-build/assembled").glob("*.sfd"))
     if not paths:
         raise SystemExit("No assembled sources; run fontforge -lang=py -script script_helper/assemble_sources.py")
     for path in paths:
-        check(path)
+        check(path, tuned)

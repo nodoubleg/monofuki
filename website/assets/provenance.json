@@ -1,6 +1,6 @@
 {
-  "source_font_filename": "Monofuki-Bold.ttf",
-  "source_font_sha256": "094c3ea5d6ea8b5e9f42bb6f9bfa0983f756fd48af0259adcd99dbcf5f6a5ff7",
+  "source_font_filename": "Monofuki-Bold.otf",
+  "source_font_sha256": "5b2b8b413b5ac6ba254e745b43966741c9974ff12d8d815e2485eaed905306f5",
   "source_names": {
     "1": "Monofuki",
     "2": "Bold",
@@ -8,7 +8,7 @@
     "6": "Monofuki-Bold"
   },
   "text": "Monofuki",
-  "outline_fingerprint_sha256": "b4516e5356c9f1b9b1b3cc9e137c3c8f6d079151d3b1b6d10bea0e7df30663c4",
+  "outline_fingerprint_sha256": "ee35f8b1bc9fb08b65f35c399a58f1860cf2bdbf3c83425a7ad1950a7c252547",
   "dimensions": [
     1280,
     330

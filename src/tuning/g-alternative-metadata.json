@@ -1,0 +1,88 @@
+{
+  "id": "open-double-storey",
+  "label": "Open double-storey",
+  "source": "Monofuki-native redraw; Iosevka structural reference only",
+  "reference": {
+    "family": "Iosevka",
+    "selector": "double-storey-open",
+    "openType": {
+      "tag": "cv42",
+      "value": 2
+    },
+    "exactWeightKnown": false
+  },
+  "advance": 575,
+  "upm": 1024,
+  "compression": {
+    "Regular": {
+      "ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          13,
+          24
+        ]
+      ],
+      "anchor": 300,
+      "anchorSlope": 0,
+      "full": 81,
+      "zero": 152
+    },
+    "Bold": {
+      "ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          13,
+          24
+        ]
+      ],
+      "anchor": 300,
+      "anchorSlope": 0,
+      "full": 81,
+      "zero": 152
+    },
+    "Italic": {
+      "ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          13,
+          24
+        ]
+      ],
+      "anchor": 259.25,
+      "anchorSlope": 0.16,
+      "full": 81,
+      "zero": 152
+    },
+    "BoldItalic": {
+      "ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          13,
+          24
+        ]
+      ],
+      "anchor": 259.25,
+      "anchorSlope": 0.16,
+      "full": 81,
+      "zero": 152
+    }
+  },
+  "italicTransform": {
+    "center": 287.5,
+    "widthFactor": 0.94,
+    "shear": 0.16,
+    "shearYOrigin": 250
+  }
+}
