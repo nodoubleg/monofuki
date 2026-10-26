@@ -1,0 +1,249 @@
+{
+  "version": "0.1",
+  "policy": "advisory",
+  "serialization": "YAML 1.2 JSON subset; edit with valid JSON syntax",
+  "rules": [
+    {
+      "id": "MF-MONO-001",
+      "title": "Keep the mono cell stable",
+      "scope": {
+        "width": [
+          "mono"
+        ]
+      },
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "method": "advance",
+      "expected": "Sampled spacing glyphs retain the n advance. Combining marks and Nerd icons are outside this probe.",
+      "approval": "approved-policy",
+      "provenance": "Greg, 2026-10-26: mono family stays intact. Existing terminal/build contracts remain separate.",
+      "examples": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "reference": "n",
+      "tolerance": 0
+    },
+    {
+      "id": "MF-STEM-001",
+      "title": "Compare related upright stems",
+      "scope": {
+        "weight": [
+          "Light",
+          "Regular",
+          "Black"
+        ],
+        "width": [
+          "mono",
+          "proportional"
+        ]
+      },
+      "targets": [
+        "H",
+        "n"
+      ],
+      "method": "stem",
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "approval": "candidate",
+      "provenance": "New beta probe proposed 2026-10-26; numeric tolerance has no design approval. Measures two filled intervals only.",
+      "examples": [
+        "H",
+        "n"
+      ],
+      "y_em": 0.2,
+      "tolerance": 0.015
+    },
+    {
+      "id": "MF-WEIGHT-001",
+      "title": "Check the weight progression at a defined section",
+      "scope": {
+        "width": [
+          "mono"
+        ],
+        "variant": [
+          "default"
+        ]
+      },
+      "targets": [
+        "H"
+      ],
+      "method": "weight-order",
+      "expected": "At y=0.20 em, H left stem should progress Light < Regular < Black, by more than 0.005 em per step. This does not measure perceived weight.",
+      "approval": "candidate",
+      "provenance": "New beta relationship proposed 2026-10-26; current experimental geometry is evidence, not a requirement.",
+      "examples": [
+        "H"
+      ],
+      "y_em": 0.2,
+      "tolerance": 0.005
+    },
+    {
+      "id": "MF-ANGLE-001",
+      "title": "Compare the designated slash edges",
+      "scope": {
+        "weight": [
+          "Light",
+          "Regular",
+          "Black"
+        ],
+        "width": [
+          "mono",
+          "proportional"
+        ]
+      },
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "method": "angle",
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "approval": "candidate",
+      "provenance": "New beta probe proposed 2026-10-26. Straight Bezier edges require control points within 0.25 font units of chord; no generic angle inference.",
+      "examples": [
+        "/",
+        "\\"
+      ],
+      "tolerance": 1
+    },
+    {
+      "id": "MF-OPTICAL-001",
+      "title": "Review optical rhythm and family identity",
+      "scope": {
+        "weight": [
+          "Light",
+          "Regular",
+          "Black"
+        ],
+        "width": [
+          "mono",
+          "proportional"
+        ]
+      },
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "method": "visual",
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "approval": "open",
+      "provenance": "Greg, 2026-10-26: beta-test rules alongside final Light/Black review. No universal numeric optical target approved.",
+      "examples": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ]
+    },
+    {
+      "id": "MF-FORM-001",
+      "title": "Keep approved Black forms visibly paired",
+      "scope": {
+        "weight": [
+          "Black"
+        ],
+        "variant": [
+          "default"
+        ]
+      },
+      "targets": [
+        "Ω",
+        "æ"
+      ],
+      "method": "visual",
+      "expected": "Show Black03 current approved Omega and ae beside Black02 previous forms when reviewing these characters. Approval is specific to these forms, not every Black03 glyph.",
+      "approval": "approved-specific-forms",
+      "provenance": "Current intent: MFD-BLACK-AE and MFD-BLACK-OMEGA in current-notes.json, verified against owner-marked Black02 pages95/96. Approval is plain ae/Omega only; descendant body implementation is family consistency, not separate owner approval.",
+      "examples": [
+        "Ω",
+        "æ"
+      ]
+    },
+    {
+      "id": "MF-CHOICE-001",
+      "title": "Keep Q and Pi choices open",
+      "scope": {
+        "weight": [
+          "Light",
+          "Regular",
+          "Black"
+        ],
+        "width": [
+          "mono",
+          "proportional"
+        ]
+      },
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "method": "visual",
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "approval": "open",
+      "provenance": "handoff-Black03-20261024.json pending_choices: foot-tail Q unselected; Pi right-foot question pending.",
+      "examples": [
+        "Q",
+        "Π"
+      ]
+    },
+    {
+      "id": "MF-PROP-001",
+      "title": "Plan proportional spacing independently",
+      "scope": {
+        "width": [
+          "proportional"
+        ]
+      },
+      "targets": [
+        "H",
+        "n",
+        "o"
+      ],
+      "method": "visual",
+      "expected": "Review sidebearings and word rhythm independently of mono advances while retaining family identity. Start Light, then Black, then Regular. No proportional geometry target exists yet.",
+      "approval": "open",
+      "provenance": "Greg, 2026-10-26 roadmap. Proportional variants are future work, not implemented or promoted by this system.",
+      "examples": [
+        "H",
+        "n",
+        "o"
+      ]
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "MF-EX-001",
+      "rule": "MF-OPTICAL-001",
+      "scope": {
+        "weight": [
+          "Black"
+        ],
+        "variant": [
+          "original-g"
+        ]
+      },
+      "reason": "Black03 original-g alternate changes U+0067 only; accented g descendants retain default drawing. Coverage limitation, not a waiver of review.",
+      "approval": "observed-limitation",
+      "provenance": "handoff-Black03-20261024.json limits. No new design exception approved."
+    }
+  ]
+}

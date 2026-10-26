@@ -318,3 +318,18 @@ This version also tries to fix all the known issues and at times adds additional
       this issue.
       Solution (Fix) was:
       For all affected glyphs set "OT Glyph Class" to "Base Glyph"
+
+
+## Family design rules and iteration worksheets
+
+The [family-design v0.1 workflow](docs/family-design/README.md) adds advisory
+checks and self-contained illustrated guides/worksheets for the experimental
+Light/Black review. Start with the [illustrated guide](docs/family-design/example/guide.html)
+and [labelled example worksheets](docs/family-design/example/worksheet.html).
+Design findings do not block requested variants or replace existing build checks.
+The [family roadmap](docs/family-design/roadmap.md) records the next stages; no
+experimental weight is promoted by this workflow.
+
+[Current design notes](src/design-rules/current-notes.json) record settled intent
+and open questions in Git. They stay editable and advisory; experiments can depart
+from them. The workflow describes scoped checkpoints and reverts.

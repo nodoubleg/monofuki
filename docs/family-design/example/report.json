@@ -1,0 +1,1767 @@
+{
+  "version": "0.1",
+  "policy": "advisory",
+  "input_hashes": {
+    "Light04": "3a423f18761d446a6c707fd10ab227679fd304f5593fa5291523ba0e98e585ff",
+    "Regular": "dee62e843aa5328370c5d61cad7b8f3c46109dbd836bf43692a595c0ec44d2c8",
+    "Black03": "a1fd08839714d7ecff2e2a1ca9f1459e0a8e00e33854939b597c68ffd32cecfa",
+    "Black02": "147ef5dc366b3f9e8341c433616a3f959fa62db131ffa4bf26ea48f5be418557",
+    "Black03-Q-foot-candidate": "52da4aede467383095c65e0cfe8ded10d24c9e703f4d0f729bedce3bc13bfb36",
+    "Black03-original-g": "36be593d3fa3c2c7242dfbda192c785e5266b6a79aceefdacfe57af0e8242963",
+    "EXAMPLE-Black03-H-plus40": "4c96b6d53658857733edf09535164447a7bbf2e5ce1b26195575ca8c1fed2947"
+  },
+  "rules_sha256": "eb8250764582f13e43877937cf65b63dbbc0304f88e25abc1f8fbf7a32a737d6",
+  "generator_sha256": "01a09df58903ebfaf0517f9f6fa760d01a7ccfc888e5d895ff6b33c4e5c82c87",
+  "notes_sha256": "72b708b1759bf8c367e0ab336211d33785c4ecde8ef2e006313563abd9f16d2e",
+  "current_notes": [
+    {
+      "id": "MFD-BLACK-AE",
+      "kind": "choice",
+      "font": "Black03",
+      "character": "æ",
+      "status": "current-note",
+      "note": "Use the open ae candidate.",
+      "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 95; green selection: Good!",
+        "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+      ],
+      "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+      "rule_ids": [
+        "MF-FORM-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-AE",
+      "kind": "choice",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "character": "æ",
+      "status": "current-note",
+      "note": "Use the open ae candidate.",
+      "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 95; green selection: Good!",
+        "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+      ],
+      "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+      "rule_ids": [
+        "MF-FORM-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-OMEGA",
+      "kind": "choice",
+      "font": "Black03",
+      "character": "Ω",
+      "status": "current-note",
+      "note": "Use the selected Omega with the wider bottom aperture.",
+      "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 96; green selection: let's go w/ this",
+        "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+      ],
+      "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+      "rule_ids": [
+        "MF-FORM-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-OMEGA",
+      "kind": "choice",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "character": "Ω",
+      "status": "current-note",
+      "note": "Use the selected Omega with the wider bottom aperture.",
+      "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 96; green selection: let's go w/ this",
+        "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+      ],
+      "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+      "rule_ids": [
+        "MF-FORM-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-Q",
+      "kind": "open-question",
+      "font": "Black03",
+      "character": "Q",
+      "status": "open-question",
+      "note": "Keep the current Q while another tail direction is discussed. The diagonal candidate was rejected; the foot-tail candidate remains unselected.",
+      "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page95 red rejection and unmarked page97 foot-tail"
+      ],
+      "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+      "rule_ids": [
+        "MF-CHOICE-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-Q",
+      "kind": "open-question",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "character": "Q",
+      "status": "open-question",
+      "note": "Keep the current Q while another tail direction is discussed. The diagonal candidate was rejected; the foot-tail candidate remains unselected.",
+      "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page95 red rejection and unmarked page97 foot-tail"
+      ],
+      "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+      "rule_ids": [
+        "MF-CHOICE-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-PI",
+      "kind": "open-question",
+      "font": "Black03",
+      "character": "Π",
+      "status": "open-question",
+      "note": "Whether capital Pi needs an outward right foot remains an open question; keep the current form for now.",
+      "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page66 blue question"
+      ],
+      "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+      "rule_ids": [
+        "MF-CHOICE-001"
+      ],
+      "reasons": []
+    },
+    {
+      "id": "MFD-BLACK-PI",
+      "kind": "open-question",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "character": "Π",
+      "status": "open-question",
+      "note": "Whether capital Pi needs an outward right foot remains an open question; keep the current form for now.",
+      "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page66 blue question"
+      ],
+      "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+      "rule_ids": [
+        "MF-CHOICE-001"
+      ],
+      "reasons": []
+    }
+  ],
+  "input_metadata": {
+    "Light04": {
+      "id": "Light04",
+      "sha256": "3a423f18761d446a6c707fd10ab227679fd304f5593fa5291523ba0e98e585ff",
+      "weight": "Light",
+      "width": "mono",
+      "role": "current",
+      "variant": "default"
+    },
+    "Regular": {
+      "id": "Regular",
+      "sha256": "dee62e843aa5328370c5d61cad7b8f3c46109dbd836bf43692a595c0ec44d2c8",
+      "weight": "Regular",
+      "width": "mono",
+      "role": "current",
+      "variant": "default"
+    },
+    "Black03": {
+      "id": "Black03",
+      "sha256": "a1fd08839714d7ecff2e2a1ca9f1459e0a8e00e33854939b597c68ffd32cecfa",
+      "weight": "Black",
+      "width": "mono",
+      "role": "current",
+      "variant": "default"
+    },
+    "Black02": {
+      "id": "Black02",
+      "sha256": "147ef5dc366b3f9e8341c433616a3f959fa62db131ffa4bf26ea48f5be418557",
+      "weight": "Black",
+      "width": "mono",
+      "role": "previous",
+      "variant": "default"
+    },
+    "Black03-Q-foot-candidate": {
+      "id": "Black03-Q-foot-candidate",
+      "sha256": "52da4aede467383095c65e0cfe8ded10d24c9e703f4d0f729bedce3bc13bfb36",
+      "weight": "Black",
+      "width": "mono",
+      "role": "proposed",
+      "variant": "q-foot"
+    },
+    "Black03-original-g": {
+      "id": "Black03-original-g",
+      "sha256": "36be593d3fa3c2c7242dfbda192c785e5266b6a79aceefdacfe57af0e8242963",
+      "weight": "Black",
+      "width": "mono",
+      "role": "alternate",
+      "variant": "original-g"
+    },
+    "EXAMPLE-Black03-H-plus40": {
+      "id": "EXAMPLE-Black03-H-plus40",
+      "sha256": "4c96b6d53658857733edf09535164447a7bbf2e5ce1b26195575ca8c1fed2947",
+      "weight": "Black",
+      "width": "mono",
+      "role": "proposed",
+      "variant": "default"
+    }
+  },
+  "requests_sha256": "6b5071d7880031f26651c41cab798cd561245a70caae59651640586a659ba3b0",
+  "findings": [
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "Light04",
+      "status": "pass",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.5615234375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Light04": {
+          "H": "pass",
+          "n": "pass",
+          "0": "pass",
+          "Ω": "pass",
+          "æ": "pass",
+          "Q": "pass",
+          "Π": "pass",
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "Regular",
+      "status": "pass",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.5615234375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Regular": {
+          "H": "pass",
+          "n": "pass",
+          "0": "pass",
+          "Ω": "pass",
+          "æ": "pass",
+          "Q": "pass",
+          "Π": "pass",
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "Black03",
+      "status": "pass",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.5615234375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03": {
+          "H": "pass",
+          "n": "pass",
+          "0": "pass",
+          "Ω": "pass",
+          "æ": "pass",
+          "Q": "pass",
+          "Π": "pass",
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "Black02",
+      "status": "pass",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.5615234375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black02": {
+          "H": "pass",
+          "n": "pass",
+          "0": "pass",
+          "Ω": "pass",
+          "æ": "pass",
+          "Q": "pass",
+          "Π": "pass",
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "Black03-Q-foot-candidate",
+      "status": "pass",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.5615234375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03-Q-foot-candidate": {
+          "H": "pass",
+          "n": "pass",
+          "0": "pass",
+          "Ω": "pass",
+          "æ": "pass",
+          "Q": "pass",
+          "Π": "pass",
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "Black03-original-g",
+      "status": "pass",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.5615234375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03-original-g": {
+          "H": "pass",
+          "n": "pass",
+          "0": "pass",
+          "Ω": "pass",
+          "æ": "pass",
+          "Q": "pass",
+          "Π": "pass",
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-MONO-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "advisory",
+      "approval": "approved-policy",
+      "targets": [
+        "H",
+        "n",
+        "0",
+        "Ω",
+        "æ",
+        "Q",
+        "Π",
+        "/",
+        "\\"
+      ],
+      "expected": "Equal to n advance (0.561523 em), tolerance 0 em",
+      "observed": {
+        "H": 0.6005859375,
+        "n": 0.5615234375,
+        "0": 0.5615234375,
+        "Ω": 0.5615234375,
+        "æ": 0.5615234375,
+        "Q": 0.5615234375,
+        "Π": 0.5615234375,
+        "/": 0.5615234375,
+        "\\": 0.5615234375
+      },
+      "reason": "Sampled spacing glyph advances in em; reference n",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "unresolved-advisory",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "H": "advisory",
+          "n": "advisory",
+          "0": "advisory",
+          "Ω": "advisory",
+          "æ": "advisory",
+          "Q": "advisory",
+          "Π": "advisory",
+          "/": "advisory",
+          "\\": "advisory"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "Light04",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.0576171875,
+        "n": 0.0576171875
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Light04": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "Regular",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.0830078125,
+        "n": 0.0830078125
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Regular": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "Black03",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.1455078125,
+        "n": 0.1455078125
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "Black02",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.1455078125,
+        "n": 0.1455078125
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black02": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "Black03-Q-foot-candidate",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.1455078125,
+        "n": 0.1455078125
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03-Q-foot-candidate": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "Black03-original-g",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.1455078125,
+        "n": 0.1455078125
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03-original-g": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H",
+        "n"
+      ],
+      "expected": "Compare H and n left stems at y=0.20 em. Proposed absolute difference <=0.015 em; discuss any mismatch rather than forcing equality.",
+      "observed": {
+        "H": 0.1455078125,
+        "n": 0.1455078125
+      },
+      "reason": "Leftmost of two filled intervals at y=0.2 em. Proposed tolerance 0.015 em.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "H": "pass",
+          "n": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-WEIGHT-001",
+      "font": "family",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H"
+      ],
+      "expected": "At y=0.20 em, H left stem should progress Light < Regular < Black, by more than 0.005 em per step. This does not measure perceived weight.",
+      "observed": {
+        "Light": 0.0576171875,
+        "Regular": 0.0830078125,
+        "Black": 0.1455078125
+      },
+      "reason": "H left stem at y=0.2 em; current family references; not perceived weight.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "context": {
+        "width": "mono",
+        "variant": "default"
+      },
+      "members": {
+        "Light": "Light04",
+        "Regular": "Regular",
+        "Black": "Black03"
+      },
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03": {
+          "H": "pass"
+        },
+        "Light04": {
+          "H": "pass"
+        },
+        "Regular": {
+          "H": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-WEIGHT-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "H"
+      ],
+      "expected": "At y=0.20 em, H left stem should progress Light < Regular < Black, by more than 0.005 em per step. This does not measure perceived weight.",
+      "observed": {
+        "Light": 0.0576171875,
+        "Regular": 0.0830078125,
+        "Black": 0.1455078125
+      },
+      "reason": "H left stem at y=0.2 em; proposed replacement against current references; not perceived weight.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "context": {
+        "width": "mono",
+        "variant": "default"
+      },
+      "members": {
+        "Light": "Light04",
+        "Regular": "Regular",
+        "Black": "EXAMPLE-Black03-H-plus40"
+      },
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "H": "pass"
+        },
+        "Light04": {
+          "H": "pass"
+        },
+        "Regular": {
+          "H": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "Light04",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 64.47093326992416,
+        "\\": 64.47092213347916
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Light04": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "Regular",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 64.00916346799393,
+        "\\": 64.00916346799393
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Regular": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "Black03",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 63.34013815356921,
+        "\\": 63.340219669296076
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "Black02",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 63.34013815356921,
+        "\\": 63.340219669296076
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black02": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "Black03-Q-foot-candidate",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 63.34013815356921,
+        "\\": 63.340219669296076
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03-Q-foot-candidate": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "Black03-original-g",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 63.34013815356921,
+        "\\": 63.340219669296076
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "Black03-original-g": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "pass",
+      "approval": "candidate",
+      "targets": [
+        "/",
+        "\\"
+      ],
+      "expected": "Compare acute angles to the baseline of the longest straight slash/backslash edges spanning >=0.5 em vertically. Proposed difference <=1 degree. Curved/unsupported geometry is unmeasured.",
+      "observed": {
+        "/": 63.34013815356921,
+        "\\": 63.340219669296076
+      },
+      "reason": "Longest supported straight edge per designated slash; acute angle to baseline, degrees.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "unmeasured_targets": {},
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "pass",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "/": "pass",
+          "\\": "pass"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "Light04",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Light04": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "Regular",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Regular": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "Black03",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "Black02",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black02": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "Black03-Q-foot-candidate",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03-Q-foot-candidate": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "Black03-original-g",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [
+        {
+          "id": "MF-EX-001",
+          "rule": "MF-OPTICAL-001",
+          "scope": {
+            "weight": [
+              "Black"
+            ],
+            "variant": [
+              "original-g"
+            ]
+          },
+          "reason": "Black03 original-g alternate changes U+0067 only; accented g descendants retain default drawing. Coverage limitation, not a waiver of review.",
+          "approval": "observed-limitation",
+          "provenance": "handoff-Black03-20261024.json limits. No new design exception approved."
+        }
+      ],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03-original-g": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "H",
+        "n",
+        "o",
+        "a",
+        "g"
+      ],
+      "expected": "Review perceived weight, counters, terminals, joins and recognizability at text and display sizes. Light/Black may need optical differences; no ink-area proxy.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "H": "visual-review",
+          "n": "visual-review",
+          "o": "visual-review",
+          "a": "visual-review",
+          "g": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-FORM-001",
+      "font": "Black03",
+      "status": "visual-review",
+      "approval": "approved-specific-forms",
+      "targets": [
+        "Ω",
+        "æ"
+      ],
+      "expected": "Show Black03 current approved Omega and ae beside Black02 previous forms when reviewing these characters. Approval is specific to these forms, not every Black03 glyph.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [
+        {
+          "id": "MFD-BLACK-AE",
+          "kind": "choice",
+          "font": "Black03",
+          "character": "æ",
+          "status": "current-note",
+          "note": "Use the open ae candidate.",
+          "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 95; green selection: Good!",
+            "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+          ],
+          "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+          "rule_ids": [
+            "MF-FORM-001"
+          ],
+          "reasons": []
+        },
+        {
+          "id": "MFD-BLACK-OMEGA",
+          "kind": "choice",
+          "font": "Black03",
+          "character": "Ω",
+          "status": "current-note",
+          "note": "Use the selected Omega with the wider bottom aperture.",
+          "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 96; green selection: let's go w/ this",
+            "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+          ],
+          "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+          "rule_ids": [
+            "MF-FORM-001"
+          ],
+          "reasons": []
+        }
+      ],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03": {
+          "Ω": "visual-review",
+          "æ": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-FORM-001",
+      "font": "Black02",
+      "status": "visual-review",
+      "approval": "approved-specific-forms",
+      "targets": [
+        "Ω",
+        "æ"
+      ],
+      "expected": "Show Black03 current approved Omega and ae beside Black02 previous forms when reviewing these characters. Approval is specific to these forms, not every Black03 glyph.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black02": {
+          "Ω": "visual-review",
+          "æ": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-FORM-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "visual-review",
+      "approval": "approved-specific-forms",
+      "targets": [
+        "Ω",
+        "æ"
+      ],
+      "expected": "Show Black03 current approved Omega and ae beside Black02 previous forms when reviewing these characters. Approval is specific to these forms, not every Black03 glyph.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [
+        {
+          "id": "MFD-BLACK-AE",
+          "kind": "choice",
+          "font": "EXAMPLE-Black03-H-plus40",
+          "character": "æ",
+          "status": "current-note",
+          "note": "Use the open ae candidate.",
+          "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 95; green selection: Good!",
+            "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+          ],
+          "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+          "rule_ids": [
+            "MF-FORM-001"
+          ],
+          "reasons": []
+        },
+        {
+          "id": "MFD-BLACK-OMEGA",
+          "kind": "choice",
+          "font": "EXAMPLE-Black03-H-plus40",
+          "character": "Ω",
+          "status": "current-note",
+          "note": "Use the selected Omega with the wider bottom aperture.",
+          "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 96; green selection: let's go w/ this",
+            "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+          ],
+          "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+          "rule_ids": [
+            "MF-FORM-001"
+          ],
+          "reasons": []
+        }
+      ],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "Ω": "visual-review",
+          "æ": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "Light04",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Light04": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "Regular",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Regular": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "Black03",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [
+        {
+          "id": "MFD-BLACK-Q",
+          "kind": "open-question",
+          "font": "Black03",
+          "character": "Q",
+          "status": "open-question",
+          "note": "Keep the current Q while another tail direction is discussed. The diagonal candidate was rejected; the foot-tail candidate remains unselected.",
+          "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page95 red rejection and unmarked page97 foot-tail"
+          ],
+          "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+          "rule_ids": [
+            "MF-CHOICE-001"
+          ],
+          "reasons": []
+        },
+        {
+          "id": "MFD-BLACK-PI",
+          "kind": "open-question",
+          "font": "Black03",
+          "character": "Π",
+          "status": "open-question",
+          "note": "Whether capital Pi needs an outward right foot remains an open question; keep the current form for now.",
+          "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page66 blue question"
+          ],
+          "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+          "rule_ids": [
+            "MF-CHOICE-001"
+          ],
+          "reasons": []
+        }
+      ],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "Black02",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black02": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "Black03-Q-foot-candidate",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03-Q-foot-candidate": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "Black03-original-g",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "Black03-original-g": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "visual-review",
+      "approval": "open",
+      "targets": [
+        "Q",
+        "Π"
+      ],
+      "expected": "Q and capital Pi remain open design choices. Display current/proposed/previous locally; do not mark a candidate approved or silently choose it.",
+      "observed": null,
+      "reason": "Human optical/form judgment required; no numeric inference.",
+      "decision": "Open - review with Greg; retain requested proposal. No waiver or rule edit applied.",
+      "exceptions": [],
+      "current_notes": [
+        {
+          "id": "MFD-BLACK-Q",
+          "kind": "open-question",
+          "font": "EXAMPLE-Black03-H-plus40",
+          "character": "Q",
+          "status": "open-question",
+          "note": "Keep the current Q while another tail direction is discussed. The diagonal candidate was rejected; the foot-tail candidate remains unselected.",
+          "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page95 red rejection and unmarked page97 foot-tail"
+          ],
+          "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+          "rule_ids": [
+            "MF-CHOICE-001"
+          ],
+          "reasons": []
+        },
+        {
+          "id": "MFD-BLACK-PI",
+          "kind": "open-question",
+          "font": "EXAMPLE-Black03-H-plus40",
+          "character": "Π",
+          "status": "open-question",
+          "note": "Whether capital Pi needs an outward right foot remains an open question; keep the current form for now.",
+          "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+          "evidence": [
+            "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page66 blue question"
+          ],
+          "implementation": "Black03 retains the current form; this note does not apply a new drawing.",
+          "rule_ids": [
+            "MF-CHOICE-001"
+          ],
+          "reasons": []
+        }
+      ],
+      "interpretation": "visual-review",
+      "target_interpretations": {
+        "EXAMPLE-Black03-H-plus40": {
+          "Q": "visual-review",
+          "Π": "visual-review"
+        }
+      }
+    }
+  ],
+  "worksheet_coverage": [
+    {
+      "character": "H",
+      "role": "current",
+      "font": "Black03",
+      "status": "supported"
+    },
+    {
+      "character": "H",
+      "role": "proposed",
+      "font": "EXAMPLE-Black03-H-plus40",
+      "status": "supported"
+    },
+    {
+      "character": "H",
+      "role": "previous",
+      "font": "Black02",
+      "status": "supported"
+    },
+    {
+      "character": "Q",
+      "role": "current",
+      "font": "Black03",
+      "status": "supported"
+    },
+    {
+      "character": "Q",
+      "role": "proposed",
+      "font": "Black03-Q-foot-candidate",
+      "status": "supported"
+    },
+    {
+      "character": "Q",
+      "role": "previous",
+      "font": "Black02",
+      "status": "supported"
+    },
+    {
+      "character": "Ω",
+      "role": "approved",
+      "font": "Black03",
+      "status": "supported"
+    },
+    {
+      "character": "Ω",
+      "role": "current",
+      "font": "Black03",
+      "status": "supported"
+    },
+    {
+      "character": "Ω",
+      "role": "previous",
+      "font": "Black02",
+      "status": "supported"
+    },
+    {
+      "character": "æ",
+      "role": "approved",
+      "font": "Black03",
+      "status": "supported"
+    },
+    {
+      "character": "æ",
+      "role": "current",
+      "font": "Black03",
+      "status": "supported"
+    },
+    {
+      "character": "æ",
+      "role": "previous",
+      "font": "Black02",
+      "status": "supported"
+    }
+  ],
+  "scope_coverage": [
+    {
+      "rule_id": "MF-MONO-001",
+      "matched_fonts": [
+        "Light04",
+        "Regular",
+        "Black03",
+        "Black02",
+        "Black03-Q-foot-candidate",
+        "Black03-original-g",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-STEM-001",
+      "matched_fonts": [
+        "Light04",
+        "Regular",
+        "Black03",
+        "Black02",
+        "Black03-Q-foot-candidate",
+        "Black03-original-g",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-WEIGHT-001",
+      "matched_fonts": [
+        "Light04",
+        "Regular",
+        "Black03",
+        "Black02",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-ANGLE-001",
+      "matched_fonts": [
+        "Light04",
+        "Regular",
+        "Black03",
+        "Black02",
+        "Black03-Q-foot-candidate",
+        "Black03-original-g",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-OPTICAL-001",
+      "matched_fonts": [
+        "Light04",
+        "Regular",
+        "Black03",
+        "Black02",
+        "Black03-Q-foot-candidate",
+        "Black03-original-g",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-FORM-001",
+      "matched_fonts": [
+        "Black03",
+        "Black02",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-CHOICE-001",
+      "matched_fonts": [
+        "Light04",
+        "Regular",
+        "Black03",
+        "Black02",
+        "Black03-Q-foot-candidate",
+        "Black03-original-g",
+        "EXAMPLE-Black03-H-plus40"
+      ]
+    },
+    {
+      "rule_id": "MF-PROP-001",
+      "matched_fonts": []
+    }
+  ],
+  "source_digest": "ac5eba592c03e7ec0730d29d44411fcbd1968a13024f26164bb3963f04b25c63"
+}

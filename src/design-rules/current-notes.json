@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "notes": [
+    {
+      "id": "MFD-BLACK-AE",
+      "kind": "choice",
+      "scope": {
+        "characters": [
+          "æ"
+        ],
+        "weight": "Black",
+        "width": "mono",
+        "variant": "default"
+      },
+      "rule_ids": [
+        "MF-FORM-001"
+      ],
+      "note": "Use the open ae candidate.",
+      "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 95; green selection: Good!",
+        "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+      ],
+      "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+      "basis": {
+        "scope": "94e342a4ad6e4c6eb1e61b13ead4ae2573a799ed48948688b17551cb23f8dc9e",
+        "rules": {
+          "MF-FORM-001": "ffd9b4a296d936b6227070388467e17605c0fa9541555964f1c4591946361090"
+        },
+        "glyphs": {
+          "æ": "95af57006458857b62bdd89b604af7b8435de6f92a75e1dc2df7ff85598c2edc"
+        }
+      }
+    },
+    {
+      "id": "MFD-BLACK-OMEGA",
+      "kind": "choice",
+      "scope": {
+        "characters": [
+          "Ω"
+        ],
+        "weight": "Black",
+        "width": "mono",
+        "variant": "default"
+      },
+      "rule_ids": [
+        "MF-FORM-001"
+      ],
+      "note": "Use the selected Omega with the wider bottom aperture.",
+      "rationale": "Current owner-selected direction from the retained Black02 markup, limited to this plain character.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page 96; green selection: let's go w/ this",
+        "Selected candidate font SHA256 afb1753e1e8b2afff12b06573e56bac4691f10b6fa46ff5a2b662c355dd51cee"
+      ],
+      "implementation": "Observed in experimental Black03 checkpoint 371182c24440edfb8df2d30c3104d83f468000e9; selected candidate and Black03 per-glyph outline/advance fingerprints match. Production is not promoted.",
+      "basis": {
+        "scope": "54a6f5cd298b25b96370d3898a2885051ec306c384fe15834dc6f3c2499fca22",
+        "rules": {
+          "MF-FORM-001": "ffd9b4a296d936b6227070388467e17605c0fa9541555964f1c4591946361090"
+        },
+        "glyphs": {
+          "Ω": "63ae52d0cfd826a6a55bc281e32a643595dc6ebdae63f14359999a1cb173d57c"
+        }
+      }
+    },
+    {
+      "id": "MFD-BLACK-Q",
+      "kind": "open-question",
+      "scope": {
+        "characters": [
+          "Q"
+        ],
+        "weight": "Black",
+        "width": "mono",
+        "variant": "default"
+      },
+      "rule_ids": [
+        "MF-CHOICE-001"
+      ],
+      "note": "Keep the current Q while another tail direction is discussed. The diagonal candidate was rejected; the foot-tail candidate remains unselected.",
+      "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page95 red rejection and unmarked page97 foot-tail"
+      ],
+      "implementation": "Black03 retains the current form; this note does not apply a new drawing."
+    },
+    {
+      "id": "MFD-BLACK-PI",
+      "kind": "open-question",
+      "scope": {
+        "characters": [
+          "Π"
+        ],
+        "weight": "Black",
+        "width": "mono",
+        "variant": "default"
+      },
+      "rule_ids": [
+        "MF-CHOICE-001"
+      ],
+      "note": "Whether capital Pi needs an outward right foot remains an open question; keep the current form for now.",
+      "rationale": "Keep the unresolved design question visible without selecting an unmarked candidate.",
+      "evidence": [
+        "Archive: Black02 reviewed markup; SHA256 ec521dfa788fa0327050baee21d2efa3167f87d67303b47fe82f9321296f0003; page66 blue question"
+      ],
+      "implementation": "Black03 retains the current form; this note does not apply a new drawing."
+    }
+  ]
+}

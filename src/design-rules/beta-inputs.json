@@ -1,0 +1,112 @@
+{
+  "provenance": "Current Light04/Black03 hashes verified against their retained reproducibility reports; previous/reference bytes pinned as observed local inputs, not universal approved geometry.",
+  "fonts": [
+    {
+      "id": "Light04",
+      "path": "light-revision04-20261023/font-lab/output/fonts/MonofukiLightRevision04.otf",
+      "sha256": "3a423f18761d446a6c707fd10ab227679fd304f5593fa5291523ba0e98e585ff",
+      "weight": "Light",
+      "width": "mono",
+      "role": "current",
+      "variant": "default"
+    },
+    {
+      "id": "Regular",
+      "path": "black-revision03-20261024/study/inputs/references/Monofuki-Current-Regular.otf",
+      "sha256": "dee62e843aa5328370c5d61cad7b8f3c46109dbd836bf43692a595c0ec44d2c8",
+      "weight": "Regular",
+      "width": "mono",
+      "role": "current",
+      "variant": "default"
+    },
+    {
+      "id": "Black03",
+      "path": "black-revision03-20261024/font-lab/output/fonts/MonofukiBlackRevision03.otf",
+      "sha256": "a1fd08839714d7ecff2e2a1ca9f1459e0a8e00e33854939b597c68ffd32cecfa",
+      "weight": "Black",
+      "width": "mono",
+      "role": "current",
+      "variant": "default"
+    },
+    {
+      "id": "Black02",
+      "path": "black-revision03-20261024/study/inputs/black02-fonts/MonofukiBlackReview.otf",
+      "sha256": "147ef5dc366b3f9e8341c433616a3f959fa62db131ffa4bf26ea48f5be418557",
+      "weight": "Black",
+      "width": "mono",
+      "role": "previous",
+      "variant": "default"
+    },
+    {
+      "id": "Black03-Q-foot-candidate",
+      "path": "black-revision03-20261024/font-lab/output/fonts/MonofukiBlackRevision03-q-foot-candidate.otf",
+      "sha256": "52da4aede467383095c65e0cfe8ded10d24c9e703f4d0f729bedce3bc13bfb36",
+      "weight": "Black",
+      "width": "mono",
+      "role": "proposed",
+      "variant": "q-foot"
+    },
+    {
+      "id": "Black03-original-g",
+      "path": "black-revision03-20261024/font-lab/output/fonts/MonofukiBlackRevision03-original-g.otf",
+      "sha256": "36be593d3fa3c2c7242dfbda192c785e5266b6a79aceefdacfe57af0e8242963",
+      "weight": "Black",
+      "width": "mono",
+      "role": "alternate",
+      "variant": "original-g"
+    }
+  ],
+  "requests": {
+    "title": "Black03 / advisory beta worksheets",
+    "notice": "TEST / EXAMPLE: H +40 font-unit advance is a synthetic request for demonstrating a rules conflict, not Greg feedback. Q foot-tail is an existing unselected candidate. Omega and ae approval refers only to their Black03 experimental forms.",
+    "items": [
+      {
+        "character": "H",
+        "label": "Synthetic conflict example",
+        "request": "EXAMPLE: propose H with an advance 40 units wider, keeping the drawing.",
+        "current": "Black03",
+        "proposed": "EXAMPLE-Black03-H-plus40",
+        "previous": "Black02",
+        "rule_ids": [
+          "MF-MONO-001",
+          "MF-STEM-001"
+        ]
+      },
+      {
+        "character": "Q",
+        "label": "Open choice",
+        "request": "Review the existing foot-tail candidate; choice remains open.",
+        "current": "Black03",
+        "proposed": "Black03-Q-foot-candidate",
+        "previous": "Black02",
+        "rule_ids": [
+          "MF-CHOICE-001"
+        ]
+      },
+      {
+        "character": "Ω",
+        "label": "Approved specific form / previous comparison",
+        "request": "Review the approved Black03 form beside Black02 previous.",
+        "approved": "Black03",
+        "current": "Black03",
+        "previous": "Black02",
+        "rule_ids": [
+          "MF-FORM-001",
+          "MF-OPTICAL-001"
+        ]
+      },
+      {
+        "character": "æ",
+        "label": "Approved specific form / previous comparison",
+        "request": "Review the approved Black03 form beside Black02 previous.",
+        "approved": "Black03",
+        "current": "Black03",
+        "previous": "Black02",
+        "rule_ids": [
+          "MF-FORM-001",
+          "MF-OPTICAL-001"
+        ]
+      }
+    ]
+  }
+}

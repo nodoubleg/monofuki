@@ -23,3 +23,10 @@ Assemble and run source-preservation tests, then build/check affected outputs.
 An intentional terminal geometry change needs an explicit policy/check update;
 do not disable failures merely because an override is declared. Report actual
 source and rendered effects separately. Do not install or publish unless asked.
+
+For family-design iterations, use `monofuki-design-review` to evaluate the actual
+proposed font and make paired worksheets. All new family-design issues are advisory:
+retain a requested variant even when it conflicts and visibly report the rule ID,
+expected versus proposed/observed result, reason and open decision. Do not silently
+waive/rewrite a rule or infer approval. This does not relax existing source/build
+integrity checks. Light04/Black03 remain experimental until separately promoted.

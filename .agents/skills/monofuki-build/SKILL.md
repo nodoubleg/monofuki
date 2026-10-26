@@ -23,3 +23,9 @@ input pinning does not establish bit-for-bit binary reproducibility.
 
 Keep all output under ignored build directories. Building does not authorize
 font installation, committing generated fonts, uploading, or publishing.
+
+The four styles above are production Regular/Bold/upright/italic and their Nerd
+exports. Light04 and Black03 are separate experimental artifacts; a production
+build does not recreate or promote them. For family-design beta reports or proof
+worksheets, use the `monofuki-design-review` skill. New design rules are advisory
+and do not replace any build/preservation/native publication check.
