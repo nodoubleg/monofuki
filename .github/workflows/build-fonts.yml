@@ -33,6 +33,11 @@ jobs:
       - name: Test supervised native handoff gates
         run: python3 -m unittest discover -s script_helper -p test_native_handoff.py -v
 
+      - name: Test terminal animation grids and redraws
+        run: |
+          python3 -m unittest discover -s script_helper -p test_terminal_demo.py -v
+          python3 -m unittest discover -s script_helper -p test_stage_demo.py -v
+
       - name: Check source glyphs
         run: |
           fontforge -lang=py -script script_helper/assemble_sources.py

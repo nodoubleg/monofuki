@@ -7,7 +7,7 @@ Set FontSize 23
 Set Width 1200
 Set Height 750
 Set Padding 32
-Set Framerate 30
+Set Framerate 24
 Set TypingSpeed 35ms
 Set CursorBlink false
 Set WindowBar Colorful
@@ -17,32 +17,10 @@ Hide
 Type "export PS1=''; clear"
 Enter
 Sleep 500ms
-Type "clear; python3 script_helper/terminal_demo.py --scene characters"
+Type "clear; python3 script_helper/terminal_demo.py --animate --record"
 Enter
 Sleep 500ms
 Show
-Sleep 4s
-Hide
-Type "clear; python3 script_helper/terminal_demo.py --scene icons"
-Enter
-Sleep 500ms
-Show
-Sleep 3s
-Hide
-Type "clear; python3 script_helper/terminal_demo.py --scene globe"
-Enter
-Sleep 500ms
-Show
-Sleep 3s
-Hide
-Type "clear; python3 script_helper/terminal_demo.py --scene city"
-Enter
-Sleep 500ms
-Show
-Sleep 3s
-Hide
-Type "clear; python3 script_helper/terminal_demo.py --scene orbit"
-Enter
-Sleep 500ms
-Show
-Sleep 4s
+# The animation redraws at 12 fps for 22 seconds, then holds the orbit.
+# Leave the final frame still for the poster and a calm end to playback.
+Sleep 24s

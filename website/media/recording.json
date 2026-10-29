@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "description": "Owner-selected circular Braille orbit, status redraws and block meters.",
+  "renderer": "CoreText, Regular face, process-local graphics font; 14 \u00d7 28 pixel cells; no terminal application capture.",
+  "font_release": "20261029",
+  "font_file": "MonofukiNerdFont-Regular.otf",
+  "font_sha256": "0b1f9051a3d5270b50196667c60de1e323a96d9f472af3279176f5c6b870cda6",
+  "duration_seconds": 22,
+  "fps": 12,
+  "dimensions": [
+    1200,
+    750
+  ],
+  "files": {
+    "monofuki.mp4": "49111deff60ec7627e6859404701b4e7d86fd60c274a09eb5fc966f5763b35b7",
+    "demo-poster.png": "e4665b87573136a14556dd1b628aeb3f6e701101689d84cec5be7004481cee17"
+  }
+}

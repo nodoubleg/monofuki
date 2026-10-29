@@ -2,9 +2,15 @@
 
 Linux CI is the canonical font builder. After it succeeds, Greg Mason runs the
 native checks on the connected Mac and explicitly submits their results. A
-separate Ubuntu workflow validates that evidence, builds the site and recording,
+separate Ubuntu workflow validates that evidence, builds the site and stages its selected movie,
 and publishes Pages. No GitHub-hosted Mac, permanent local runner, new credential,
 font installation, or terminal-app UI is involved.
+
+The selected CoreText movie is an independently pinned site input with its own
+recorded release-font hash and renderer metadata. It is copied byte-for-byte,
+not regenerated as part of publication. This does not weaken native checks for
+the current site's font artifacts: every new source commit still requires its
+own successful Linux build and matching supervised Mac evidence.
 
 ## Run the handoff
 

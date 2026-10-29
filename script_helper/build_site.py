@@ -9,10 +9,11 @@ import shutil
 import zipfile
 from pathlib import Path
 
-from terminal_demo import CHARACTER_SAMPLE, art_pieces
+from terminal_demo import ANIMATION_DESCRIPTION, CHARACTER_SAMPLE, art_pieces
 from symbols_page import render_symbols
 from native_evidence import file_hash, inventory, read_json, require
 from build_tuning_site import stage as stage_tuning
+from stage_demo import stage_demo
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -49,6 +50,7 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     for directory in ('fonts', 'licenses', 'media', 'downloads'):
         (output / directory).mkdir(exist_ok=True)
+    recording = stage_demo(output / 'media')
     for name in ('style.css', 'specimen.js', 'symbols.js'):
         shutil.copy2(ROOT / 'website' / name, output / name)
     shutil.copytree(ROOT / 'website/assets', output / 'assets', dirs_exist_ok=True)
@@ -112,15 +114,13 @@ def main():
                     '@@BUILD_URL@@': html.escape(args.build_url, quote=True), '@@BUILD_REVISION@@': html.escape(args.revision[:7])}
     replacements.update(render_symbols(args.nerd, args.coretext))
     text_demo = '\n\n'.join(f'{title}\n\n{text}' for _, title, _, text in art_pieces())
-    (output / 'demo.txt').write_text(f'Monofuki terminal specimen\n\n{CHARACTER_SAMPLE}\n\n{text_demo}\n')
+    (output / 'demo.txt').write_text(f'Monofuki terminal specimen\n\n{ANIMATION_DESCRIPTION}\n{CHARACTER_SAMPLE}\n\n{text_demo}\n')
     def version_asset(match):
         attribute, url = match.groups()
         if url.startswith(('https://', 'http://', '//', '#')) or url.split('#')[0].endswith('.html'):
             return match[0]
         path = output / url
-        # Media is rendered after staging; its revision still provides a new
-        # cache key whenever the tape or demo changes. Other files use bytes.
-        version = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() and not url.startswith('media/') else args.revision
+        version = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else args.revision
         return f'{attribute}="{url}?v={version}"'
     for name in ('index.html', 'symbols.html'):
         document = (ROOT / 'website' / name).read_text()
@@ -133,7 +133,7 @@ def main():
     tuning_hash = stage_tuning(output, args.regular, args.nerd, args.revision)
     (output / 'build.json').write_text(json.dumps({'revision': args.revision, 'build_url': args.build_url, 'tuning_configuration_sha256': tuning_hash,
                                                 'native_verification': dict(receipt, download='downloads/Monofuki-native-verification.zip'),
-                                                'font_sha256': hashes, 'vhs_version': '0.12.1',
+                                                'font_sha256': hashes, 'recording': recording,
                                                 'nerd_fonts_version': dependencies['nerd_fonts_version'],
                                                 'unicode_version': dependencies['unicode_version']}, indent=2) + '\n')
     (output / '.nojekyll').touch()

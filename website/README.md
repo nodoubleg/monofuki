@@ -2,9 +2,9 @@
 
 The site uses Monofuki’s Monofoki-derived outlines. The dark palette comes from Crush’s [Charmtone theme](https://github.com/charmbracelet/crush/blob/main/internal/ui/styles/themes.go); light mode darkens the same accents for legibility.
 
-The `site` job in `.github/workflows/publish-verified-site.yml` downloads the exact regular and Nerd Font artifacts identified by a successful Linux build and the owner-submitted native verification proof. `script_helper/build_site.py` stages five WOFF2 files, licenses, HTML, and the demo under ignored `_site/`. Generated font and video files are never committed. Only the separate `deploy` job can publish to GitHub Pages, and it runs on `master` outside pull requests.
+The `site` job in `.github/workflows/publish-verified-site.yml` downloads the exact regular and Nerd Font artifacts identified by a successful Linux build and the owner-submitted native verification proof. `script_helper/build_site.py` stages five WOFF2 files, licenses, HTML, and the demo under ignored `_site/`. Generated fonts are never committed; the explicitly selected movie is a pinned site input. Only the separate `deploy` job can publish to GitHub Pages, and it runs on `master` outside pull requests.
 
-Asset URLs use content hashes, or the recording’s source revision, to refresh cached assets after a build.
+Asset URLs, including the selected recording and poster, use content hashes to refresh cached assets after a build.
 
 To preview locally, download the two artifacts from a successful font-build run, then run:
 
@@ -26,13 +26,37 @@ The site and terminal demo get all three art pieces from `art_pieces()` in `scri
 python3 script_helper/terminal_demo.py --art
 ```
 
-For the recording, install [VHS](https://github.com/charmbracelet/vhs), `ttyd`, and `ffmpeg`, install the built Monofuki Nerd Font OTFs, and run this from the repository root after staging the site:
+The homepage uses the selected CoreText-rendered animation in `website/media/`.
+These three small authored publication inputs are committed deliberately: the
+exact owner-selected MP4, its final-frame PNG poster, and `recording.json` with
+hashes, dimensions, renderer and the recorded release font hash. The movie uses
+Regular throughout; it is not a terminal-app capture. Its font provenance is
+separate from the verified current-build downloadable fonts. `build_site.py`
+validates and copies the selected bytes, includes recording metadata in
+`build.json`, and content-hashes the media URLs. Publication never regenerates
+this selected movie or substitutes a different renderer's result.
+
+The 22-second animation shows a Powerline status row and filling block meter,
+changing windows and block meters, then a circular Braille orbit with satellites.
+The orbit uses the actual dot pitches: 575/2 horizontally and 1150/4 vertically.
+The video has controls, a text alternative, and no autoplay or looping. It stays
+paused for visitors who prefer reduced motion.
+
+To run the animation natively with your current terminal font:
 
 ```sh
-vhs website/demo.tape
+python3 script_helper/terminal_demo.py --animate
 ```
 
-The tape records specimen scenes to `_site/media/monofuki.mp4`. CI extracts a PNG poster from the final artwork frame with FFmpeg. The video has controls and a text alternative; it does not autoplay. `_site/build.json` records Nerd Fonts and Unicode versions, the font-build revision and per-file SHA-256 hashes.
+It needs at least 59 columns by 23 rows. The alternate screen, cursor and colors
+are restored on exit or Ctrl-C. The terminal cell must be twice as tall as wide
+for round output; extra letter or line spacing changes the aspect. Optical
+spacing support depends on the terminal. No installation or profile change is
+performed by the script.
+
+`website/demo.tape` remains an optional VHS recipe, using `--record` to leave its
+last frame visible. It is not used by publication of the selected CoreText movie.
+Generating a replacement does not select or publish it automatically.
 
 The Symbols page shows Monofuki’s letters and symbols, Nerd Font icons, the
 415 additions and macOS fallback examples. The old Mononoki specimen supplied
